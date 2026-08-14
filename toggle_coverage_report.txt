@@ -1,0 +1,131 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_top/vif
+=== Design Unit: work.axi4_write_if
+=================================================================================
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        272       137       135    50.36%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top/vif --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                      ARADDR[15-0]           0           0        0.00 
+                                           ARESETn           0           1       50.00 
+                                        ARLEN[7-0]           0           0        0.00 
+                                           ARREADY           0           0        0.00 
+                                       ARSIZE[2-0]           0           0        0.00 
+                                           ARVALID           0           0        0.00 
+                                          BRESP[0]           0           0        0.00 
+                                       RDATA[31-0]           0           0        0.00 
+                                             RLAST           0           0        0.00 
+                                            RREADY           0           0        0.00 
+                                        RRESP[1-0]           0           0        0.00 
+                                            RVALID           0           0        0.00 
+
+Total Node Count     =        136 
+Toggled Node Count   =         68 
+Untoggled Node Count =         68 
+
+Toggle Coverage      =      50.36% (137 of 272 bins)
+
+=================================================================================
+=== Instance: /tb_top/dut/mem_inst
+=== Design Unit: work.axi4_memory
+=================================================================================
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        220        91       129    41.36%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top/dut/mem_inst --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                           j[31-0]           0           0        0.00 
+                                   mem_rdata[31-0]           0           0        0.00 
+                                             rst_n           0           1       50.00 
+
+Total Node Count     =        110 
+Toggled Node Count   =         45 
+Untoggled Node Count =         65 
+
+Toggle Coverage      =      41.36% (91 of 220 bins)
+
+=================================================================================
+=== Instance: /tb_top/dut
+=== Design Unit: work.axi4
+=================================================================================
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        616       303       313    49.18%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top/dut --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                      ARADDR[0-15]           0           0        0.00 
+                                           ARESETn           0           1       50.00 
+                                        ARLEN[0-7]           0           0        0.00 
+                                           ARREADY           0           0        0.00 
+                                       ARSIZE[0-2]           0           0        0.00 
+                                           ARVALID           0           0        0.00 
+                                          BRESP[0]           0           0        0.00 
+                                       RDATA[31-0]           0           0        0.00 
+                                             RLAST           0           0        0.00 
+                                            RREADY           0           0        0.00 
+                                        RRESP[1-0]           0           0        0.00 
+                                            RVALID           0           0        0.00 
+                                   mem_rdata[0-31]           0           0        0.00 
+                                   read_addr[15-0]           0           0        0.00 
+                              read_addr_incr[0-15]           0           0        0.00 
+                                   read_addr_valid           0           0        0.00 
+                               read_burst_cnt[7-0]           0           0        0.00 
+                                          read_err           0           0        0.00 
+                                    read_size[2-0]           0           0        0.00 
+                                   read_state[2-0]           0           0        0.00 
+                             write_addr_incr[8-15]           0           0        0.00 
+                                    write_state[2]           0           0        0.00 
+
+Total Node Count     =        308 
+Toggled Node Count   =        151 
+Untoggled Node Count =        157 
+
+Toggle Coverage      =      49.18% (303 of 616 bins)
+
+=================================================================================
+=== Instance: /tb_top
+=== Design Unit: work.tb_top
+=================================================================================
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                          4         3         1    75.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                           ARESETn           0           1       50.00 
+
+Total Node Count     =          2 
+Toggled Node Count   =          1 
+Untoggled Node Count =          1 
+
+Toggle Coverage      =      75.00% (3 of 4 bins)
+
+
+Total Coverage By Instance (filtered view): 47.92%
+

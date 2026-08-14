@@ -1,0 +1,47 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_top/vif
+=== Design Unit: work.axi4_write_if
+=================================================================================
+
+Assertion Coverage:
+    Assertions                       4         4         0   100.00%
+--------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass 
+                                                  Count        Count
+--------------------------------------------------------------------
+/tb_top/vif/a_aw_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(108)
+                                                        0          1
+/tb_top/vif/a_w_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(112)
+                                                        0          1
+/tb_top/vif/a_wlast_requires_wvalid
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(116)
+                                                        0          1
+/tb_top/vif/a_bresp_legal
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(120)
+                                                        0          1
+
+
+ASSERTION RESULTS:
+--------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass 
+                                                  Count        Count
+--------------------------------------------------------------------
+/tb_top/vif/a_aw_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(108)
+                                                        0          1
+/tb_top/vif/a_w_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(112)
+                                                        0          1
+/tb_top/vif/a_wlast_requires_wvalid
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(116)
+                                                        0          1
+/tb_top/vif/a_bresp_legal
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(120)
+                                                        0          1
+
+Total Coverage By Instance (filtered view): 100.00%
+

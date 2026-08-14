@@ -1,0 +1,124 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_top/dut
+=== Design Unit: work.axi4
+=================================================================================
+Expression Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Expressions                      9         4         5    44.44%
+
+================================Expression Details================================
+
+Expression Coverage for instance /tb_top/dut --
+
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+----------------Focused Expression View-----------------
+Line       138 Item    1  ((write_addr >> 2) < 1024)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       139 Item    1  ((read_addr >> 2) < 1024)
+Expression totals: 0 of 1 input term covered = 0.00%
+
+                 Input Term   Covered  Reason for no coverage   Hint
+                -----------  --------  -----------------------  --------------
+  ((read_addr >> 2) < 1024)         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                   Non-masking condition(s)      
+ ---------  ---------  --------------------         -------------------------     
+  Row   1:    ***0***  ((read_addr >> 2) < 1024)_0  -                             
+  Row   2:          1  ((read_addr >> 2) < 1024)_1  -                             
+
+----------------Focused Expression View-----------------
+Line       213 Item    1  (((((AWADDR[11:0] + ((AWLEN + 1) << AWSIZE)) - 1) > 4095) || ((AWADDR >> 2) >= 1024)) || (AWSIZE != 2))
+Expression totals: 3 of 3 input terms covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       282 Item    1  (((((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095) || ((ARADDR >> 2) >= 1024)) || (ARSIZE != 2))
+Expression totals: 0 of 3 input terms covered = 0.00%
+
+                                               Input Term   Covered  Reason for no coverage   Hint
+                                              -----------  --------  -----------------------  --------------
+  (((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)         N  No hits                  Hit '_0' and '_1'
+                                  ((ARADDR >> 2) >= 1024)         N  No hits                  Hit '_0' and '_1'
+                                            (ARSIZE != 2)         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target                                                 Non-masking condition(s)      
+ ---------  ---------  --------------------                                       -------------------------     
+  Row   1:    ***0***  (((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)_0  (~(ARSIZE != 2) && ~((ARADDR >> 2) >= 1024))
+  Row   2:    ***0***  (((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)_1  -                             
+  Row   3:    ***0***  ((ARADDR >> 2) >= 1024)_0                                  (~(ARSIZE != 2) && ~(((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095))
+  Row   4:    ***0***  ((ARADDR >> 2) >= 1024)_1                                  ~(((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)
+  Row   5:    ***0***  (ARSIZE != 2)_0                                            ~((((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095) || ((ARADDR >> 2) >= 1024))
+  Row   6:    ***0***  (ARSIZE != 2)_1                                            ~((((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095) || ((ARADDR >> 2) >= 1024))
+
+----------------Focused Expression View-----------------
+Line       315 Item    1  (read_burst_cnt == 0)
+Expression totals: 0 of 1 input term covered = 0.00%
+
+             Input Term   Covered  Reason for no coverage   Hint
+            -----------  --------  -----------------------  --------------
+  (read_burst_cnt == 0)         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target               Non-masking condition(s)      
+ ---------  ---------  --------------------     -------------------------     
+  Row   1:    ***0***  (read_burst_cnt == 0)_0  -                             
+  Row   2:    ***0***  (read_burst_cnt == 0)_1  -                             
+
+
+
+=================================================================================
+=== Instance: /axi4_write_pkg
+=== Design Unit: work.axi4_write_pkg
+=================================================================================
+Expression Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Expressions                     11        11         0   100.00%
+
+================================Expression Details================================
+
+Expression Coverage for instance /axi4_write_pkg --
+
+  File axi4_golden_model.sv
+----------------Focused Expression View-----------------
+Line       43 Item    1  (txn.awsize == 2)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       45 Item    1  ((txn.awaddr >> 2) < 1024)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       49 Item    1  (last_byte_offset > 4095)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       60 Item    1  ((beat_addr >> 2) < 1024)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       64 Item    1  (((size_valid && start_in_range) && in_range) && ~burst_crosses_4kb)
+Expression totals: 4 of 4 input terms covered = 100.00%
+
+
+----------------Focused Expression View-----------------
+Line       121 Item    1  (i == 0)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       122 Item    1  (i == (this.beat_total - 1))
+Expression totals: 1 of 1 input term covered = 100.00%
+
+
+----------------Focused Expression View-----------------
+Line       64 Item    1  (i == txn.awlen)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+
+
+
+Total Coverage By Instance (filtered view): 75.00%
+

@@ -1,0 +1,1884 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_top/vif
+=== Design Unit: work.axi4_write_if
+=================================================================================
+
+Assertion Coverage:
+    Assertions                       4         4         0   100.00%
+--------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass 
+                                                  Count        Count
+--------------------------------------------------------------------
+/tb_top/vif/a_aw_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(108)
+                                                        0          1
+/tb_top/vif/a_w_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(112)
+                                                        0          1
+/tb_top/vif/a_wlast_requires_wvalid
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(116)
+                                                        0          1
+/tb_top/vif/a_bresp_legal
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(120)
+                                                        0          1
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        272       137       135    50.36%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top/vif --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                      ARADDR[15-0]           0           0        0.00 
+                                           ARESETn           0           1       50.00 
+                                        ARLEN[7-0]           0           0        0.00 
+                                           ARREADY           0           0        0.00 
+                                       ARSIZE[2-0]           0           0        0.00 
+                                           ARVALID           0           0        0.00 
+                                          BRESP[0]           0           0        0.00 
+                                       RDATA[31-0]           0           0        0.00 
+                                             RLAST           0           0        0.00 
+                                            RREADY           0           0        0.00 
+                                        RRESP[1-0]           0           0        0.00 
+                                            RVALID           0           0        0.00 
+
+Total Node Count     =        136 
+Toggled Node Count   =         68 
+Untoggled Node Count =         68 
+
+Toggle Coverage      =      50.36% (137 of 272 bins)
+
+=================================================================================
+=== Instance: /tb_top/dut/mem_inst
+=== Design Unit: work.axi4_memory
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         5         4         1    80.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /tb_top/dut/mem_inst
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_memory.v
+------------------------------------IF Branch------------------------------------
+    45                                      5124     Count coming in to IF
+    45              1                          2     
+    48              1                       5056     
+                                              66     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    49                                      5056     Count coming in to IF
+    49              1                       5056     
+    51              1                    ***0***     
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                       7         6         1    85.71%
+
+================================Statement Details================================
+
+Statement Coverage for instance /tb_top/dut/mem_inst --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_memory.v
+    44              1                       5124     
+    47              1                          2     
+    50              1                       5056     
+    53              1                    ***0***     
+    61              1                          1     
+    61              2                       1024     
+    62              1                       1024     
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        220        91       129    41.36%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top/dut/mem_inst --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                           j[31-0]           0           0        0.00 
+                                   mem_rdata[31-0]           0           0        0.00 
+                                             rst_n           0           1       50.00 
+
+Total Node Count     =        110 
+Toggled Node Count   =         45 
+Untoggled Node Count =         65 
+
+Toggle Coverage      =      41.36% (91 of 220 bins)
+
+=================================================================================
+=== Instance: /tb_top/dut
+=== Design Unit: work.axi4
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        34        19        15    55.88%
+
+================================Branch Details================================
+
+Branch Coverage for instance /tb_top/dut
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+------------------------------------IF Branch------------------------------------
+    157                                    19917     Count coming in to IF
+    157             1                          3     
+    186             1                      19914     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    194                                    19914     Count coming in to CASE
+    196             1                        402     
+    224             1                      19112     
+    248             1                        400     
+    256             1                    ***0***     
+Branch totals: 3 hits of 4 branches = 75.00%
+
+------------------------------------IF Branch------------------------------------
+    201                                      402     Count coming in to IF
+    201             1                        200     
+                                             202     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    225                                    19112     Count coming in to IF
+    225             1                      18912     
+                                             200     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    226                                    18912     Count coming in to IF
+    226             1                       5056     
+                                           13856     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    233                                    18912     Count coming in to IF
+    233             1                        200     
+    241             1                      18712     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    239                                      200     Count coming in to IF
+    239             1                        135     
+    239             2                         65     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    249                                      400     Count coming in to IF
+    249             1                        200     
+                                             200     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    268                                    19914     Count coming in to CASE
+    270             1                      19914     
+    292             1                    ***0***     
+    304             1                    ***0***     
+    311             1                    ***0***     
+    339             1                    ***0***     
+Branch totals: 1 hit of 5 branches = 20.00%
+
+------------------------------------IF Branch------------------------------------
+    275                                    19914     Count coming in to IF
+    275             1                    ***0***     
+                                           19914     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    293                                  ***0***     Count coming in to IF
+    293             1                    ***0***     
+    297             1                    ***0***     
+Branch totals: 0 hits of 2 branches = 0.00%
+
+------------------------------------IF Branch------------------------------------
+    312                                  ***0***     Count coming in to IF
+    312             1                    ***0***     
+    316             1                    ***0***     
+Branch totals: 0 hits of 2 branches = 0.00%
+
+------------------------------------IF Branch------------------------------------
+    324                                  ***0***     Count coming in to IF
+    324             1                    ***0***     
+                                         ***0***     All False Count
+Branch totals: 0 hits of 2 branches = 0.00%
+
+------------------------------------IF Branch------------------------------------
+    327                                  ***0***     Count coming in to IF
+    327             1                    ***0***     
+    329             1                    ***0***     
+    331             1                    ***0***     
+Branch totals: 0 hits of 3 branches = 0.00%
+
+
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                      23         7        16    30.43%
+
+================================Condition Details================================
+
+Condition Coverage for instance /tb_top/dut --
+
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+----------------Focused Condition View-------------------
+Line       201 Item    1  (AWVALID && AWREADY)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+     AWVALID         Y
+     AWREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  AWVALID_0             -                             
+  Row   2:          1  AWVALID_1             AWREADY                       
+  Row   3:    ***0***  AWREADY_0             AWVALID                       
+  Row   4:          1  AWREADY_1             AWVALID                       
+
+----------------Focused Condition View-------------------
+Line       225 Item    1  (WVALID && WREADY)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+      WVALID         Y
+      WREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  WVALID_0              -                             
+  Row   2:          1  WVALID_1              WREADY                        
+  Row   3:    ***0***  WREADY_0              WVALID                        
+  Row   4:          1  WREADY_1              WVALID                        
+
+----------------Focused Condition View-------------------
+Line       226 Item    1  (write_addr_valid && ~write_err)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+----------------Focused Condition View-------------------
+Line       233 Item    1  (WLAST || (write_burst_cnt == 0))
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+              Input Term   Covered  Reason for no coverage   Hint
+             -----------  --------  -----------------------  --------------
+                   WLAST         Y
+  (write_burst_cnt == 0)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                Non-masking condition(s)      
+ ---------  ---------  --------------------      -------------------------     
+  Row   1:          1  WLAST_0                   ~(write_burst_cnt == 0)       
+  Row   2:          1  WLAST_1                   -                             
+  Row   3:          1  (write_burst_cnt == 0)_0  ~WLAST                        
+  Row   4:    ***0***  (write_burst_cnt == 0)_1  ~WLAST                        
+
+----------------Focused Condition View-------------------
+Line       239 Item    1  (write_err || ~write_addr_valid)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+        Input Term   Covered  Reason for no coverage   Hint
+       -----------  --------  -----------------------  --------------
+         write_err         Y
+  write_addr_valid         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  write_err_0           write_addr_valid              
+  Row   2:          1  write_err_1           -                             
+  Row   3:    ***0***  write_addr_valid_0    ~write_err                    
+  Row   4:          1  write_addr_valid_1    ~write_err                    
+
+----------------Focused Condition View-------------------
+Line       249 Item    1  (BVALID && BREADY)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+      BVALID         N  '_0' not hit             Hit '_0'
+      BREADY         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  BVALID_0              -                             
+  Row   2:          1  BVALID_1              BREADY                        
+  Row   3:          1  BREADY_0              BVALID                        
+  Row   4:          1  BREADY_1              BVALID                        
+
+----------------Focused Condition View-------------------
+Line       275 Item    1  (ARVALID && ARREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+     ARVALID         N  '_1' not hit             Hit '_1'
+     ARREADY         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  ARVALID_0             -                             
+  Row   2:    ***0***  ARVALID_1             ARREADY                       
+  Row   3:    ***0***  ARREADY_0             ARVALID                       
+  Row   4:    ***0***  ARREADY_1             ARVALID                       
+
+----------------Focused Condition View-------------------
+Line       293 Item    1  (read_addr_valid && ~read_err)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  read_addr_valid         N  No hits                  Hit '_0' and '_1'
+         read_err         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  read_addr_valid_0     -                             
+  Row   2:    ***0***  read_addr_valid_1     ~read_err                     
+  Row   3:    ***0***  read_err_0            read_addr_valid               
+  Row   4:    ***0***  read_err_1            read_addr_valid               
+
+----------------Focused Condition View-------------------
+Line       312 Item    1  (read_addr_valid && ~read_err)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  read_addr_valid         N  No hits                  Hit '_0' and '_1'
+         read_err         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  read_addr_valid_0     -                             
+  Row   2:    ***0***  read_addr_valid_1     ~read_err                     
+  Row   3:    ***0***  read_err_0            read_addr_valid               
+  Row   4:    ***0***  read_err_1            read_addr_valid               
+
+----------------Focused Condition View-------------------
+Line       324 Item    1  (RVALID && RREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+      RVALID         N  No hits                  Hit '_0' and '_1'
+      RREADY         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  RVALID_0              -                             
+  Row   2:    ***0***  RVALID_1              RREADY                        
+  Row   3:    ***0***  RREADY_0              RVALID                        
+  Row   4:    ***0***  RREADY_1              RVALID                        
+
+----------------Focused Condition View-------------------
+Line       327 Item    1  (~read_addr_valid || read_err)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  read_addr_valid         N  No hits                  Hit '_0' and '_1'
+         read_err         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  read_addr_valid_0     -                             
+  Row   2:    ***0***  read_addr_valid_1     ~read_err                     
+  Row   3:    ***0***  read_err_0            read_addr_valid               
+  Row   4:    ***0***  read_err_1            read_addr_valid               
+
+----------------Focused Condition View-------------------
+Line       329 Item    1  (read_burst_cnt == 0)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+             Input Term   Covered  Reason for no coverage   Hint
+            -----------  --------  -----------------------  --------------
+  (read_burst_cnt == 0)         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target               Non-masking condition(s)      
+ ---------  ---------  --------------------     -------------------------     
+  Row   1:    ***0***  (read_burst_cnt == 0)_0  -                             
+  Row   2:    ***0***  (read_burst_cnt == 0)_1  -                             
+
+
+Expression Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Expressions                      9         4         5    44.44%
+
+================================Expression Details================================
+
+Expression Coverage for instance /tb_top/dut --
+
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+----------------Focused Expression View-----------------
+Line       138 Item    1  ((write_addr >> 2) < 1024)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       139 Item    1  ((read_addr >> 2) < 1024)
+Expression totals: 0 of 1 input term covered = 0.00%
+
+                 Input Term   Covered  Reason for no coverage   Hint
+                -----------  --------  -----------------------  --------------
+  ((read_addr >> 2) < 1024)         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target                   Non-masking condition(s)      
+ ---------  ---------  --------------------         -------------------------     
+  Row   1:    ***0***  ((read_addr >> 2) < 1024)_0  -                             
+  Row   2:          1  ((read_addr >> 2) < 1024)_1  -                             
+
+----------------Focused Expression View-----------------
+Line       213 Item    1  (((((AWADDR[11:0] + ((AWLEN + 1) << AWSIZE)) - 1) > 4095) || ((AWADDR >> 2) >= 1024)) || (AWSIZE != 2))
+Expression totals: 3 of 3 input terms covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       282 Item    1  (((((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095) || ((ARADDR >> 2) >= 1024)) || (ARSIZE != 2))
+Expression totals: 0 of 3 input terms covered = 0.00%
+
+                                               Input Term   Covered  Reason for no coverage   Hint
+                                              -----------  --------  -----------------------  --------------
+  (((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)         N  No hits                  Hit '_0' and '_1'
+                                  ((ARADDR >> 2) >= 1024)         N  No hits                  Hit '_0' and '_1'
+                                            (ARSIZE != 2)         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target                                                 Non-masking condition(s)      
+ ---------  ---------  --------------------                                       -------------------------     
+  Row   1:    ***0***  (((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)_0  (~(ARSIZE != 2) && ~((ARADDR >> 2) >= 1024))
+  Row   2:    ***0***  (((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)_1  -                             
+  Row   3:    ***0***  ((ARADDR >> 2) >= 1024)_0                                  (~(ARSIZE != 2) && ~(((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095))
+  Row   4:    ***0***  ((ARADDR >> 2) >= 1024)_1                                  ~(((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095)
+  Row   5:    ***0***  (ARSIZE != 2)_0                                            ~((((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095) || ((ARADDR >> 2) >= 1024))
+  Row   6:    ***0***  (ARSIZE != 2)_1                                            ~((((ARADDR[11:0] + ((ARLEN + 1) << ARSIZE)) - 1) > 4095) || ((ARADDR >> 2) >= 1024))
+
+----------------Focused Expression View-----------------
+Line       315 Item    1  (read_burst_cnt == 0)
+Expression totals: 0 of 1 input term covered = 0.00%
+
+             Input Term   Covered  Reason for no coverage   Hint
+            -----------  --------  -----------------------  --------------
+  (read_burst_cnt == 0)         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target               Non-masking condition(s)      
+ ---------  ---------  --------------------     -------------------------     
+  Row   1:    ***0***  (read_burst_cnt == 0)_0  -                             
+  Row   2:    ***0***  (read_burst_cnt == 0)_1  -                             
+
+
+FSM Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    FSM States                       7         4         3    57.14%
+    FSM Transitions                 12         3         9    25.00%
+
+================================FSM Details================================
+
+FSM Coverage for instance /tb_top/dut --
+
+FSM_ID: write_state
+    Current State Object : write_state
+    ----------------------
+    State Value MapInfo :
+    ---------------------
+Line          State Name               Value
+----          ----------               -----
+ 196              W_IDLE                   0
+ 224              W_DATA                   1
+ 248              W_RESP                   2
+    Covered States :
+    ----------------
+                   State           Hit_count
+                   -----           ---------
+                  W_IDLE                 203          
+                  W_DATA                 200          
+                  W_RESP                 200          
+    Covered Transitions :
+    ---------------------
+Line            Trans_ID           Hit_count          Transition          
+----            --------           ---------          ----------          
+ 219                   0                 200          W_IDLE -> W_DATA              
+ 235                   1                 200          W_DATA -> W_RESP              
+ 252                   3                 200          W_RESP -> W_IDLE              
+    Uncovered Transitions :
+    -----------------------
+Line            Trans_ID          Transition          
+----            --------          ----------          
+ 169                   2          W_DATA -> W_IDLE    
+
+
+    Summary                       Bins      Hits    Misses  Coverage
+    -------                       ----      ----    ------  --------
+        FSM States                   3         3         0   100.00%
+        FSM Transitions              4         3         1    75.00%
+FSM_ID: read_state
+    Current State Object : read_state
+    ----------------------
+    State Value MapInfo :
+    ---------------------
+Line          State Name               Value
+----          ----------               -----
+ 270              R_IDLE                   0
+ 292             R_ISSUE                   1
+ 311              R_DATA                   3
+ 304              R_WAIT                   2
+    Covered States :
+    ----------------
+                   State           Hit_count
+                   -----           ---------
+                  R_IDLE                   3          
+    Uncovered States :
+    ------------------
+                   State
+                   -----
+                 R_ISSUE
+                  R_DATA
+                  R_WAIT
+    Uncovered Transitions :
+    -----------------------
+Line            Trans_ID          Transition          
+----            --------          ----------          
+ 288                   0          R_IDLE -> R_ISSUE   
+ 300                   1          R_ISSUE -> R_DATA   
+ 296                   2          R_ISSUE -> R_WAIT   
+ 170                   3          R_ISSUE -> R_IDLE   
+ 334                   4          R_DATA -> R_ISSUE   
+ 330                   5          R_DATA -> R_IDLE    
+ 308                   6          R_WAIT -> R_DATA    
+ 170                   7          R_WAIT -> R_IDLE    
+
+
+    Summary                       Bins      Hits    Misses  Coverage
+    -------                       ----      ----    ------  --------
+        FSM States                   4         1         3    25.00%
+        FSM Transitions              8         0         8     0.00%
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      82        56        26    68.29%
+
+================================Statement Details================================
+
+Statement Coverage for instance /tb_top/dut --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+    128             1                        133     
+    129             1                          2     
+    138             1                      18913     
+    139             1                          2     
+    156             1                      19917     
+    158             1                          3     
+    159             1                          3     
+    160             1                          3     
+    161             1                          3     
+    163             1                          3     
+    164             1                          3     
+    165             1                          3     
+    166             1                          3     
+    167             1                          3     
+    169             1                          3     
+    170             1                          3     
+    172             1                          3     
+    173             1                          3     
+    174             1                          3     
+    175             1                          3     
+    177             1                          3     
+    178             1                          3     
+    179             1                          3     
+    180             1                          3     
+    181             1                          3     
+    182             1                          3     
+    183             1                          3     
+    184             1                          3     
+    188             1                      19914     
+    189             1                      19914     
+    197             1                        402     
+    198             1                        402     
+    199             1                        402     
+    202             1                        200     
+    203             1                        200     
+    204             1                        200     
+    205             1                        200     
+    213             1                        200     
+    219             1                        200     
+    220             1                        200     
+    227             1                       5056     
+    228             1                       5056     
+    229             1                       5056     
+    230             1                       5056     
+    234             1                        200     
+    235             1                        200     
+    239             1                        200     
+    240             1                        200     
+    242             1                      18712     
+    243             1                      18712     
+    250             1                        200     
+    251             1                        200     
+    252             1                        200     
+    256             1                    ***0***     
+    271             1                      19914     
+    272             1                      19914     
+    273             1                      19914     
+    276             1                    ***0***     
+    277             1                    ***0***     
+    278             1                    ***0***     
+    279             1                    ***0***     
+    282             1                    ***0***     
+    288             1                    ***0***     
+    294             1                    ***0***     
+    295             1                    ***0***     
+    296             1                    ***0***     
+    300             1                    ***0***     
+    308             1                    ***0***     
+    313             1                    ***0***     
+    314             1                    ***0***     
+    315             1                    ***0***     
+    317             1                    ***0***     
+    318             1                    ***0***     
+    320             1                    ***0***     
+    322             1                    ***0***     
+    325             1                    ***0***     
+    328             1                    ***0***     
+    330             1                    ***0***     
+    332             1                    ***0***     
+    333             1                    ***0***     
+    334             1                    ***0***     
+    339             1                    ***0***     
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        616       303       313    49.18%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top/dut --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                      ARADDR[0-15]           0           0        0.00 
+                                           ARESETn           0           1       50.00 
+                                        ARLEN[0-7]           0           0        0.00 
+                                           ARREADY           0           0        0.00 
+                                       ARSIZE[0-2]           0           0        0.00 
+                                           ARVALID           0           0        0.00 
+                                          BRESP[0]           0           0        0.00 
+                                       RDATA[31-0]           0           0        0.00 
+                                             RLAST           0           0        0.00 
+                                            RREADY           0           0        0.00 
+                                        RRESP[1-0]           0           0        0.00 
+                                            RVALID           0           0        0.00 
+                                   mem_rdata[0-31]           0           0        0.00 
+                                   read_addr[15-0]           0           0        0.00 
+                              read_addr_incr[0-15]           0           0        0.00 
+                                   read_addr_valid           0           0        0.00 
+                               read_burst_cnt[7-0]           0           0        0.00 
+                                          read_err           0           0        0.00 
+                                    read_size[2-0]           0           0        0.00 
+                                   read_state[2-0]           0           0        0.00 
+                             write_addr_incr[8-15]           0           0        0.00 
+                                    write_state[2]           0           0        0.00 
+
+Total Node Count     =        308 
+Toggled Node Count   =        151 
+Untoggled Node Count =        157 
+
+Toggle Coverage      =      49.18% (303 of 616 bins)
+
+=================================================================================
+=== Instance: /tb_top
+=== Design Unit: work.tb_top
+=================================================================================
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      21        18         3    85.71%
+
+================================Statement Details================================
+
+Statement Coverage for instance /tb_top --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/tb_top.sv
+    18              1                          1     
+    19              1                   53704111     
+    19              2                   53704110     
+    22              1                          1     
+    23              1                          5     
+    23              2                          5     
+    24              1                          1     
+    81              1                       5056     
+    93              1                          1     
+    94              1                          1     
+    96              1                          1     
+    98              1                          1     
+    99              1                          1     
+    104             1                          1     
+    105             1                          1     
+    109             1                      19918     
+    110             1                      19919     
+    112             1                    ***0***     
+    117             1                    ***0***     
+    128             1                    ***0***     
+    137             1                          1     
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                          4         3         1    75.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_top --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+                                           ARESETn           0           1       50.00 
+
+Total Node Count     =          2 
+Toggled Node Count   =          1 
+Untoggled Node Count =          1 
+
+Toggle Coverage      =      75.00% (3 of 4 bins)
+
+=================================================================================
+=== Instance: /axi4_write_pkg
+=== Design Unit: work.axi4_write_pkg
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        57        48         9    84.21%
+
+================================Branch Details================================
+
+Branch Coverage for instance /axi4_write_pkg
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File axi4_golden_model.sv
+------------------------------------IF Branch------------------------------------
+    71                                     18912     Count coming in to IF
+    71              1                       5056     
+    74              1                      13856     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    81                                       200     Count coming in to IF
+    81              1                        135     
+    81              2                         65     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+  File axi4_write_scoreboard.sv
+------------------------------------IF Branch------------------------------------
+    23                                       200     Count coming in to IF
+    23              1                    ***0***     
+    28              1                        200     
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    41                                      5056     Count coming in to IF
+    41              1                    ***0***     
+                                            5056     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    46                                      5056     Count coming in to IF
+    46              1                    ***0***     
+                                            5056     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    64                                         1     Count coming in to IF
+    64              1                    ***0***     
+                                               1     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+  File axi4_write_env.sv
+------------------------------------CASE Branch------------------------------------
+    64                                        32     Count coming in to CASE
+    70              1                          1     
+    76              1                          1     
+    82              1                          1     
+    88              1                          1     
+    94              1                          1     
+    105             1                          1     
+    111             1                          1     
+    117             1                          1     
+    128             1                          1     
+    134             1                          1     
+    140             1                          1     
+    151             1                          1     
+    157             1                          1     
+    163             1                          1     
+    169             1                          1     
+    180             1                          1     
+    186             1                          1     
+    192             1                          1     
+    203             1                          1     
+    209             1                          1     
+    220             1                          1     
+    226             1                          1     
+    237             1                          1     
+    248             1                          1     
+    254             1                          1     
+    260             1                          1     
+    266             1                          1     
+    277             1                          1     
+    283             1                          1     
+    289             1                          1     
+    295             1                          1     
+    301             1                          1     
+    308             1                    ***0***     
+Branch totals: 32 hits of 33 branches = 96.96%
+
+------------------------------------IF Branch------------------------------------
+    325                                        1     Count coming in to IF
+    325             1                    ***0***     
+                                               1     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    360                                      200     Count coming in to IF
+    360             1                         32     
+    373             1                        168     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    362                                       32     Count coming in to IF
+    362             1                    ***0***     
+                                              32     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    375                                      168     Count coming in to IF
+    375             1                    ***0***     
+                                             168     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    438                                    18912     Count coming in to IF
+    438             1                       5056     
+                                           13856     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    491                                        1     Count coming in to IF
+    491             1                    ***0***     
+                                               1     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                      16         3        13    18.75%
+
+================================Condition Details================================
+
+Condition Coverage for instance /axi4_write_pkg --
+
+  File axi4_write_scoreboard.sv
+----------------Focused Condition View-------------------
+Line       23 Item    1  (txn.act_bresp !== txn.exp_bresp)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                         Input Term   Covered  Reason for no coverage   Hint
+                        -----------  --------  -----------------------  --------------
+  (txn.act_bresp !== txn.exp_bresp)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                           Non-masking condition(s)      
+ ---------  ---------  --------------------                 -------------------------     
+  Row   1:          1  (txn.act_bresp !== txn.exp_bresp)_0  -                             
+  Row   2:    ***0***  (txn.act_bresp !== txn.exp_bresp)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       46 Item    1  (backdoor_val !== expected)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                   Input Term   Covered  Reason for no coverage   Hint
+                  -----------  --------  -----------------------  --------------
+  (backdoor_val !== expected)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                     Non-masking condition(s)      
+ ---------  ---------  --------------------           -------------------------     
+  Row   1:          1  (backdoor_val !== expected)_0  -                             
+  Row   2:    ***0***  (backdoor_val !== expected)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       64 Item    1  ((this.num_bresp_errors != 0) || (this.num_data_errors != 0))
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+                    Input Term   Covered  Reason for no coverage   Hint
+                   -----------  --------  -----------------------  --------------
+  (this.num_bresp_errors != 0)         N  '_1' not hit             Hit '_1'
+   (this.num_data_errors != 0)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                      Non-masking condition(s)      
+ ---------  ---------  --------------------            -------------------------     
+  Row   1:          1  (this.num_bresp_errors != 0)_0  ~(this.num_data_errors != 0)  
+  Row   2:    ***0***  (this.num_bresp_errors != 0)_1  -                             
+  Row   3:          1  (this.num_data_errors != 0)_0   ~(this.num_bresp_errors != 0) 
+  Row   4:    ***0***  (this.num_data_errors != 0)_1   ~(this.num_bresp_errors != 0) 
+
+
+
+----------------Focused Condition View-------------------
+Line       50 Item    1  ~(this.vif.AWVALID && this.vif.AWREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+        Input Term   Covered  Reason for no coverage   Hint
+       -----------  --------  -----------------------  --------------
+  this.vif.AWVALID         N  '_0' not hit             Hit '_0'
+  this.vif.AWREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  this.vif.AWVALID_0    -                             
+  Row   2:          1  this.vif.AWVALID_1    this.vif.AWREADY              
+  Row   3:    ***0***  this.vif.AWREADY_0    this.vif.AWVALID              
+  Row   4:          1  this.vif.AWREADY_1    this.vif.AWVALID              
+
+----------------Focused Condition View-------------------
+Line       68 Item    1  ~(this.vif.WVALID && this.vif.WREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  this.vif.WVALID         N  '_0' not hit             Hit '_0'
+  this.vif.WREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  this.vif.WVALID_0     -                             
+  Row   2:          1  this.vif.WVALID_1     this.vif.WREADY               
+  Row   3:    ***0***  this.vif.WREADY_0     this.vif.WVALID               
+  Row   4:          1  this.vif.WREADY_1     this.vif.WVALID               
+
+----------------Focused Condition View-------------------
+Line       82 Item    1  ~(this.vif.BVALID && this.vif.BREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  this.vif.BVALID         N  '_0' not hit             Hit '_0'
+  this.vif.BREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  this.vif.BVALID_0     -                             
+  Row   2:          1  this.vif.BVALID_1     this.vif.BREADY               
+  Row   3:    ***0***  this.vif.BREADY_0     this.vif.BVALID               
+  Row   4:          1  this.vif.BREADY_1     this.vif.BVALID               
+
+
+----------------Focused Condition View-------------------
+Line       18 Item    1  ~(this.vif.BVALID && this.vif.BREADY)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+
+----------------Focused Condition View-------------------
+Line       325 Item    1  (this.bd == null)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+         Input Term   Covered  Reason for no coverage   Hint
+        -----------  --------  -----------------------  --------------
+  (this.bd == null)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (this.bd == null)_0   -                             
+  Row   2:    ***0***  (this.bd == null)_1   -                             
+
+----------------Focused Condition View-------------------
+Line       360 Item    1  (n < 32)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Condition View-------------------
+Line       491 Item    1  ((this.sb.num_bresp_errors != 0) || (this.sb.num_data_errors != 0))
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+                       Input Term   Covered  Reason for no coverage   Hint
+                      -----------  --------  -----------------------  --------------
+  (this.sb.num_bresp_errors != 0)         N  '_1' not hit             Hit '_1'
+   (this.sb.num_data_errors != 0)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                         Non-masking condition(s)      
+ ---------  ---------  --------------------               -------------------------     
+  Row   1:          1  (this.sb.num_bresp_errors != 0)_0  ~(this.sb.num_data_errors != 0)
+  Row   2:    ***0***  (this.sb.num_bresp_errors != 0)_1  -                             
+  Row   3:          1  (this.sb.num_data_errors != 0)_0   ~(this.sb.num_bresp_errors != 0)
+  Row   4:    ***0***  (this.sb.num_data_errors != 0)_1   ~(this.sb.num_bresp_errors != 0)
+
+
+
+Covergroup Coverage:
+    Covergroups                      2        na        na   100.00%
+        Coverpoints/Crosses         14        na        na        na
+            Covergroup Bins         66        66         0   100.00%
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_write    100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_write  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_beat     100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_beat  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+Expression Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Expressions                     11        11         0   100.00%
+
+================================Expression Details================================
+
+Expression Coverage for instance /axi4_write_pkg --
+
+  File axi4_golden_model.sv
+----------------Focused Expression View-----------------
+Line       43 Item    1  (txn.awsize == 2)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       45 Item    1  ((txn.awaddr >> 2) < 1024)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       49 Item    1  (last_byte_offset > 4095)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       60 Item    1  ((beat_addr >> 2) < 1024)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       64 Item    1  (((size_valid && start_in_range) && in_range) && ~burst_crosses_4kb)
+Expression totals: 4 of 4 input terms covered = 100.00%
+
+
+
+----------------Focused Expression View-----------------
+Line       121 Item    1  (i == 0)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Expression View-----------------
+Line       122 Item    1  (i == (this.beat_total - 1))
+Expression totals: 1 of 1 input term covered = 100.00%
+
+
+----------------Focused Expression View-----------------
+Line       64 Item    1  (i == txn.awlen)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+
+
+
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                     172       161        11    93.60%
+
+================================Statement Details================================
+
+Statement Coverage for instance /axi4_write_pkg --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File axi4_write_txn.sv
+    83              1                        200     
+    84              1                      19112     
+    85              1                      18912     
+    87              1                        200     
+    91              1                        200     
+  File axi4_golden_model.sv
+    27              1                       1025     
+    28              1                       1024     
+    41              1                        200     
+    42              1                        200     
+    43              1                        200     
+    45              1                        200     
+    47              1                        200     
+    49              1                        200     
+    51              1                        200     
+    52              1                        200     
+    54              1                        200     
+    55              1                        200     
+    57              1                        200     
+    57              2                      18912     
+    60              1                      18912     
+    64              1                      18912     
+    69              1                      18912     
+    72              1                       5056     
+    75              1                      13856     
+    78              1                      18912     
+    81              1                        200     
+    85              1                       5056     
+  File axi4_write_scoreboard.sv
+    14              1                          1     
+    15              1                          1     
+    16              1                          1     
+    17              1                          1     
+    21              1                        200     
+    24              1                    ***0***     
+    25              1                    ***0***     
+    29              1                        200     
+    42              1                    ***0***     
+    44              1                       5056     
+    47              1                    ***0***     
+    48              1                    ***0***     
+    57              1                          1     
+    58              1                          1     
+    59              1                          1     
+    60              1                          1     
+    61              1                          1     
+    62              1                          1     
+    65              1                    ***0***     
+  File axi4_write_coverage.sv
+    110             1                          1     
+    111             1                          1     
+    115             1                        200     
+    116             1                        200     
+    118             1                        200     
+    119             1                        200     
+    119             2                      18912     
+    120             1                      18912     
+    121             1                      18912     
+    122             1                      18912     
+    123             1                      18912     
+    124             1                      18912     
+    125             1                      18912     
+    130             1                          1     
+    134             1                          1     
+    138             1                          1     
+  File axi4_write_driver.sv
+    20              1                          1     
+    24              1                          1     
+    25              1                          1     
+    26              1                          1     
+    27              1                          1     
+    29              1                          1     
+    30              1                          1     
+    31              1                          1     
+    33              1                          1     
+    41              1                        200     
+    43              1                        200     
+    44              1                        200     
+    45              1                        200     
+    46              1                        200     
+    49              1                        200     
+    49              2                        200     
+    52              1                        200     
+    53              1                        200     
+    60              1                        200     
+    60              2                      18912     
+    61              1                      18912     
+    63              1                      18912     
+    64              1                      18912     
+    65              1                      18912     
+    67              1                      18912     
+    67              2                      18912     
+    71              1                        200     
+    72              1                        200     
+    73              1                        200     
+    78              1                        200     
+    79              1                        200     
+    81              1                        200     
+    81              2                        200     
+    84              1                        200     
+    85              1                        200     
+  File axi4_write_monitor.sv
+    13              1                          1     
+    17              1                      19911     
+    17              2                      19911     
+    20              1                        200     
+  File axi4_write_env.sv
+    37              1                          1     
+    38              1                          1     
+    40              1                          1     
+    41              1                          1     
+    42              1                          1     
+    44              1                          1     
+    45              1                          1     
+    70              1                          1     
+    76              1                          1     
+    82              1                          1     
+    88              1                          1     
+    94              1                          1     
+    105             1                          1     
+    111             1                          1     
+    117             1                          1     
+    128             1                          1     
+    134             1                          1     
+    140             1                          1     
+    151             1                          1     
+    157             1                          1     
+    163             1                          1     
+    169             1                          1     
+    180             1                          1     
+    186             1                          1     
+    192             1                          1     
+    203             1                          1     
+    209             1                          1     
+    220             1                          1     
+    226             1                          1     
+    237             1                          1     
+    248             1                          1     
+    254             1                          1     
+    260             1                          1     
+    266             1                          1     
+    277             1                          1     
+    283             1                          1     
+    289             1                          1     
+    295             1                          1     
+    301             1                          1     
+    309             1                    ***0***     
+    326             1                    ***0***     
+    333             1                          1     
+    336             1                          1     
+    338             1                          2     
+    339             1                          2     
+    341             1                          1     
+    342             1                          1     
+    343             1                          1     
+    344             1                          1     
+    351             1                          1     
+    351             2                        200     
+    353             1                        200     
+    364             1                    ***0***     
+    377             1                    ***0***     
+    392             1                        200     
+    399             1                        200     
+    415             1                        200     
+    417             1                        200     
+    426             1                        200     
+    436             1                      19112     
+    440             1                       5056     
+    455             1                        200     
+    464             1                          1     
+    465             1                          1     
+    466             1                          1     
+    467             1                          1     
+    469             1                          1     
+    471             1                          1     
+    476             1                          1     
+    481             1                          1     
+    494             1                    ***0***     
+
+COVERGROUP COVERAGE:
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_write    100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_write  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_beat     100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_beat  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+
+TOTAL COVERGROUP COVERAGE: 100.00%  COVERGROUP TYPES: 2
+
+ASSERTION RESULTS:
+--------------------------------------------------------------------
+Name                 File(Line)                   Failure      Pass 
+                                                  Count        Count
+--------------------------------------------------------------------
+/tb_top/vif/a_aw_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(108)
+                                                        0          1
+/tb_top/vif/a_w_payload_known
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(112)
+                                                        0          1
+/tb_top/vif/a_wlast_requires_wvalid
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(116)
+                                                        0          1
+/tb_top/vif/a_bresp_legal
+                     C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_write_if.sv(120)
+                                                        0          1
+
+Total Coverage By Instance (filtered view): 65.56%
+

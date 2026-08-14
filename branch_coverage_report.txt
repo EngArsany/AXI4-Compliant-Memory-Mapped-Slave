@@ -1,0 +1,275 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_top/dut/mem_inst
+=== Design Unit: work.axi4_memory
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                         5         4         1    80.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /tb_top/dut/mem_inst
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4_memory.v
+------------------------------------IF Branch------------------------------------
+    45                                      5124     Count coming in to IF
+    45              1                          2     
+    48              1                       5056     
+                                              66     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    49                                      5056     Count coming in to IF
+    49              1                       5056     
+    51              1                    ***0***     
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+
+=================================================================================
+=== Instance: /tb_top/dut
+=== Design Unit: work.axi4
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        34        19        15    55.88%
+
+================================Branch Details================================
+
+Branch Coverage for instance /tb_top/dut
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+------------------------------------IF Branch------------------------------------
+    157                                    19917     Count coming in to IF
+    157             1                          3     
+    186             1                      19914     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    194                                    19914     Count coming in to CASE
+    196             1                        402     
+    224             1                      19112     
+    248             1                        400     
+    256             1                    ***0***     
+Branch totals: 3 hits of 4 branches = 75.00%
+
+------------------------------------IF Branch------------------------------------
+    201                                      402     Count coming in to IF
+    201             1                        200     
+                                             202     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    225                                    19112     Count coming in to IF
+    225             1                      18912     
+                                             200     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    226                                    18912     Count coming in to IF
+    226             1                       5056     
+                                           13856     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    233                                    18912     Count coming in to IF
+    233             1                        200     
+    241             1                      18712     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    239                                      200     Count coming in to IF
+    239             1                        135     
+    239             2                         65     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    249                                      400     Count coming in to IF
+    249             1                        200     
+                                             200     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    268                                    19914     Count coming in to CASE
+    270             1                      19914     
+    292             1                    ***0***     
+    304             1                    ***0***     
+    311             1                    ***0***     
+    339             1                    ***0***     
+Branch totals: 1 hit of 5 branches = 20.00%
+
+------------------------------------IF Branch------------------------------------
+    275                                    19914     Count coming in to IF
+    275             1                    ***0***     
+                                           19914     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    293                                  ***0***     Count coming in to IF
+    293             1                    ***0***     
+    297             1                    ***0***     
+Branch totals: 0 hits of 2 branches = 0.00%
+
+------------------------------------IF Branch------------------------------------
+    312                                  ***0***     Count coming in to IF
+    312             1                    ***0***     
+    316             1                    ***0***     
+Branch totals: 0 hits of 2 branches = 0.00%
+
+------------------------------------IF Branch------------------------------------
+    324                                  ***0***     Count coming in to IF
+    324             1                    ***0***     
+                                         ***0***     All False Count
+Branch totals: 0 hits of 2 branches = 0.00%
+
+------------------------------------IF Branch------------------------------------
+    327                                  ***0***     Count coming in to IF
+    327             1                    ***0***     
+    329             1                    ***0***     
+    331             1                    ***0***     
+Branch totals: 0 hits of 3 branches = 0.00%
+
+
+
+=================================================================================
+=== Instance: /axi4_write_pkg
+=== Design Unit: work.axi4_write_pkg
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        57        48         9    84.21%
+
+================================Branch Details================================
+
+Branch Coverage for instance /axi4_write_pkg
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File axi4_golden_model.sv
+------------------------------------IF Branch------------------------------------
+    71                                     18912     Count coming in to IF
+    71              1                       5056     
+    74              1                      13856     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    81                                       200     Count coming in to IF
+    81              1                        135     
+    81              2                         65     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+  File axi4_write_scoreboard.sv
+------------------------------------IF Branch------------------------------------
+    23                                       200     Count coming in to IF
+    23              1                    ***0***     
+    28              1                        200     
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    41                                      5056     Count coming in to IF
+    41              1                    ***0***     
+                                            5056     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    46                                      5056     Count coming in to IF
+    46              1                    ***0***     
+                                            5056     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    64                                         1     Count coming in to IF
+    64              1                    ***0***     
+                                               1     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+  File axi4_write_env.sv
+------------------------------------CASE Branch------------------------------------
+    64                                        32     Count coming in to CASE
+    70              1                          1     
+    76              1                          1     
+    82              1                          1     
+    88              1                          1     
+    94              1                          1     
+    105             1                          1     
+    111             1                          1     
+    117             1                          1     
+    128             1                          1     
+    134             1                          1     
+    140             1                          1     
+    151             1                          1     
+    157             1                          1     
+    163             1                          1     
+    169             1                          1     
+    180             1                          1     
+    186             1                          1     
+    192             1                          1     
+    203             1                          1     
+    209             1                          1     
+    220             1                          1     
+    226             1                          1     
+    237             1                          1     
+    248             1                          1     
+    254             1                          1     
+    260             1                          1     
+    266             1                          1     
+    277             1                          1     
+    283             1                          1     
+    289             1                          1     
+    295             1                          1     
+    301             1                          1     
+    308             1                    ***0***     
+Branch totals: 32 hits of 33 branches = 96.96%
+
+------------------------------------IF Branch------------------------------------
+    325                                        1     Count coming in to IF
+    325             1                    ***0***     
+                                               1     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    360                                      200     Count coming in to IF
+    360             1                         32     
+    373             1                        168     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    362                                       32     Count coming in to IF
+    362             1                    ***0***     
+                                              32     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    375                                      168     Count coming in to IF
+    375             1                    ***0***     
+                                             168     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+------------------------------------IF Branch------------------------------------
+    438                                    18912     Count coming in to IF
+    438             1                       5056     
+                                           13856     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    491                                        1     Count coming in to IF
+    491             1                    ***0***     
+                                               1     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%
+
+
+
+
+Total Coverage By Instance (filtered view): 73.95%
+

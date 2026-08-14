@@ -1,0 +1,344 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_top/dut
+=== Design Unit: work.axi4
+=================================================================================
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                      23         7        16    30.43%
+
+================================Condition Details================================
+
+Condition Coverage for instance /tb_top/dut --
+
+  File C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project/axi4.v
+----------------Focused Condition View-------------------
+Line       201 Item    1  (AWVALID && AWREADY)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+     AWVALID         Y
+     AWREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  AWVALID_0             -                             
+  Row   2:          1  AWVALID_1             AWREADY                       
+  Row   3:    ***0***  AWREADY_0             AWVALID                       
+  Row   4:          1  AWREADY_1             AWVALID                       
+
+----------------Focused Condition View-------------------
+Line       225 Item    1  (WVALID && WREADY)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+      WVALID         Y
+      WREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  WVALID_0              -                             
+  Row   2:          1  WVALID_1              WREADY                        
+  Row   3:    ***0***  WREADY_0              WVALID                        
+  Row   4:          1  WREADY_1              WVALID                        
+
+----------------Focused Condition View-------------------
+Line       226 Item    1  (write_addr_valid && ~write_err)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+----------------Focused Condition View-------------------
+Line       233 Item    1  (WLAST || (write_burst_cnt == 0))
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+              Input Term   Covered  Reason for no coverage   Hint
+             -----------  --------  -----------------------  --------------
+                   WLAST         Y
+  (write_burst_cnt == 0)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                Non-masking condition(s)      
+ ---------  ---------  --------------------      -------------------------     
+  Row   1:          1  WLAST_0                   ~(write_burst_cnt == 0)       
+  Row   2:          1  WLAST_1                   -                             
+  Row   3:          1  (write_burst_cnt == 0)_0  ~WLAST                        
+  Row   4:    ***0***  (write_burst_cnt == 0)_1  ~WLAST                        
+
+----------------Focused Condition View-------------------
+Line       239 Item    1  (write_err || ~write_addr_valid)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+        Input Term   Covered  Reason for no coverage   Hint
+       -----------  --------  -----------------------  --------------
+         write_err         Y
+  write_addr_valid         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  write_err_0           write_addr_valid              
+  Row   2:          1  write_err_1           -                             
+  Row   3:    ***0***  write_addr_valid_0    ~write_err                    
+  Row   4:          1  write_addr_valid_1    ~write_err                    
+
+----------------Focused Condition View-------------------
+Line       249 Item    1  (BVALID && BREADY)
+Condition totals: 1 of 2 input terms covered = 50.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+      BVALID         N  '_0' not hit             Hit '_0'
+      BREADY         Y
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  BVALID_0              -                             
+  Row   2:          1  BVALID_1              BREADY                        
+  Row   3:          1  BREADY_0              BVALID                        
+  Row   4:          1  BREADY_1              BVALID                        
+
+----------------Focused Condition View-------------------
+Line       275 Item    1  (ARVALID && ARREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+     ARVALID         N  '_1' not hit             Hit '_1'
+     ARREADY         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  ARVALID_0             -                             
+  Row   2:    ***0***  ARVALID_1             ARREADY                       
+  Row   3:    ***0***  ARREADY_0             ARVALID                       
+  Row   4:    ***0***  ARREADY_1             ARVALID                       
+
+----------------Focused Condition View-------------------
+Line       293 Item    1  (read_addr_valid && ~read_err)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  read_addr_valid         N  No hits                  Hit '_0' and '_1'
+         read_err         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  read_addr_valid_0     -                             
+  Row   2:    ***0***  read_addr_valid_1     ~read_err                     
+  Row   3:    ***0***  read_err_0            read_addr_valid               
+  Row   4:    ***0***  read_err_1            read_addr_valid               
+
+----------------Focused Condition View-------------------
+Line       312 Item    1  (read_addr_valid && ~read_err)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  read_addr_valid         N  No hits                  Hit '_0' and '_1'
+         read_err         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  read_addr_valid_0     -                             
+  Row   2:    ***0***  read_addr_valid_1     ~read_err                     
+  Row   3:    ***0***  read_err_0            read_addr_valid               
+  Row   4:    ***0***  read_err_1            read_addr_valid               
+
+----------------Focused Condition View-------------------
+Line       324 Item    1  (RVALID && RREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+  Input Term   Covered  Reason for no coverage   Hint
+ -----------  --------  -----------------------  --------------
+      RVALID         N  No hits                  Hit '_0' and '_1'
+      RREADY         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  RVALID_0              -                             
+  Row   2:    ***0***  RVALID_1              RREADY                        
+  Row   3:    ***0***  RREADY_0              RVALID                        
+  Row   4:    ***0***  RREADY_1              RVALID                        
+
+----------------Focused Condition View-------------------
+Line       327 Item    1  (~read_addr_valid || read_err)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  read_addr_valid         N  No hits                  Hit '_0' and '_1'
+         read_err         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  read_addr_valid_0     -                             
+  Row   2:    ***0***  read_addr_valid_1     ~read_err                     
+  Row   3:    ***0***  read_err_0            read_addr_valid               
+  Row   4:    ***0***  read_err_1            read_addr_valid               
+
+----------------Focused Condition View-------------------
+Line       329 Item    1  (read_burst_cnt == 0)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+             Input Term   Covered  Reason for no coverage   Hint
+            -----------  --------  -----------------------  --------------
+  (read_burst_cnt == 0)         N  No hits                  Hit '_0' and '_1'
+
+     Rows:       Hits  FEC Target               Non-masking condition(s)      
+ ---------  ---------  --------------------     -------------------------     
+  Row   1:    ***0***  (read_burst_cnt == 0)_0  -                             
+  Row   2:    ***0***  (read_burst_cnt == 0)_1  -                             
+
+
+
+=================================================================================
+=== Instance: /axi4_write_pkg
+=== Design Unit: work.axi4_write_pkg
+=================================================================================
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                      16         3        13    18.75%
+
+================================Condition Details================================
+
+Condition Coverage for instance /axi4_write_pkg --
+
+  File axi4_write_scoreboard.sv
+----------------Focused Condition View-------------------
+Line       23 Item    1  (txn.act_bresp !== txn.exp_bresp)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                         Input Term   Covered  Reason for no coverage   Hint
+                        -----------  --------  -----------------------  --------------
+  (txn.act_bresp !== txn.exp_bresp)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                           Non-masking condition(s)      
+ ---------  ---------  --------------------                 -------------------------     
+  Row   1:          1  (txn.act_bresp !== txn.exp_bresp)_0  -                             
+  Row   2:    ***0***  (txn.act_bresp !== txn.exp_bresp)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       46 Item    1  (backdoor_val !== expected)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+                   Input Term   Covered  Reason for no coverage   Hint
+                  -----------  --------  -----------------------  --------------
+  (backdoor_val !== expected)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                     Non-masking condition(s)      
+ ---------  ---------  --------------------           -------------------------     
+  Row   1:          1  (backdoor_val !== expected)_0  -                             
+  Row   2:    ***0***  (backdoor_val !== expected)_1  -                             
+
+----------------Focused Condition View-------------------
+Line       64 Item    1  ((this.num_bresp_errors != 0) || (this.num_data_errors != 0))
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+                    Input Term   Covered  Reason for no coverage   Hint
+                   -----------  --------  -----------------------  --------------
+  (this.num_bresp_errors != 0)         N  '_1' not hit             Hit '_1'
+   (this.num_data_errors != 0)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                      Non-masking condition(s)      
+ ---------  ---------  --------------------            -------------------------     
+  Row   1:          1  (this.num_bresp_errors != 0)_0  ~(this.num_data_errors != 0)  
+  Row   2:    ***0***  (this.num_bresp_errors != 0)_1  -                             
+  Row   3:          1  (this.num_data_errors != 0)_0   ~(this.num_bresp_errors != 0) 
+  Row   4:    ***0***  (this.num_data_errors != 0)_1   ~(this.num_bresp_errors != 0) 
+
+
+----------------Focused Condition View-------------------
+Line       50 Item    1  ~(this.vif.AWVALID && this.vif.AWREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+        Input Term   Covered  Reason for no coverage   Hint
+       -----------  --------  -----------------------  --------------
+  this.vif.AWVALID         N  '_0' not hit             Hit '_0'
+  this.vif.AWREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  this.vif.AWVALID_0    -                             
+  Row   2:          1  this.vif.AWVALID_1    this.vif.AWREADY              
+  Row   3:    ***0***  this.vif.AWREADY_0    this.vif.AWVALID              
+  Row   4:          1  this.vif.AWREADY_1    this.vif.AWVALID              
+
+----------------Focused Condition View-------------------
+Line       68 Item    1  ~(this.vif.WVALID && this.vif.WREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  this.vif.WVALID         N  '_0' not hit             Hit '_0'
+  this.vif.WREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  this.vif.WVALID_0     -                             
+  Row   2:          1  this.vif.WVALID_1     this.vif.WREADY               
+  Row   3:    ***0***  this.vif.WREADY_0     this.vif.WVALID               
+  Row   4:          1  this.vif.WREADY_1     this.vif.WVALID               
+
+----------------Focused Condition View-------------------
+Line       82 Item    1  ~(this.vif.BVALID && this.vif.BREADY)
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+       Input Term   Covered  Reason for no coverage   Hint
+      -----------  --------  -----------------------  --------------
+  this.vif.BVALID         N  '_0' not hit             Hit '_0'
+  this.vif.BREADY         N  '_0' not hit             Hit '_0'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:    ***0***  this.vif.BVALID_0     -                             
+  Row   2:          1  this.vif.BVALID_1     this.vif.BREADY               
+  Row   3:    ***0***  this.vif.BREADY_0     this.vif.BVALID               
+  Row   4:          1  this.vif.BREADY_1     this.vif.BVALID               
+
+
+----------------Focused Condition View-------------------
+Line       18 Item    1  ~(this.vif.BVALID && this.vif.BREADY)
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+
+----------------Focused Condition View-------------------
+Line       325 Item    1  (this.bd == null)
+Condition totals: 0 of 1 input term covered = 0.00%
+
+         Input Term   Covered  Reason for no coverage   Hint
+        -----------  --------  -----------------------  --------------
+  (this.bd == null)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target            Non-masking condition(s)      
+ ---------  ---------  --------------------  -------------------------     
+  Row   1:          1  (this.bd == null)_0   -                             
+  Row   2:    ***0***  (this.bd == null)_1   -                             
+
+----------------Focused Condition View-------------------
+Line       360 Item    1  (n < 32)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Condition View-------------------
+Line       491 Item    1  ((this.sb.num_bresp_errors != 0) || (this.sb.num_data_errors != 0))
+Condition totals: 0 of 2 input terms covered = 0.00%
+
+                       Input Term   Covered  Reason for no coverage   Hint
+                      -----------  --------  -----------------------  --------------
+  (this.sb.num_bresp_errors != 0)         N  '_1' not hit             Hit '_1'
+   (this.sb.num_data_errors != 0)         N  '_1' not hit             Hit '_1'
+
+     Rows:       Hits  FEC Target                         Non-masking condition(s)      
+ ---------  ---------  --------------------               -------------------------     
+  Row   1:          1  (this.sb.num_bresp_errors != 0)_0  ~(this.sb.num_data_errors != 0)
+  Row   2:    ***0***  (this.sb.num_bresp_errors != 0)_1  -                             
+  Row   3:          1  (this.sb.num_data_errors != 0)_0   ~(this.sb.num_bresp_errors != 0)
+  Row   4:    ***0***  (this.sb.num_data_errors != 0)_1   ~(this.sb.num_bresp_errors != 0)
+
+
+
+
+Total Coverage By Instance (filtered view): 25.64%
+

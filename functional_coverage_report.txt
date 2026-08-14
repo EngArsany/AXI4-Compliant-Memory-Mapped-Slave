@@ -1,0 +1,602 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /axi4_write_pkg
+=== Design Unit: work.axi4_write_pkg
+=================================================================================
+
+Covergroup Coverage:
+    Covergroups                      2        na        na   100.00%
+        Coverpoints/Crosses         14        na        na        na
+            Covergroup Bins         66        66         0   100.00%
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_write    100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_write  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_beat     100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_beat  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+
+COVERGROUP COVERAGE:
+----------------------------------------------------------------------------------------------------------
+Covergroup                                             Metric       Goal       Bins    Status               
+                                                                                                         
+----------------------------------------------------------------------------------------------------------
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_write    100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_write  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    49         49          -                      
+    missing/total bins:                                     0         49          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_awlen                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin single_beat                                    12          1          -    Covered              
+        bin short_burst                                    36          1          -    Covered              
+        bin long_burst                                    150          1          -    Covered              
+        bin max_burst                                       2          1          -    Covered              
+    Coverpoint cp_awsize                              100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin word_size                                     114          1          -    Covered              
+        bin sub_word_size                                  33          1          -    Covered              
+        bin oversize                                       53          1          -    Covered              
+    Coverpoint cp_addr_mode                           100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin normal                                        102          1          -    Covered              
+        bin near_boundary                                  55          1          -    Covered              
+        bin out_of_range                                   22          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_aligned                             100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin aligned                                       179          1          -    Covered              
+        bin unaligned                                      21          1          -    Covered              
+    Coverpoint cp_start_region                        100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                            60          1          -    Covered              
+        bin mid                                            44          1          -    Covered              
+        bin near_edge                                      55          1          -    Covered              
+        default bin beyond                                 41                     -    Occurred             
+    Coverpoint cp_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        illegal_bin unreachable                             0                     -    ZERO                 
+        bin okay                                           65          1          -    Covered              
+        bin slverr                                        135          1          -    Covered              
+    Cross cx_len_bresp                                100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <max_burst,slverr>                          1          1          -    Covered              
+            bin <long_burst,slverr>                       106          1          -    Covered              
+            bin <short_burst,slverr>                       20          1          -    Covered              
+            bin <single_beat,slverr>                        8          1          -    Covered              
+            bin <max_burst,okay>                            1          1          -    Covered              
+            bin <long_burst,okay>                          44          1          -    Covered              
+            bin <short_burst,okay>                         16          1          -    Covered              
+            bin <single_beat,okay>                          4          1          -    Covered              
+    Cross cx_size_addr                                100.00%        100          -    Covered              
+        covered/total bins:                                12         12          -                      
+        missing/total bins:                                 0         12          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,unaligned>                        5          1          -    Covered              
+            bin <sub_word_size,unaligned>                   2          1          -    Covered              
+            bin <word_size,unaligned>                      14          1          -    Covered              
+            bin <oversize,out_of_range>                     6          1          -    Covered              
+            bin <sub_word_size,out_of_range>                4          1          -    Covered              
+            bin <word_size,out_of_range>                   12          1          -    Covered              
+            bin <oversize,near_boundary>                   14          1          -    Covered              
+            bin <sub_word_size,near_boundary>              12          1          -    Covered              
+            bin <word_size,near_boundary>                  29          1          -    Covered              
+            bin <oversize,normal>                          28          1          -    Covered              
+            bin <sub_word_size,normal>                     15          1          -    Covered              
+            bin <word_size,normal>                         59          1          -    Covered              
+    Cross cx_mode_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 7          7          -                      
+        missing/total bins:                                 0          7          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <unaligned,slverr>                         20          1          -    Covered              
+            bin <near_boundary,slverr>                     48          1          -    Covered              
+            bin <out_of_range,slverr>                      22          1          -    Covered              
+            bin <normal,slverr>                            45          1          -    Covered              
+            bin <unaligned,okay>                            1          1          -    Covered              
+            bin <near_boundary,okay>                        7          1          -    Covered              
+            bin <normal,okay>                              57          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin out_of_range_okay                    0                     -    ZERO                 
+    Cross cx_size_bresp                               100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <oversize,slverr>                          53          1          -    Covered              
+            bin <sub_word_size,slverr>                     33          1          -    Covered              
+            bin <word_size,slverr>                         49          1          -    Covered              
+            bin <word_size,okay>                           65          1          -    Covered              
+        Illegal and Ignore Bins:
+            ignore_bin oversize_okay                        0                     -    ZERO                 
+            ignore_bin subword_okay                         0                     -    ZERO                 
+ TYPE /axi4_write_pkg/axi4_write_coverage/cg_beat     100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+ Covergroup instance \/axi4_write_pkg::axi4_write_coverage::cg_beat  
+                                                      100.00%        100          -    Covered              
+    covered/total bins:                                    17         17          -                      
+    missing/total bins:                                     0         17          -                      
+    % Hit:                                            100.00%        100          -                      
+    Coverpoint cp_beat_valid                          100.00%        100          -    Covered              
+        covered/total bins:                                 2          2          -                      
+        missing/total bins:                                 0          2          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin invalid                                     13856          1          -    Covered              
+        bin valid                                        5056          1          -    Covered              
+    Coverpoint cp_beat_position                       100.00%        100          -    Covered              
+        covered/total bins:                                 4          4          -                      
+        missing/total bins:                                 0          4          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin only_beat                                      12          1          -    Covered              
+        bin first_only                                    188          1          -    Covered              
+        bin last_only                                     188          1          -    Covered              
+        bin middle                                      18524          1          -    Covered              
+    Coverpoint cp_beat_addr_region                    100.00%        100          -    Covered              
+        covered/total bins:                                 3          3          -                      
+        missing/total bins:                                 0          3          -                      
+        % Hit:                                        100.00%        100          -                      
+        bin low                                          1115          1          -    Covered              
+        bin mid                                          5015          1          -    Covered              
+        bin high                                         1945          1          -    Covered              
+        default bin oob                                 10837                     -    Occurred             
+    Cross cx_valid_position                           100.00%        100          -    Covered              
+        covered/total bins:                                 8          8          -                      
+        missing/total bins:                                 0          8          -                      
+        % Hit:                                        100.00%        100          -                      
+        Auto, Default and User Defined Bins:
+            bin <valid,middle>                           4930          1          -    Covered              
+            bin <invalid,middle>                        13594          1          -    Covered              
+            bin <valid,last_only>                          61          1          -    Covered              
+            bin <invalid,last_only>                       127          1          -    Covered              
+            bin <valid,first_only>                         61          1          -    Covered              
+            bin <invalid,first_only>                      127          1          -    Covered              
+            bin <valid,only_beat>                           4          1          -    Covered              
+            bin <invalid,only_beat>                         8          1          -    Covered              
+
+TOTAL COVERGROUP COVERAGE: 100.00%  COVERGROUP TYPES: 2
+
+Total Coverage By Instance (filtered view): 100.00%
+
