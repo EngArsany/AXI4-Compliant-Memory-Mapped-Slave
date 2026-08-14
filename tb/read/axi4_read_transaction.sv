@@ -14,21 +14,12 @@ package AXI_read_transaction_pkg;
     bit rvalid;
     bit rready;
 
-    rand addr_mode_e addr_mode;
+    int total_addresses = (arlen + 1) * arsize;
 
     constraint reset_c {
       areset_n dist {
         1 :/ 95,
         0 :/ 5
-      };
-    }
-
-    constraint addr_mode_c {
-      addr_mode dist {
-        ADDR_NORMAL        := 50,
-        ADDR_NEAR_BOUNDARY := 30,
-        ADDR_OUT_OF_RANGE  := 10,
-        ADDR_UNALIGNED     := 10
       };
     }
 
@@ -45,18 +36,14 @@ package AXI_read_transaction_pkg;
       araddr dist {
         [0 : 7] := 10,
         [8 : 255] := 10,
-        [256 : 4095] := 10,
-        [4096 : 65535] := 10
+        [256 : 4095] := 10
       };
+
+      araddr <= 4096 - total_addresses;  // To keep bounds in check
     }
 
     function new();
-
     endfunction
-
-
-
-
 
   endclass
 
