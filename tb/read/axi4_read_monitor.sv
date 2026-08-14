@@ -9,26 +9,32 @@ package AXI_read_monitor_pkg;
     mailbox #(AXI_read_transaction) monitor2scb;
     mailbox #(int) scb2monitor;
 
-
     task run_monitor();
       AXI_read_transaction sampled;
       int token;
 
-
       forever begin
+        sampled = new();
 
-        @(posedge vif.ACLK);
-        sampled.araddr   = vif.ARADDR;
-        sampled.areset_n = vif.ARESETn;
-        sampled.arlen    = vif.ARLEN;
-        sampled.arsize   = vif.ARSIZE;
-        sampled.arvalid  = vif.ARVALID;
-        sampled.arready  = vif.ARREADY;
-        sampled.rdata    = vif.RDATA;
-        sampled.rresp    = vif.RRESP;
-        sampled.rlast    = vif.RLAST;
-        sampled.rvalid   = vif.RVALID;
-        sampled.rready   = vif.RREADY;
+        // Wait for address transfer
+        do begin
+          @(negedge vif.ACLK);
+        end while (!(vif.ARVALID && vif.ARREADY));
+
+        // Sample address info
+        sampled.araddr = vif.ARADDR;
+        sampled.arlen  = vif.ARLEN;
+        sampled.arsize = vif.ARSIZE;
+
+        // Wait for data transfer
+        // Handle bursts
+        do begin
+          @(negedge vif.ACLK);
+          if (vif.RREADY && vif.RVALID) begin
+            sampled.out.push_back(vif.RDATA);
+            sampled.rresp.push_back(vif.RRESP);
+          end
+        end while (!(vif.RREADY && vif.RVALID && vif.RLAST));
 
         monitor2scb.put(sampled);
         scb2monitor.get(token);
