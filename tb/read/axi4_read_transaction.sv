@@ -4,8 +4,6 @@ package AXI_read_transaction_pkg;
     rand bit [15:0] araddr;
     rand bit [7:0] arlen;
     static bit [2:0] arsize = 2;  // 4 Bytes as specified
-    bit arvalid;
-    bit arready;
 
     bit [31:0] rdata;
     bit [1:0] rresp;
