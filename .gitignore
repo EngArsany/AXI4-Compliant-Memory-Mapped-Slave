@@ -2,3 +2,5 @@ work/*
 AXI-Memory-Slave.mpf
 vsim.wlf
 Main.log
+AXI-Memory-Slave.cr.mti
+AXI-Memory-Slave.mpf_new
