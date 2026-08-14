@@ -16,6 +16,13 @@ package AXI_read_transaction_pkg;
 
     rand addr_mode_e addr_mode;
 
+    constraint reset_c {
+      areset_n dist {
+        1 :/ 95,
+        0 :/ 5
+      };
+    }
+
     constraint addr_mode_c {
       addr_mode dist {
         ADDR_NORMAL        := 50,
