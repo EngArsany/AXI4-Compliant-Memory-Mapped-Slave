@@ -30,6 +30,13 @@ package AXI_read_transaction_pkg;
       araddr <= 4096 - total_addresses;  // To keep bounds in check
     }
 
+    function void display_info();
+      $display("ARADDR = 0x%08h | ARLEN = %0d | ARSIZE = %0d", araddr, arlen, arsize);
+      $display("RDATA  = %p", rdata);
+      $display("RRESP  = %p", rresp);
+
+    endfunction
+
   endclass
 
 endpackage
