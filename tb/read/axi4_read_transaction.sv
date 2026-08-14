@@ -1,7 +1,6 @@
 package AXI_read_transaction_pkg;
 
   class AXI_read_transaction;
-    rand bit areset_n;
     rand bit [15:0] araddr;
     rand bit [7:0] arlen;
     static bit [2:0] arsize = 2;  // 4 Bytes as specified
@@ -11,17 +10,8 @@ package AXI_read_transaction_pkg;
     bit [31:0] rdata;
     bit [1:0] rresp;
     bit rlast;
-    bit rvalid;
-    bit rready;
 
     int total_addresses = (arlen + 1) * arsize;
-
-    constraint reset_c {
-      areset_n dist {
-        1 :/ 95,
-        0 :/ 5
-      };
-    }
 
     constraint rlength_c {
       arlen dist {
@@ -41,9 +31,6 @@ package AXI_read_transaction_pkg;
 
       araddr <= 4096 - total_addresses;  // To keep bounds in check
     }
-
-    function new();
-    endfunction
 
   endclass
 
