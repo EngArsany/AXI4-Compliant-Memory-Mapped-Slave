@@ -31,7 +31,7 @@ package AXI_read_monitor_pkg;
         do begin
           @(negedge vif.ACLK);
           if (vif.RREADY && vif.RVALID) begin
-            sampled.out.push_back(vif.RDATA);
+            sampled.rdata.push_back(vif.RDATA);
             sampled.rresp.push_back(vif.RRESP);
           end
         end while (!(vif.RREADY && vif.RVALID && vif.RLAST));
