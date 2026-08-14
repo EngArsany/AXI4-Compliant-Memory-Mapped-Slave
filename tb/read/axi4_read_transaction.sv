@@ -6,9 +6,10 @@ package AXI_read_transaction_pkg;
     static bit [2:0] arsize = 2;  // 4 Bytes as specified
 
     bit [31:0] rdata;
-    bit [1:0] rresp;
+    bit [1:0] rresp[$];
     bit rlast;
 
+    bit [31:0] out[$];
     int total_addresses = (arlen + 1) * arsize;
 
     constraint rlength_c {
