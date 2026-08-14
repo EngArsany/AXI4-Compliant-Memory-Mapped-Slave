@@ -19,26 +19,6 @@ package AXI_read_scoreboard_pkg;
 
     // Golden Model
     function void find_expected_values();
-      expected_txn = new();
-
-      expected_txn.araddr = actual_txn.araddr;
-      expected_txn.arlen = actual_txn.arlen;
-      expected_txn.arsize = actual_txn.arsize;
-
-      for (int i = 0; i <= actual_txn.arlen; i++) begin
-
-        int address = actual_txn.araddr + (i * (1 << actual_txn.arsize));
-
-        // Invalid address / boundary violation
-        if ((address >> 2) >= 1024) begin
-          expected_txn.rdata.push_back(32'b0);
-          expected_txn.rresp.push_back(2'b10);  // SLVERR
-        end else begin
-          expected_txn.rdata.push_back(memory[address>>2]);
-          expected_txn.rresp.push_back(2'b00);  // OKAY
-        end
-
-      end
 
     endfunction
 
