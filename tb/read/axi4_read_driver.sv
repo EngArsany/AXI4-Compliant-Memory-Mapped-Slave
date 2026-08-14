@@ -3,7 +3,7 @@ package AXI_read_driver_pkg;
 
   class AXI_read_driver;
 
-    virtual axi4_write_if.DRIVER vif;
+    virtual axi4_if.DRIVER vif;
 
     mailbox #(AXI_read_transaction) gen2driver_mbx;
     mailbox #(int) driver2gen_mbx;

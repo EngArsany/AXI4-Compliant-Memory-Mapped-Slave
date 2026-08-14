@@ -4,7 +4,7 @@ package AXI_read_monitor_pkg;
 
   class AXI_read_monitor;
 
-    virtual axi4_write_if.MONITOR vif;
+    virtual axi4_if.MONITOR vif;
 
     mailbox #(AXI_read_transaction) monitor2scb;
     mailbox #(int) scb2monitor;

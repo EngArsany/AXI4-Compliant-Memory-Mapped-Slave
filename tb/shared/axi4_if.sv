@@ -2,7 +2,7 @@
 // axi4_write_if.sv
 //=============================================================
 
-interface axi4_write_if #(
+interface axi4_if #(
     parameter ADDR_WIDTH = 16,
     parameter DATA_WIDTH = 32
 ) (
