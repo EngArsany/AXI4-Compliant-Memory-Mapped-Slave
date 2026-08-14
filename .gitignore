@@ -1,0 +1,4 @@
+work/*
+AXI-Memory-Slave.mpf
+vsim.wlf
+Main.log
