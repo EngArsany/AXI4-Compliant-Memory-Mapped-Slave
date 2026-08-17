@@ -1,19 +1,36 @@
 `timescale 1ns / 1ps
 
+import AXI_read_transaction_pkg::*;
+import AXI_read_generator_pkg::*;
+import AXI_read_driver_pkg::*;
+import AXI_read_monitor_pkg::*;
+import AXI_read_scoreboard_pkg::*;
+
+import AXI_write_transaction_pkg::*;
+import AXI_write_generator_pkg::*;
+import AXI_write_driver_pkg::*;
+import AXI_write_monitor_pkg::*;
+import AXI_write_scoreboard_pkg::*;
+import AXI_write_golden_model_pkg::*;
+import AXI_write_coverage_pkg::*;
 import AXI_env_pkg::*;
 
 module tb_top;
 
   logic ACLK;
+  logic ARESETn;
 
   initial begin
     ACLK = 1'b0;
     forever #5 ACLK = ~ACLK;
   end
 
-  axi4_if vif (.ACLK(ACLK));
+  axi4_if vif (
+      .ACLK(ACLK),
+      .ARESETn(ARESETn)
+  );
 
-  axi4_slave dut (
+  axi4 dut (
       .ACLK   (vif.ACLK),
       .ARESETn(vif.ARESETn),
 
@@ -56,7 +73,7 @@ module tb_top;
 
     env = new();
 
-    vif.ARESETn = 1'b0;
+    ARESETn = 1'b0;
 
     // Initialize master-driven signals.
     vif.AWADDR = '0;
@@ -79,7 +96,7 @@ module tb_top;
 
     repeat (2) @(posedge ACLK);
 
-    vif.ARESETn = 1'b1;
+    ARESETn = 1'b1;
 
     env.run_env();
 
