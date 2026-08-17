@@ -54,9 +54,7 @@ package AXI_write_scoreboard_pkg;
         // -----------------------------------------------------
         // Get the expected transaction from the golden model.
         // -----------------------------------------------------
-        $display("[WRITE_SCB] Waiting for expected transaction");
         gm2scb_mbx.get(expected_txn);
-        $display("[WRITE_SCB] Got expected transaction");
 
         scb2gm_mbx.put(1);
 
@@ -64,9 +62,7 @@ package AXI_write_scoreboard_pkg;
         // -----------------------------------------------------
         // Get the actual transaction from the monitor.
         // -----------------------------------------------------
-        $display("[WRITE_SCB] Waiting for actual transaction");
         monitor2scb_mbx.get(actual_txn);
-        $display("[WRITE_SCB] Got actual transaction");
 
 
 
@@ -75,10 +71,8 @@ package AXI_write_scoreboard_pkg;
         // -----------------------------------------------------
 
         check_transaction(expected_txn, actual_txn);
-        $display("[WRITE_SCB] Releasing monitor");
         scb2monitor_mbx.put(1);
 
-        $display("[WRITE_SCB] Releasing generator");
         scb2gen_mbx.put(1);
 
       end
