@@ -12,7 +12,8 @@
 // e.g. dut.mem_inst.memory) is provided by tb_top.sv. This keeps the
 // environment reusable even if the DUT instance name/path changes.
 //=============================================================
-
-virtual class axi4_backdoor_base;
+package AXI_backdoor_pkg;
+  virtual class axi4_backdoor_base;
     pure virtual function bit [31:0] read(bit [9:0] word_addr);
-endclass
+  endclass
+endpackage
