@@ -43,12 +43,6 @@ package AXI_write_transaction_pkg;
     bit                     beat_valid    [];
 
 
-    // =========================================================
-    // AXI burst length
-    //
-    // AWLEN = number_of_beats - 1
-    // =========================================================
-
     constraint c_awlen {
 
       awlen dist {
@@ -60,15 +54,6 @@ package AXI_write_transaction_pkg;
 
     }
 
-
-    // =========================================================
-    // Transfer size
-    //
-    // AWSIZE = 2 => 4 bytes/beat
-    //
-    // Other values are intentionally generated to exercise
-    // illegal-transfer handling.
-    // =========================================================
 
     constraint c_awsize {
   awsize dist {
@@ -152,24 +137,14 @@ package AXI_write_transaction_pkg;
 
       final_byte_address = start_address + total_bytes - 1;
 
-
-      // This design supports only 32-bit transfers.
       if (awsize != 3'b010) return 0;
 
-
-      // Word alignment is required.
       if (awaddr[1:0] != 2'b00) return 0;
 
-
-      // Starting address must be inside the 4-KB memory.
       if (start_address >= 4096) return 0;
 
-
-      // Burst must not cross a 4-KB boundary.
       if ((start_address >> 12) != (final_byte_address >> 12)) return 0;
 
-
-      // Final accessed word must exist in the memory.
       final_word_address = final_byte_address >> 2;
 
       if (final_word_address >= 1024) return 0;

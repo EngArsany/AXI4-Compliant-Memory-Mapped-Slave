@@ -8,8 +8,7 @@ package AXI_read_transaction_pkg;
 
     bit      [31:0] rdata  [$];
     bit      [ 1:0] rresp  [$];
-    bit             rlast  [$];   // changed to queue (per beat)
-
+    bit             rlast  [$]; 
     localparam bit [2:0] WORD_SIZE = 3'b010;
 
     constraint c_arlen {
@@ -68,7 +67,7 @@ package AXI_read_transaction_pkg;
       $display("ARADDR = 0x%08h | ARLEN = %0d | ARSIZE = %0d", araddr, arlen, arsize);
       $display("RDATA  = %p", rdata);
       $display("RRESP  = %p", rresp);
-      $display("RLAST  = %p", rlast);   // print queue
+      $display("RLAST  = %p", rlast);   
     endfunction
 
   endclass

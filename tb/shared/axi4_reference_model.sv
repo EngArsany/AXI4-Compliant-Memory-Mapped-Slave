@@ -97,7 +97,7 @@ package AXI_reference_model_pkg;
       // Clear output queues
       txn.rdata.delete();
       txn.rresp.delete();
-      txn.rlast.delete();   // rlast is now a queue
+      txn.rlast.delete();   
 
       num_beats      = int'(txn.arlen) + 1;
       bytes_per_beat = 1 << txn.arsize;
@@ -108,7 +108,7 @@ package AXI_reference_model_pkg;
       if (!burst_valid) begin
         txn.rdata.push_back(32'h0000_0000);
         txn.rresp.push_back(SLVERR);
-        txn.rlast.push_back(1'b1);   // single beat → RLAST high
+        txn.rlast.push_back(1'b1);   
         return;
       end
 

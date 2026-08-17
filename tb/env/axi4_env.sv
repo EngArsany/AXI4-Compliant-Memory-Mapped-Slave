@@ -332,18 +332,6 @@ package AXI_env_pkg;
 
       join_none
 
-
-      // -------------------------------------------------------
-      // The generator is the completion owner.
-      //
-      // It cannot finish until:
-      //   driver completed the transaction
-      //   scoreboard consumed the expected transaction
-      //
-      // Therefore write_gen.done means the complete write
-      // verification pipeline has processed all transactions.
-      // -------------------------------------------------------
-
       wait (write_gen.done);
 
 
@@ -420,14 +408,6 @@ package AXI_env_pkg;
 
     task automatic run_env();
 
-      // -------------------------------------------------------
-      // Write first.
-      //
-      // The write and read environments share the same expected
-      // memory model. Running them sequentially avoids an
-      // ordering race between reference-memory updates and
-      // read predictions.
-      // -------------------------------------------------------
 
       run_write_env();
 

@@ -60,7 +60,7 @@ package AXI_read_coverage_pkg;
     cp_response: coverpoint first_rresp {
       bins okay_response    = {2'b00};
       bins slverr_response  = {2'b10};
-      illegal_bins unreachable = {2'b01, 2'b11};   // EXOKAY and DECERR impossible
+      illegal_bins unreachable = {2'b01, 2'b11};   
     }
 
     // READ DATA

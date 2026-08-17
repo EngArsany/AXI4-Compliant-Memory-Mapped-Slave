@@ -30,7 +30,7 @@ package AXI_read_monitor_pkg;
           if (vif.RVALID && vif.RREADY) begin
             sampled.rdata.push_back(vif.RDATA);
             sampled.rresp.push_back(vif.RRESP);
-            sampled.rlast.push_back(vif.RLAST);   // was: sampled.rlast = vif.RLAST;
+            sampled.rlast.push_back(vif.RLAST);   
             if (vif.RLAST) break;
           end
         end

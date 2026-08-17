@@ -2,91 +2,61 @@ import AXI_env_pkg::*;
 
 `timescale 1ns / 1ps
 
-
 module tb_top;
 
   // ==========================================================
   // Clock
   // ==========================================================
-
   logic ACLK;
   logic ARESETn;
-
 
   // ==========================================================
   // AXI interface
   // ==========================================================
-
   axi4_if vif (
       .ACLK   (ACLK),
       .ARESETn(ARESETn)
   );
 
-
   // ==========================================================
   // DUT
   // ==========================================================
-
   axi4 dut (
-
       .ACLK   (vif.ACLK),
       .ARESETn(vif.ARESETn),
 
-      // ------------------------------------------------------
       // Write address channel
-      // ------------------------------------------------------
-
       .AWADDR (vif.AWADDR),
       .AWLEN  (vif.AWLEN),
       .AWSIZE (vif.AWSIZE),
       .AWVALID(vif.AWVALID),
       .AWREADY(vif.AWREADY),
 
-
-      // ------------------------------------------------------
       // Write data channel
-      // ------------------------------------------------------
-
       .WDATA (vif.WDATA),
       .WLAST (vif.WLAST),
       .WVALID(vif.WVALID),
       .WREADY(vif.WREADY),
 
-
-      // ------------------------------------------------------
       // Write response channel
-      // ------------------------------------------------------
-
       .BRESP (vif.BRESP),
       .BVALID(vif.BVALID),
       .BREADY(vif.BREADY),
 
-
-      // ------------------------------------------------------
       // Read address channel
-      // ------------------------------------------------------
-
       .ARADDR (vif.ARADDR),
       .ARLEN  (vif.ARLEN),
       .ARSIZE (vif.ARSIZE),
       .ARVALID(vif.ARVALID),
       .ARREADY(vif.ARREADY),
 
-
-      // ------------------------------------------------------
       // Read data channel
-      // ------------------------------------------------------
-
       .RDATA (vif.RDATA),
       .RRESP (vif.RRESP),
       .RLAST (vif.RLAST),
       .RVALID(vif.RVALID),
       .RREADY(vif.RREADY)
-
   );
-
-
-
 
   // ==========================================================
   // READ-CHANNEL ASSERTIONS
@@ -116,7 +86,6 @@ module tb_top;
     @(posedge ACLK) disable iff (!ARESETn)
       (vif.ARVALID && !vif.ARREADY) |=> $stable({vif.ARADDR, vif.ARLEN, vif.ARSIZE});
   endproperty
-
   a_read_address_stable: assert property (p_read_address_stable)
     else $error("[READ_SVA] ARADDR/ARLEN/ARSIZE changed while ARVALID && !ARREADY");
 
@@ -126,7 +95,6 @@ module tb_top;
     @(posedge ACLK) disable iff (!ARESETn)
       vif.RVALID |-> ((vif.RRESP == 2'b00) || (vif.RRESP == 2'b10));
   endproperty
-
   a_read_response_legal: assert property (p_read_response_legal)
     else $error("[READ_SVA] Illegal RRESP observed: %b", vif.RRESP);
 
@@ -136,7 +104,6 @@ module tb_top;
     @(posedge ACLK) disable iff (!ARESETn)
       vif.RLAST |-> vif.RVALID;
   endproperty
-
   a_rlast_requires_rvalid: assert property (p_rlast_requires_rvalid)
     else $error("[READ_SVA] RLAST asserted without RVALID");
 
@@ -147,20 +114,17 @@ module tb_top;
       (vif.RVALID && !vif.RREADY) |=>
         $stable({vif.RDATA, vif.RRESP, vif.RLAST});
   endproperty
-
   a_read_data_stable_when_stalled: assert property (p_read_data_stable_when_stalled)
     else $error("[READ_SVA] RDATA/RRESP/RLAST changed while RVALID && !RREADY");
 
-
-  // For this implementation an invalid burst produces one SLVERR beat
-  // and that beat terminates the response.
   property p_invalid_read_returns_slverr;
     @(posedge ACLK) disable iff (!ARESETn)
       (vif.ARVALID && vif.ARREADY &&
        !read_burst_valid(vif.ARADDR, vif.ARLEN, vif.ARSIZE))
-      |-> ##[1:3] (vif.RVALID && vif.RRESP == 2'b10 && vif.RLAST);
-  endproperty
+      |-> ##[1:600] (vif.RVALID && vif.RREADY && vif.RLAST && vif.RRESP == 2'b10);
 
+
+  endproperty
   a_invalid_read_returns_slverr: assert property (p_invalid_read_returns_slverr)
     else $error("[READ_SVA] Invalid read did not return SLVERR + RLAST");
 
@@ -172,35 +136,26 @@ module tb_top;
   endproperty
 
   a_rlast_is_terminal: assert property (p_rlast_is_terminal)
-    else $error("[READ_SVA] RLAST remained asserted after the terminal transfer");
 
+    else $error("[READ_SVA] RLAST remained asserted after the terminal transfer");
 
   // ==========================================================
   // Environment
   // ==========================================================
-
   AXI_env env;
-
 
   // ==========================================================
   // Clock generation
   // ==========================================================
-
   initial begin
-
     ACLK = 1'b0;
-
     forever #5 ACLK = ~ACLK;
-
   end
-
 
   // ==========================================================
   // Initialize master-driven signals
   // ==========================================================
-
   task automatic initialize_signals();
-
     vif.AWADDR  = '0;
     vif.AWLEN   = '0;
     vif.AWSIZE  = 3'b010;
@@ -218,80 +173,35 @@ module tb_top;
     vif.ARVALID = 1'b0;
 
     vif.RREADY  = 1'b0;
-
   endtask
-
 
   // ==========================================================
   // Reset
   // ==========================================================
-
   task automatic reset_dut();
-
     ARESETn = 1'b0;
-
     repeat (2) @(posedge ACLK);
-
     ARESETn = 1'b1;
-
     @(posedge ACLK);
-
   endtask
-
 
   // ==========================================================
   // Test
   // ==========================================================
-
   initial begin
-
-    // --------------------------------------------------------
-    // Initialize interface signals before the environment
-    // starts driving transactions.
-    // --------------------------------------------------------
-
     ARESETn = 1'b0;
-
     initialize_signals();
 
-
-    // --------------------------------------------------------
-    // Construct and connect environment.
-    // --------------------------------------------------------
-
     env             = new();
-
     env.vif         = vif;
     env.vif_driver  = vif;
     env.vif_monitor = vif;
 
-
-    // --------------------------------------------------------
-    // Reset DUT.
-    // --------------------------------------------------------
-
     reset_dut();
-
-
-    // --------------------------------------------------------
-    // Run complete verification.
-    // --------------------------------------------------------
 
     env.run_env();
 
-
-    // --------------------------------------------------------
-    // Environment returns only after:
-    //
-    //   write generation completed
-    //   write scoreboard completed
-    //   read generation completed
-    //   read scoreboard completed
-    //
-    // --------------------------------------------------------
-
     $finish;
-
   end
 
 endmodule

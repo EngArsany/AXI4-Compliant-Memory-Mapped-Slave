@@ -1,27 +1,23 @@
 #===========================================================
-# run_all.do — AXI4 READ + WRITE complete verification
+# AXI4 COMPLETE REGRESSION
+# READ + WRITE
 #===========================================================
 
 #===========================================================
-# Project path
+# PROJECT PATH
 #===========================================================
 
 quietly set PROJ_DIR "C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project"
+quietly set OUT_DIR  "${PROJ_DIR}/sim_out"
+
+file mkdir "${OUT_DIR}"
+
+transcript file "${OUT_DIR}/Main.log"
+
 
 #===========================================================
-# Output directory
+# CLEAN WORK LIBRARY
 #===========================================================
-
-file mkdir "${PROJ_DIR}/reports"
-
-# Main simulation transcript
-transcript file "${PROJ_DIR}/reports/Main.log"
-
-#===========================================================
-# Clean previous compilation
-#===========================================================
-
-.main clear
 
 if {[file exists work]} {
     vdel -lib work -all
@@ -35,208 +31,458 @@ vmap work work
 # RTL / DUT
 #===========================================================
 
-# AXI4 memory
-vlog +cover=sbceft \
+puts "==========================================================="
+puts " Compiling RTL"
+puts "==========================================================="
+
+vlog -sv +cover=sbceft \
     "${PROJ_DIR}/rtl/axi_memory.v"
 
-# AXI4 top/design
-vlog +cover=sbceft \
+vlog -sv +cover=sbceft \
     "${PROJ_DIR}/rtl/axi4.v"
 
 
 #===========================================================
-# SHARED TESTBENCH FILES
+# SHARED INTERFACE
 #===========================================================
 
-# AXI4 interface
-vlog "${PROJ_DIR}/tb/shared/axi4_if.sv"
+puts "==========================================================="
+puts " Compiling AXI interface"
+puts "==========================================================="
 
-# Shared reference model
-vlog "${PROJ_DIR}/tb/shared/axi4_reference_model.sv"
-
-
-#===========================================================
-# READ TRANSACTION
-#===========================================================
-
-vlog "${PROJ_DIR}/tb/read/axi4_read_transaction.sv"
+vlog -sv \
+    "${PROJ_DIR}/tb/shared/axi4_if.sv"
 
 
 #===========================================================
-# WRITE TRANSACTION
+# READ TRANSACTION PACKAGE
+#
+# MUST be compiled before anything importing:
+# AXI_read_transaction_pkg
 #===========================================================
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_transaction.sv"
+puts "==========================================================="
+puts " Compiling READ transaction package"
+puts "==========================================================="
 
-
-#===========================================================
-# READ ENVIRONMENT
-#===========================================================
-
-vlog "${PROJ_DIR}/tb/read/axi4_read_generator.sv"
-
-vlog "${PROJ_DIR}/tb/read/axi4_read_driver.sv"
-
-vlog "${PROJ_DIR}/tb/read/axi4_read_monitor.sv"
-
-vlog "${PROJ_DIR}/tb/read/axi4_read_scoreboard.sv"
+vlog -sv \
+    "${PROJ_DIR}/tb/read/axi4_read_transaction.sv"
 
 
 #===========================================================
-# WRITE ENVIRONMENT
+# WRITE TRANSACTION PACKAGE
+#
+# MUST be compiled before:
+# axi4_reference_model.sv
+#
+# because reference model imports:
+# AXI_write_transaction_pkg
 #===========================================================
 
-vlog "${PROJ_DIR}/tb/write/axi4_backdoor_base.sv"
+puts "==========================================================="
+puts " Compiling WRITE transaction package"
+puts "==========================================================="
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_generator.sv"
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_transaction.sv"
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_driver.sv"
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_monitor.sv"
+#===========================================================
+# READ FUNCTIONAL COVERAGE
+#
+# AXI_read_scoreboard imports:
+# AXI_read_coverage_pkg
+#
+# Therefore compile it before the scoreboard.
+#===========================================================
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_golden_model.sv"
+puts "==========================================================="
+puts " Compiling READ functional coverage"
+puts "==========================================================="
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_scoreboard.sv"
+vlog -sv \
+    "${PROJ_DIR}/tb/read/axi4_read_coverage.sv"
 
-vlog "${PROJ_DIR}/tb/write/axi4_write_coverage.sv"
+
+#===========================================================
+# SHARED REFERENCE MODEL
+#
+# IMPORTANT:
+#
+# axi4_reference_model.sv imports:
+#
+#   AXI_write_transaction_pkg
+#   AXI_read_transaction_pkg
+#
+# Both packages have already been compiled above.
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling AXI reference model"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/shared/axi4_reference_model.sv"
+
+
+#===========================================================
+# READ GENERATOR
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling READ generator"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/read/axi4_read_generator.sv"
+
+
+#===========================================================
+# READ DRIVER
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling READ driver"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/read/axi4_read_driver.sv"
+
+
+#===========================================================
+# READ MONITOR
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling READ monitor"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/read/axi4_read_monitor.sv"
+
+
+#===========================================================
+# READ SCOREBOARD
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling READ scoreboard"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/read/axi4_read_scoreboard.sv"
+
+
+#===========================================================
+# WRITE BACKDOOR
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE backdoor"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_backdoor_base.sv"
+
+
+#===========================================================
+# WRITE GENERATOR
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE generator"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_generator.sv"
+
+
+#===========================================================
+# WRITE DRIVER
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE driver"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_driver.sv"
+
+
+#===========================================================
+# WRITE MONITOR
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE monitor"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_monitor.sv"
+
+
+#===========================================================
+# WRITE GOLDEN MODEL
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE golden model"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_golden_model.sv"
+
+
+#===========================================================
+# WRITE FUNCTIONAL COVERAGE
+#
+# MUST be compiled before axi4_write_scoreboard.sv, since the
+# scoreboard now imports AXI_write_coverage_pkg and declares
+# a write_cov handle of type axi4_write_coverage.
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE functional coverage"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_coverage.sv"
+
+
+#===========================================================
+# WRITE SCOREBOARD
+#===========================================================
+
+puts "==========================================================="
+puts " Compiling WRITE scoreboard"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/write/axi4_write_scoreboard.sv"
 
 
 #===========================================================
 # ENVIRONMENT
 #===========================================================
 
-vlog "${PROJ_DIR}/tb/env/axi4_env.sv"
+puts "==========================================================="
+puts " Compiling AXI environment"
+puts "==========================================================="
+
+vlog -sv \
+    "${PROJ_DIR}/tb/env/axi4_env.sv"
 
 
 #===========================================================
 # TOP TESTBENCH
 #===========================================================
 
-vlog "${PROJ_DIR}/tb/top/axi4_tb_top.sv"
+puts "==========================================================="
+puts " Compiling TB top"
+puts "==========================================================="
+
+vlog -sv +cover=sbceft \
+    "${PROJ_DIR}/tb/top/axi4_tb_top.sv"
 
 
 #===========================================================
 # OPTIMIZATION
 #===========================================================
 
+puts "==========================================================="
+puts " Optimizing simulation"
+puts "==========================================================="
+
 vopt +acc +cover=sbceft \
-    work.axi4_tb_top \
-    -o axi4_tb_top_opt
+    work.tb_top \
+    -o tb_top_opt
 
 
 #===========================================================
 # START SIMULATION
 #===========================================================
 
+puts "==========================================================="
+puts " Starting simulation"
+puts "==========================================================="
+
 vsim -coverage \
     -voptargs=+acc \
-    axi4_tb_top_opt
+    tb_top_opt
 
 
 #===========================================================
-# WAVEFORM
+# WAVES
 #===========================================================
 
 add wave *
 
 
 #===========================================================
-# RUN COMPLETE READ + WRITE TEST
+# RUN COMPLETE READ + WRITE REGRESSION
 #===========================================================
+
+puts "==========================================================="
+puts " Running READ + WRITE regression"
+puts "==========================================================="
 
 run -all
 
 
 #===========================================================
-# SAVE UCDB
+# SAVE COMBINED UCDB
 #===========================================================
 
-coverage save -onexit \
+puts "==========================================================="
+puts " Saving coverage database"
+puts "==========================================================="
+
+coverage save \
+    -onexit \
     -assert \
     -directive \
     -cvg \
     -codeAll \
-    "${PROJ_DIR}/reports/axi4_all_coverage.ucdb"
+    "${OUT_DIR}/axi4_all_coverage.ucdb"
 
 
 #===========================================================
 # OVERALL COVERAGE
 #===========================================================
 
-coverage report -details \
-    -output "${PROJ_DIR}/reports/overall_coverage_report.txt"
+puts "Generating overall coverage report..."
+
+coverage report \
+    -details \
+    -output "${OUT_DIR}/overall_coverage_report.txt"
 
 
 #===========================================================
 # FUNCTIONAL COVERAGE
 #===========================================================
 
-coverage report -cvg -details \
-    -output "${PROJ_DIR}/reports/functional_coverage_report.txt"
+puts "Generating functional coverage report..."
+
+coverage report \
+    -cvg \
+    -details \
+    -output "${OUT_DIR}/functional_coverage_report.txt"
 
 
 #===========================================================
 # ASSERTION COVERAGE
 #===========================================================
 
-coverage report -assert -details \
-    -output "${PROJ_DIR}/reports/assertion_coverage_report.txt"
+puts "Generating assertion coverage report..."
+
+coverage report \
+    -assert \
+    -details \
+    -output "${OUT_DIR}/assertion_coverage_report.txt"
 
 
 #===========================================================
 # STATEMENT COVERAGE
 #===========================================================
 
-coverage report -code s -details \
-    -output "${PROJ_DIR}/reports/statement_coverage_report.txt"
+puts "Generating statement coverage report..."
+
+coverage report \
+    -code s \
+    -details \
+    -output "${OUT_DIR}/statement_coverage_report.txt"
 
 
 #===========================================================
 # BRANCH COVERAGE
 #===========================================================
 
-coverage report -code b -details \
-    -output "${PROJ_DIR}/reports/branch_coverage_report.txt"
+puts "Generating branch coverage report..."
+
+coverage report \
+    -code b \
+    -details \
+    -output "${OUT_DIR}/branch_coverage_report.txt"
 
 
 #===========================================================
 # CONDITION / EXPRESSION COVERAGE
 #===========================================================
 
-coverage report -code c -details \
-    -output "${PROJ_DIR}/reports/condition_expression_coverage_report.txt"
+puts "Generating condition/expression coverage report..."
+
+coverage report \
+    -code c \
+    -details \
+    -output "${OUT_DIR}/condition_expression_coverage_report.txt"
 
 
 #===========================================================
 # TOGGLE ENABLE COVERAGE
 #===========================================================
 
-coverage report -code e -details \
-    -output "${PROJ_DIR}/reports/toggle_enable_coverage_report.txt"
+puts "Generating toggle-enable coverage report..."
+
+coverage report \
+    -code e \
+    -details \
+    -output "${OUT_DIR}/toggle_enable_coverage_report.txt"
 
 
 #===========================================================
 # FSM COVERAGE
 #===========================================================
 
-coverage report -code f -details \
-    -output "${PROJ_DIR}/reports/fsm_coverage_report.txt"
+puts "Generating FSM coverage report..."
+
+coverage report \
+    -code f \
+    -details \
+    -output "${OUT_DIR}/fsm_coverage_report.txt"
 
 
 #===========================================================
 # TOGGLE COVERAGE
 #===========================================================
 
-coverage report -code t -details \
-    -output "${PROJ_DIR}/reports/toggle_coverage_report.txt"
+puts "Generating toggle coverage report..."
+
+coverage report \
+    -code t \
+    -details \
+    -output "${OUT_DIR}/toggle_coverage_report.txt"
 
 
 #===========================================================
-# READ + WRITE OPERATION REPORT
+# FINAL MESSAGE
 #===========================================================
 
-coverage report -details \
-    -output "${PROJ_DIR}/reports/read_write_operations_report.txt"
+puts ""
+puts "==========================================================="
+puts " AXI4 READ + WRITE REGRESSION COMPLETED"
+puts "==========================================================="
+puts ""
+puts "Output directory:"
+puts "${OUT_DIR}"
+puts ""
+puts "Main log:"
+puts "${OUT_DIR}/Main.log"
+puts ""
+puts "Coverage database:"
+puts "${OUT_DIR}/axi4_all_coverage.ucdb"
+puts ""
+puts "Coverage reports:"
+puts "  overall_coverage_report.txt"
+puts "  functional_coverage_report.txt"
+puts "  assertion_coverage_report.txt"
+puts "  statement_coverage_report.txt"
+puts "  branch_coverage_report.txt"
+puts "  condition_expression_coverage_report.txt"
+puts "  toggle_enable_coverage_report.txt"
+puts "  fsm_coverage_report.txt"
+puts "  toggle_coverage_report.txt"
+puts ""
+puts "==========================================================="
 
 
 #===========================================================
@@ -244,25 +490,3 @@ coverage report -details \
 #===========================================================
 
 transcript file ""
-
-puts "==========================================================="
-puts " AXI4 READ + WRITE VERIFICATION COMPLETED"
-puts "==========================================================="
-puts " UCDB:"
-puts " reports/axi4_all_coverage.ucdb"
-puts ""
-puts " Main Log:"
-puts " reports/Main.log"
-puts ""
-puts " Coverage Reports:"
-puts " reports/overall_coverage_report.txt"
-puts " reports/functional_coverage_report.txt"
-puts " reports/assertion_coverage_report.txt"
-puts " reports/statement_coverage_report.txt"
-puts " reports/branch_coverage_report.txt"
-puts " reports/condition_expression_coverage_report.txt"
-puts " reports/toggle_enable_coverage_report.txt"
-puts " reports/fsm_coverage_report.txt"
-puts " reports/toggle_coverage_report.txt"
-puts " reports/read_write_operations_report.txt"
-puts "==========================================================="

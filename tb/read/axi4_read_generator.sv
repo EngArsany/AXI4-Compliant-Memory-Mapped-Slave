@@ -32,7 +32,7 @@ package AXI_read_generator_pkg;
     endtask
 
     task generate_rtm();
-      // Normal / boundary cases
+      // Normal & boundary cases
       generate_directed(16'h0000, 8'd0,   3'd2, "RTM-R01 single beat base address");
       generate_directed(16'h0004, 8'd1,   3'd2, "RTM-R02 two beat burst");
       generate_directed(16'h0020, 8'd7,   3'd2, "RTM-R03 short burst");
