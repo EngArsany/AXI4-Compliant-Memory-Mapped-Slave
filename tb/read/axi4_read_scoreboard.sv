@@ -6,11 +6,11 @@ package AXI_read_scoreboard_pkg;
     AXI_read_transaction expected_txn;
     AXI_read_transaction actual_txn;
 
-    mailbox #(AXI_read_transaction) gen2scb;
-    mailbox #(int) scb2gen;
+    mailbox #(AXI_read_transaction) gen2scb_mbx;
+    mailbox #(int) scb2gen_mbx;
 
-    mailbox #(AXI_read_transaction) monitor2scb;
-    mailbox #(int) scb2monitor;
+    mailbox #(AXI_read_transaction) monitor2scb_mbx;
+    mailbox #(int) scb2monitor_mbx;
 
     static int unsigned num_checked = 0;
     static int unsigned num_address_errors = 0;
@@ -103,18 +103,18 @@ package AXI_read_scoreboard_pkg;
 
     task run_scoreboard;
       forever begin
-        gen2scb.get(expected_txn);
-        scb2gen.put(1);
+        gen2scb_mbx.get(expected_txn);
+        scb2gen_mbx.put(1);
         num_checked++;
 
-        monitor2scb.get(actual_txn);
+        monitor2scb_mbx.get(actual_txn);
 
         find_expected_values();
 
         display_values();
         check_transactions();
 
-        scb2monitor.put(1);
+        scb2monitor_mbx.put(1);
       end
     endtask
 

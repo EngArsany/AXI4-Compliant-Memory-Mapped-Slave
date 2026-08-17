@@ -1,14 +1,17 @@
 package AXI_write_scoreboard_pkg;
 
+  import AXI_write_transaction_pkg::*;
+  import AXI_backdoor_pkg::*;
+
   class axi4_write_scoreboard;
 
     // Expected transactions produced by the golden model.
-    mailbox #(axi4_write_txn) gm2scb;
-    mailbox #(int) scb2gm;
+    mailbox #(axi4_write_txn) gm2scb_mbx;
+    mailbox #(int) scb2gm_mbx;
 
     // Actual transactions produced by the write monitor.
-    mailbox #(axi4_write_txn) monitor2scb;
-    mailbox #(int) scb2monitor;
+    mailbox #(axi4_write_txn) monitor2scb_mbx;
+    mailbox #(int) scb2monitor_mbx;
 
     // Backdoor access to DUT memory.
     axi4_backdoor_base bd;
@@ -18,16 +21,16 @@ package AXI_write_scoreboard_pkg;
     int unsigned num_data_errors;
     int token;
 
-    function new(mailbox#(axi4_write_txn) gm2scb, mailbox#(axi4_write_txn) monitor2scb,
+    function new(mailbox#(axi4_write_txn) gm2scb_mbx, mailbox#(axi4_write_txn) monitor2scb_mbx,
                  axi4_backdoor_base bd);
 
-      this.gm2scb      = gm2scb;
-      this.monitor2scb = monitor2scb;
-      this.bd          = bd;
+      this.gm2scb_mbx      = gm2scb_mbx;
+      this.monitor2scb_mbx = monitor2scb_mbx;
+      this.bd              = bd;
 
-      num_checked      = 0;
-      num_bresp_errors = 0;
-      num_data_errors  = 0;
+      num_checked          = 0;
+      num_bresp_errors     = 0;
+      num_data_errors      = 0;
 
     endfunction
 
@@ -41,11 +44,11 @@ package AXI_write_scoreboard_pkg;
 
         // Only one write burst is outstanding, so the order
         // of expected and actual transactions is identical.
-        gm2scb.get(expected_txn);
-        scb2gm.put(token);
+        gm2scb_mbx.get(expected_txn);
+        scb2gm_mbx.put(token);
 
-        monitor2scb.get(actual_txn);
-        scb2monitor.put(token);
+        monitor2scb_mbx.get(actual_txn);
+        scb2monitor_mbx.put(token);
 
         check_transaction(expected_txn, actual_txn);
 
