@@ -264,6 +264,7 @@ package AXI_env_pkg;
 
       write_scb.monitor2scb_mbx = write_monitor2scb_mbx;
       write_scb.scb2monitor_mbx = write_scb2monitor_mbx;
+      write_scb.scb2gen_mbx     = write_scb2gen_mbx;
 
       write_scb.gm2scb_mbx      = gm2scb_mbx;
 
