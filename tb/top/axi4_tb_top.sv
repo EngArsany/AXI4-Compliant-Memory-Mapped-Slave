@@ -5,6 +5,7 @@
 `timescale 1ns/1ps
 
 import axi4_write_pkg::*;
+import AXI_env_pkg::*;
 
 module tb_top;
 
@@ -82,18 +83,16 @@ module tb_top;
         endfunction
     endclass
 
-    axi4_write_env    env;
+    AXI_env    env;
     axi4_backdoor_impl bd;
 
     localparam int WATCHDOG_CYCLES = 200_000;
 
 initial begin
 
-    // Bind the interface instance to the required modports.
-    drv_vif = vif;
-    mon_vif = vif;
-
-    env = new(drv_vif, mon_vif);
+    env = new();
+    env.vif_driver = drv_vif;
+    env.vif_monitor = mon_vif;
 
     bd = new();
     env.bd = bd;
@@ -101,7 +100,7 @@ initial begin
     fork
 
         begin
-            env.run(200);
+            env.run_env(200);
             $display("[TB_TOP] Test complete.");
         end
 
