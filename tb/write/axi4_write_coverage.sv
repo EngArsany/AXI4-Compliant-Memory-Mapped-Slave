@@ -24,7 +24,7 @@ package AXI_write_coverage_pkg;
       }
 
       cp_awsize: coverpoint txn.awsize {
-        bins word_size = {3'b010}; illegal_bins wrong_write_size = !binsof (word_size);
+        bins word_size = {3'b010}; illegal_bins wrong_write_size = default;
       }
 
       cp_addr_mode: coverpoint txn.addr_mode {
@@ -60,9 +60,9 @@ package AXI_write_coverage_pkg;
 
       cx_size_bresp: cross cp_awsize, cp_bresp{
         // Non-word AWSIZE is rejected by this 32-bit/no-WSTRB design.
-        ignore_bins subword_okay = binsof (cp_awsize.sub_word_size) && binsof (cp_bresp.okay);
+        ignore_bins subword_okay = !binsof (cp_awsize.word_size) && binsof (cp_bresp.okay);
 
-        ignore_bins oversize_okay = binsof (cp_awsize.oversize) && binsof (cp_bresp.okay);
+        ignore_bins oversize_okay = !binsof (cp_awsize.word_size) && binsof (cp_bresp.okay);
       }
 
     endgroup
