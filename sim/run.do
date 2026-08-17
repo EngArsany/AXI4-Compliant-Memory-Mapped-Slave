@@ -30,6 +30,6 @@ vlog tb/write/axi4_write_coverage.sv
 vlog tb/env/axi4_env.sv
 vlog tb/top/axi4_tb_top.sv
 
-vsim -voptargs=+acc work.tb_top -l Main.log
+vsim -voptargs=+acc work.tb_top -l reports/Main.log
 
 run -all
