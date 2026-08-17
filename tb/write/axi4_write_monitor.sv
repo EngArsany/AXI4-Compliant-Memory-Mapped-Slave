@@ -6,8 +6,8 @@ package AXI_write_monitor_pkg;
 
     virtual axi4_if.MONITOR vif;
 
-    mailbox #(axi4_write_txn) monitor2scb;
-    mailbox #(int) scb2monitor;
+    mailbox #(axi4_write_txn) monitor2scb_mbx;
+    mailbox #(int) scb2monitor_mbx;
 
 
     task automatic run_monitor();
@@ -62,8 +62,8 @@ package AXI_write_monitor_pkg;
         sampled.act_bresp = vif.BRESP;
 
         // Send the observed transaction to the scoreboard.
-        if (monitor2scb != null) monitor2scb.put(sampled);
-        scb2monitor.get(token);
+        if (monitor2scb_mbx != null) monitor2scb_mbx.put(sampled);
+        scb2monitor_mbx.get(token);
 
       end
 
