@@ -75,7 +75,7 @@ package AXI_env_pkg;
       read_scb = new();
 
       // Wire generator mailboxes
-      read_gen.gen2driver_mbx = read_driver2gen_mbx;
+      read_gen.gen2driver_mbx = read_gen2driver_mbx;
       read_gen.driver2gen_mbx = read_driver2gen_mbx;
       read_gen.gen2scb_mbx = read_gen2scb_mbx;
       read_gen.scb2gen_mbx = read_scb2gen_mbx;
@@ -130,7 +130,7 @@ package AXI_env_pkg;
       write_cov = new();
 
       // Wire generator mailboxes
-      write_gen.gen2driver_mbx = write_driver2gen_mbx;
+      write_gen.gen2driver_mbx = write_gen2driver_mbx;
       write_gen.driver2gen_mbx = write_driver2gen_mbx;
       write_gen.gen2scb_mbx = write_gen2scb_mbx;
       write_gen.scb2gen_mbx = write_scb2gen_mbx;
