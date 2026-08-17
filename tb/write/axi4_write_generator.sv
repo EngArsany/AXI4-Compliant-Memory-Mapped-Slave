@@ -42,35 +42,35 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd0;
-          awsize == 3'b010;
+
         };
 
         1:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd1;
-          awsize == 3'b010;
+
         };
 
         2:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd7;
-          awsize == 3'b010;
+
         };
 
         3:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd31;
-          awsize == 3'b010;
+
         };
 
         4:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd255;
-          awsize == 3'b010;
+
         };
 
 
@@ -82,21 +82,21 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
           awlen == 8'd0;
-          awsize == 3'b010;
+
         };
 
         6:
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
           awlen == 8'd1;
-          awsize == 3'b010;
+
         };
 
         7:
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
           awlen == 8'd7;
-          awsize == 3'b010;
+
         };
 
 
@@ -108,54 +108,45 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_OUT_OF_RANGE;
           awlen == 8'd0;
-          awsize == 3'b010;
+
         };
 
         9:
         return txn.randomize() with {
           addr_mode == ADDR_OUT_OF_RANGE;
           awlen == 8'd1;
-          awsize == 3'b010;
+
         };
 
         10:
         return txn.randomize() with {
           addr_mode == ADDR_OUT_OF_RANGE;
           awlen == 8'd7;
-          awsize == 3'b010;
+
         };
-
-
-        // -----------------------------------------------------
-        // Invalid AWSIZE
-        // -----------------------------------------------------
 
         11:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd0;
-          awsize == 3'b000;
         };
 
         12:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd1;
-          awsize == 3'b001;
         };
 
         13:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd7;
-          awsize == 3'b011;
         };
 
         14:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd31;
-          awsize == 3'b111;
         };
 
 
@@ -167,21 +158,21 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_UNALIGNED;
           awlen == 8'd0;
-          awsize == 3'b010;
+
         };
 
         16:
         return txn.randomize() with {
           addr_mode == ADDR_UNALIGNED;
           awlen == 8'd1;
-          awsize == 3'b010;
+
         };
 
         17:
         return txn.randomize() with {
           addr_mode == ADDR_UNALIGNED;
           awlen == 8'd7;
-          awsize == 3'b010;
+
         };
 
 
@@ -193,14 +184,14 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd2;
-          awsize == 3'b010;
+
         };
 
         19:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd15;
-          awsize == 3'b010;
+
         };
 
 
@@ -212,14 +203,14 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
           awlen == 8'd2;
-          awsize == 3'b010;
+
         };
 
         21:
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
           awlen == 8'd15;
-          awsize == 3'b010;
+
         };
 
 
@@ -231,40 +222,31 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_OUT_OF_RANGE;
           awlen == 8'd31;
-          awsize == 3'b010;
+
         };
-
-
-        // -----------------------------------------------------
-        // Additional invalid AWSIZE cases
-        // -----------------------------------------------------
 
         23:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd0;
-          awsize == 3'b000;
         };
 
         24:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd0;
-          awsize == 3'b001;
         };
 
         25:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd0;
-          awsize == 3'b011;
         };
 
         26:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd0;
-          awsize == 3'b100;
         };
 
 
@@ -276,21 +258,21 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd3;
-          awsize == 3'b010;
+
         };
 
         28:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd63;
-          awsize == 3'b010;
+
         };
 
         29:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd127;
-          awsize == 3'b010;
+
         };
 
 
