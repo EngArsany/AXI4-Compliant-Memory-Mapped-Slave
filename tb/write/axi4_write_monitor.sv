@@ -7,9 +7,9 @@
 
 class axi4_write_monitor;
 
-    virtual axi4_write_if.MONITOR vif;
+    virtual axi4_if.MONITOR vif;
 
-    function new(virtual axi4_write_if.MONITOR vif);
+    function new(virtual axi4_if.MONITOR vif);
         this.vif = vif;
     endfunction
 

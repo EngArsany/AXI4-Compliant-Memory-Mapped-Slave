@@ -25,7 +25,7 @@ module tb_top;
         ARESETn = 1'b1;
     end
 
-    axi4_write_if #(
+    axi4_if #(
         .ADDR_WIDTH(ADDR_WIDTH),
         .DATA_WIDTH(DATA_WIDTH)
     ) vif (
@@ -71,8 +71,8 @@ module tb_top;
     // path; this handle-based form preserves the required modports
     // without that warning.
     // -----------------------------------------------------------
-    virtual axi4_write_if.DRIVER  drv_vif;
-    virtual axi4_write_if.MONITOR mon_vif;
+    virtual axi4_if.DRIVER  drv_vif;
+    virtual axi4_if.MONITOR mon_vif;
 
     // -----------------------------------------------------------
     // Backdoor memory access.

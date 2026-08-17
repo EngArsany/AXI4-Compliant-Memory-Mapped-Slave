@@ -14,9 +14,9 @@
 
 class axi4_write_driver;
 
-    virtual axi4_write_if.DRIVER vif;
+    virtual axi4_if.DRIVER vif;
 
-    function new(virtual axi4_write_if.DRIVER vif);
+    function new(virtual axi4_if.DRIVER vif);
         this.vif = vif;
     endfunction
 
