@@ -16,19 +16,32 @@ package AXI_env_pkg;
 
   import AXI_reference_model_pkg::*;
 
+
   class AXI_env;
-    // Interfaces
+
+    // =========================================================
+    // Virtual interfaces
+    // =========================================================
+
     virtual axi4_if                 vif;
     virtual axi4_if.DRIVER          vif_driver;
     virtual axi4_if.MONITOR         vif_monitor;
 
-    // Read Components
+
+    // =========================================================
+    // Read components
+    // =========================================================
+
     AXI_read_generator              read_gen;
     AXI_read_driver                 read_drv;
     AXI_read_monitor                read_mon;
     AXI_read_scoreboard             read_scb;
 
-    // Read Mailboxes
+
+    // =========================================================
+    // Read mailboxes
+    // =========================================================
+
     mailbox #(AXI_read_transaction) read_gen2driver_mbx;
     mailbox #(int)                  read_driver2gen_mbx;
 
@@ -38,7 +51,11 @@ package AXI_env_pkg;
     mailbox #(AXI_read_transaction) read_monitor2scb_mbx;
     mailbox #(int)                  read_scb2monitor_mbx;
 
-    // Write Components
+
+    // =========================================================
+    // Write components
+    // =========================================================
+
     axi4_write_generator            write_gen;
     axi4_write_driver               write_drv;
     axi4_write_monitor              write_mon;
@@ -46,7 +63,11 @@ package AXI_env_pkg;
     axi4_golden_model               write_gm;
     axi4_write_coverage             write_cov;
 
-    // Write Mailboxes
+
+    // =========================================================
+    // Write mailboxes
+    // =========================================================
+
     mailbox #(axi4_write_txn)       write_gen2driver_mbx;
     mailbox #(int)                  write_driver2gen_mbx;
 
@@ -58,152 +79,380 @@ package AXI_env_pkg;
 
     mailbox #(axi4_write_txn)       gm2scb_mbx;
 
-    // Reference model
+
+    // =========================================================
+    // Shared reference model
+    // =========================================================
+
     axi4_reference_model            ref_model;
 
-    // Test Done
-    bit                             test_done              = 0;
 
-    task run_read_env();
-      // Initialize mailboxes
-      read_gen2driver_mbx = new(1);
-      read_driver2gen_mbx = new(1);
-      read_gen2scb_mbx = new(1);
-      read_scb2gen_mbx = new(1);
-      read_monitor2scb_mbx = new(1);
-      read_scb2monitor_mbx = new(1);
+    // =========================================================
+    // Environment status
+    // =========================================================
 
-      // Initialize components
-      read_gen = new();
-      read_drv = new();
-      read_mon = new();
-      read_scb = new();
+    bit                             write_done;
+    bit                             read_done;
+    bit                             test_done;
 
-      // Wire generator mailboxes
-      read_gen.gen2driver_mbx = read_gen2driver_mbx;
-      read_gen.driver2gen_mbx = read_driver2gen_mbx;
-      read_gen.gen2scb_mbx = read_gen2scb_mbx;
-      read_gen.scb2gen_mbx = read_scb2gen_mbx;
 
-      // Wire driver mailboxes
-      read_drv.gen2driver_mbx = read_gen2driver_mbx;
-      read_drv.driver2gen_mbx = read_driver2gen_mbx;
+    // =========================================================
+    // Constructor
+    // =========================================================
 
-      // Wire Monitor mailboxes
+    function new();
+
+      // -------------------------------------------------------
+      // Shared reference model
+      // -------------------------------------------------------
+
+      ref_model             = new();
+
+
+      // -------------------------------------------------------
+      // Read mailboxes
+      // -------------------------------------------------------
+
+      read_gen2driver_mbx   = new(1);
+      read_driver2gen_mbx   = new(1);
+
+      read_gen2scb_mbx      = new(1);
+      read_scb2gen_mbx      = new(1);
+
+      read_monitor2scb_mbx  = new(1);
+      read_scb2monitor_mbx  = new(1);
+
+
+      // -------------------------------------------------------
+      // Write mailboxes
+      // -------------------------------------------------------
+
+      write_gen2driver_mbx  = new(1);
+      write_driver2gen_mbx  = new(1);
+
+      write_gen2scb_mbx     = new(1);
+      write_scb2gen_mbx     = new(1);
+
+      write_monitor2scb_mbx = new(1);
+      write_scb2monitor_mbx = new(1);
+
+      gm2scb_mbx            = new(1);
+
+
+      write_done            = 0;
+      read_done             = 0;
+      test_done             = 0;
+
+    endfunction
+
+
+    // =========================================================
+    // Build read environment
+    // =========================================================
+
+    task automatic build_read_env();
+
+      // -------------------------------------------------------
+      // Components
+      // -------------------------------------------------------
+
+      read_gen                 = new();
+      read_drv                 = new();
+      read_mon                 = new();
+      read_scb                 = new();
+
+
+      // -------------------------------------------------------
+      // Generator connections
+      // -------------------------------------------------------
+
+      read_gen.gen2driver_mbx  = read_gen2driver_mbx;
+      read_gen.driver2gen_mbx  = read_driver2gen_mbx;
+
+      read_gen.gen2scb_mbx     = read_gen2scb_mbx;
+      read_gen.scb2gen_mbx     = read_scb2gen_mbx;
+
+
+      // -------------------------------------------------------
+      // Driver connections
+      // -------------------------------------------------------
+
+      read_drv.gen2driver_mbx  = read_gen2driver_mbx;
+      read_drv.driver2gen_mbx  = read_driver2gen_mbx;
+
+
+      // -------------------------------------------------------
+      // Monitor connections
+      // -------------------------------------------------------
+
       read_mon.monitor2scb_mbx = read_monitor2scb_mbx;
       read_mon.scb2monitor_mbx = read_scb2monitor_mbx;
 
-      // Wire scoreboard mailboxes
-      read_scb.gen2scb_mbx = read_gen2scb_mbx;
-      read_scb.scb2gen_mbx = read_scb2gen_mbx;
+
+      // -------------------------------------------------------
+      // Scoreboard connections
+      // -------------------------------------------------------
+
+      read_scb.gen2scb_mbx     = read_gen2scb_mbx;
+      read_scb.scb2gen_mbx     = read_scb2gen_mbx;
+
       read_scb.monitor2scb_mbx = read_monitor2scb_mbx;
       read_scb.scb2monitor_mbx = read_scb2monitor_mbx;
-      // Virtual Interface
-      read_drv.vif = vif_driver;
-      read_mon.vif = vif_monitor;
 
-      // Reference model
-      read_scb.ref_model = ref_model;
+      read_scb.ref_model       = ref_model;
 
 
-      // Running
-      fork
-        read_gen.run_generator();
-        read_drv.run_driver();
-        read_mon.run_monitor();
-        read_scb.run_scoreboard();
-      join_any
+      // -------------------------------------------------------
+      // Virtual interfaces
+      // -------------------------------------------------------
 
-      @(posedge vif.ACLK);
-      @(posedge vif.ACLK);
+      read_drv.vif             = vif_driver;
+      read_mon.vif             = vif_monitor;
 
-      read_scb.report();
     endtask
 
-    task run_golden_model();
+
+    // =========================================================
+    // Build write environment
+    // =========================================================
+
+    task automatic build_write_env();
+
+      // -------------------------------------------------------
+      // Components
+      // -------------------------------------------------------
+
+      write_gen                 = new();
+      write_drv                 = new();
+      write_mon                 = new();
+      write_scb                 = new();
+      write_gm                  = new();
+      write_cov                 = new();
+
+
+      // -------------------------------------------------------
+      // Generator connections
+      // -------------------------------------------------------
+
+      write_gen.gen2driver_mbx  = write_gen2driver_mbx;
+      write_gen.driver2gen_mbx  = write_driver2gen_mbx;
+
+      write_gen.gen2scb_mbx     = write_gen2scb_mbx;
+      write_gen.scb2gen_mbx     = write_scb2gen_mbx;
+
+
+      // -------------------------------------------------------
+      // Driver connections
+      // -------------------------------------------------------
+
+      write_drv.gen2driver_mbx  = write_gen2driver_mbx;
+      write_drv.driver2gen_mbx  = write_driver2gen_mbx;
+
+
+      // -------------------------------------------------------
+      // Monitor connections
+      // -------------------------------------------------------
+
+      write_mon.monitor2scb_mbx = write_monitor2scb_mbx;
+      write_mon.scb2monitor_mbx = write_scb2monitor_mbx;
+
+
+      // -------------------------------------------------------
+      // Scoreboard connections
+      // -------------------------------------------------------
+
+
+      write_scb.monitor2scb_mbx = write_monitor2scb_mbx;
+      write_scb.scb2monitor_mbx = write_scb2monitor_mbx;
+
+      write_scb.gm2scb_mbx      = gm2scb_mbx;
+
+
+      // -------------------------------------------------------
+      // Golden model
+      // -------------------------------------------------------
+
+      write_gm.set_reference_model(ref_model);
+
+
+      // -------------------------------------------------------
+      // Virtual interfaces
+      // -------------------------------------------------------
+
+      write_drv.vif = vif_driver;
+      write_mon.vif = vif_monitor;
+
+    endtask
+
+
+    // =========================================================
+    // Run golden model
+    // =========================================================
+
+    task automatic run_golden_model();
 
       axi4_write_txn txn;
 
+
       forever begin
+
         write_gen2scb_mbx.get(txn);
 
         write_gm.predict(txn);
 
         gm2scb_mbx.put(txn);
+
       end
 
     endtask
 
-    task run_write_env();
-      // Initialize mailboxes
-      write_gen2driver_mbx = new(1);
-      write_driver2gen_mbx = new(1);
-      write_gen2scb_mbx = new(1);
-      write_scb2gen_mbx = new(1);
-      write_monitor2scb_mbx = new(1);
-      write_scb2monitor_mbx = new(1);
-      gm2scb_mbx = new(1);
 
-      // Initialize components
-      write_gen = new();
-      write_drv = new();
-      write_mon = new();
-      write_scb = new();
-      write_gm = new();
-      write_cov = new();
+    // =========================================================
+    // Run write environment
+    // =========================================================
 
-      // Wire generator mailboxes
-      write_gen.gen2driver_mbx = write_gen2driver_mbx;
-      write_gen.driver2gen_mbx = write_driver2gen_mbx;
-      write_gen.gen2scb_mbx = write_gen2scb_mbx;
-      write_gen.scb2gen_mbx = write_scb2gen_mbx;
+    task automatic run_write_env();
 
-      // Wire driver mailboxes
-      write_drv.gen2driver_mbx = write_gen2driver_mbx;
-      write_drv.driver2gen_mbx = write_driver2gen_mbx;
+      build_write_env();
 
-      // Wire Monitor mailboxes
-      write_mon.monitor2scb_mbx = write_monitor2scb_mbx;
-      write_mon.scb2monitor_mbx = write_scb2monitor_mbx;
 
-      // Wire scoreboard mailboxes
-      write_scb.gen2scb_mbx = write_gen2scb_mbx;
-      write_scb.scb2gen_mbx = write_scb2gen_mbx;
-      write_scb.monitor2scb_mbx = write_monitor2scb_mbx;
-      write_scb.scb2monitor_mbx = write_scb2monitor_mbx;
-      write_scb.gm2scb_mbx = gm2scb_mbx;
+      fork : write_processes
 
-      // Virtual Interface
-      write_drv.vif = vif_driver;
-      write_mon.vif = vif_monitor;
-
-      // Running
-      fork
         write_gen.run_generator();
-        write_drv.run_driver();
-        write_mon.run_monitor();
-        run_golden_model();
-        write_scb.run_scoreboard();
-      join_any
 
-      @(posedge vif.ACLK);
-      @(posedge vif.ACLK);
+        write_drv.run_driver();
+
+        write_mon.run_monitor();
+
+        run_golden_model();
+
+        write_scb.run_scoreboard();
+
+      join_none
+
+
+      // -------------------------------------------------------
+      // The generator is the completion owner.
+      //
+      // It cannot finish until:
+      //   driver completed the transaction
+      //   scoreboard consumed the expected transaction
+      //
+      // Therefore write_gen.done means the complete write
+      // verification pipeline has processed all transactions.
+      // -------------------------------------------------------
+
+      wait (write_gen.done);
+
+
+      write_done = 1;
+
+
+      // -------------------------------------------------------
+      // Stop background components.
+      // -------------------------------------------------------
+
+      disable write_processes;
+
+
+      // -------------------------------------------------------
+      // Final report.
+      // -------------------------------------------------------
 
       write_scb.report();
 
     endtask
 
-    // Main task
-    task run_env();
-      fork
-        run_read_env();
-        run_write_env();
-      join_any
+
+    // =========================================================
+    // Run read environment
+    // =========================================================
+
+    task automatic run_read_env();
+
+      build_read_env();
+
+
+      fork : read_processes
+
+        read_gen.run_generator();
+
+        read_drv.run_driver();
+
+        read_mon.run_monitor();
+
+        read_scb.run_scoreboard();
+
+      join_none
+
+
+      // -------------------------------------------------------
+      // The generator is the completion owner.
+      // -------------------------------------------------------
+
+      wait (read_gen.done);
+
+
+      read_done = 1;
+
+
+      // -------------------------------------------------------
+      // Stop background components.
+      // -------------------------------------------------------
+
+      disable read_processes;
+
+
+      // -------------------------------------------------------
+      // Final report.
+      // -------------------------------------------------------
+
+      read_scb.report();
+
+    endtask
+
+
+    // =========================================================
+    // Main environment
+    // =========================================================
+
+    task automatic run_env();
+
+      // -------------------------------------------------------
+      // Write first.
+      //
+      // The write and read environments share the same expected
+      // memory model. Running them sequentially avoids an
+      // ordering race between reference-memory updates and
+      // read predictions.
+      // -------------------------------------------------------
+
+      run_write_env();
+
+
+      // -------------------------------------------------------
+      // After all writes are complete, run reads.
+      // -------------------------------------------------------
+
+      run_read_env();
+
+
+      // -------------------------------------------------------
+      // All verification activity is complete.
+      // -------------------------------------------------------
 
       test_done = 1;
-      $stop;
+
+
+      $display("=================================================");
+      $display("                 TEST COMPLETE");
+      $display("=================================================");
+      $display("Write environment : COMPLETE");
+      $display("Read environment  : COMPLETE");
+      $display("=================================================");
 
     endtask
 
   endclass
+
 endpackage

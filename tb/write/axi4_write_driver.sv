@@ -2,6 +2,7 @@ package AXI_write_driver_pkg;
 
   import AXI_write_transaction_pkg::*;
 
+
   class axi4_write_driver;
 
     virtual axi4_if.DRIVER    vif;
@@ -9,7 +10,13 @@ package AXI_write_driver_pkg;
     mailbox #(axi4_write_txn) gen2driver_mbx;
     mailbox #(int)            driver2gen_mbx;
 
+
+    // =========================================================
+    // Reset driver outputs
+    // =========================================================
+
     task automatic reset_signals();
+
       vif.AWADDR  = '0;
       vif.AWLEN   = '0;
       vif.AWSIZE  = '0;
@@ -20,7 +27,13 @@ package AXI_write_driver_pkg;
       vif.WVALID  = 1'b0;
 
       vif.BREADY  = 1'b0;
+
     endtask
+
+
+    // =========================================================
+    // Main driver
+    // =========================================================
 
     task automatic run_driver();
 
@@ -28,14 +41,19 @@ package AXI_write_driver_pkg;
 
       reset_signals();
 
+
       forever begin
 
-        // Wait for the next transaction from the generator.
+        // -----------------------------------------------------
+        // Get next transaction
+        // -----------------------------------------------------
+
         gen2driver_mbx.get(txn);
 
-        // =================================================
+
+        // =====================================================
         // WRITE ADDRESS CHANNEL
-        // =================================================
+        // =====================================================
 
         @(negedge vif.ACLK);
 
@@ -44,17 +62,23 @@ package AXI_write_driver_pkg;
         vif.AWSIZE  = txn.awsize;
         vif.AWVALID = 1'b1;
 
-        // Hold AWVALID and payload until handshake.
+
+        // Hold all address-channel signals until handshake.
         do begin
+
           @(posedge vif.ACLK);
-        end while (!vif.AWREADY);
+
+        end while (!(vif.AWVALID && vif.AWREADY));
+
 
         @(negedge vif.ACLK);
+
         vif.AWVALID = 1'b0;
 
-        // =================================================
+
+        // =====================================================
         // WRITE DATA CHANNEL
-        // =================================================
+        // =====================================================
 
         for (int i = 0; i <= txn.awlen; i++) begin
 
@@ -64,11 +88,16 @@ package AXI_write_driver_pkg;
           vif.WLAST  = (i == txn.awlen);
           vif.WVALID = 1'b1;
 
+
           // Hold WVALID, WDATA and WLAST until handshake.
           do begin
+
             @(posedge vif.ACLK);
-          end while (!vif.WREADY);
+
+          end while (!(vif.WVALID && vif.WREADY));
+
         end
+
 
         @(negedge vif.ACLK);
 
@@ -76,29 +105,49 @@ package AXI_write_driver_pkg;
         vif.WLAST  = 1'b0;
         vif.WDATA  = '0;
 
-        // =================================================
+
+        // =====================================================
         // WRITE RESPONSE CHANNEL
-        // =================================================
+        // =====================================================
 
         @(negedge vif.ACLK);
 
         vif.BREADY = 1'b1;
 
-        // Wait for BVALID/BREADY handshake.
+
+        // Wait for the actual B-channel handshake.
         do begin
+
           @(posedge vif.ACLK);
-        end while (!vif.BVALID);
+
+        end while (!(vif.BVALID && vif.BREADY));
+
+
+        // Capture the response.
+        txn.act_bresp = vif.BRESP;
+
 
         @(negedge vif.ACLK);
 
         vif.BREADY = 1'b0;
 
-        // Tell generator that this transaction completed.
-        if (driver2gen_mbx != null) driver2gen_mbx.put(1);
+
+        // =====================================================
+        // Transaction complete
+        // =====================================================
+
+        if (driver2gen_mbx == null) begin
+
+          $fatal(1, "[WRITE_DRV] driver2gen_mbx is null");
+
+        end
+
+        driver2gen_mbx.put(1);
 
       end
 
     endtask
 
   endclass
+
 endpackage

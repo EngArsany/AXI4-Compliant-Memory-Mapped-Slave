@@ -1,52 +1,123 @@
 package AXI_read_driver_pkg;
+
   import AXI_read_transaction_pkg::*;
+
 
   class AXI_read_driver;
 
-    virtual axi4_if.DRIVER vif;
+    virtual axi4_if.DRIVER          vif;
 
     mailbox #(AXI_read_transaction) gen2driver_mbx;
-    mailbox #(int) driver2gen_mbx;
+    mailbox #(int)                  driver2gen_mbx;
 
 
-    task assert_signal(ref logic signal);
-      @(negedge vif.ACLK);
-      signal = 1;
+    task automatic reset_signals();
+
+      vif.ARADDR  = '0;
+      vif.ARLEN   = '0;
+      vif.ARSIZE  = '0;
+      vif.ARVALID = 1'b0;
+
+      vif.RREADY  = 1'b0;
+
     endtask
 
-    task deassert_signal(ref logic signal);
-      @(negedge vif.ACLK);
-      signal = 0;
-    endtask
 
+    task automatic run_driver();
 
-    task run_driver();
       AXI_read_transaction txn;
-      vif.ARSIZE = 3'd2;
+      int expected_beats;
+      int actual_beats;
+
+
+      reset_signals();
+
 
       forever begin
+
         gen2driver_mbx.get(txn);
 
+
+        // =====================================================
+        // READ ADDRESS CHANNEL
+        // =====================================================
+
         @(negedge vif.ACLK);
-        vif.ARADDR <= txn.araddr;
-        vif.ARLEN  <= txn.arlen;
-        vif.ARSIZE <= txn.arsize;
 
-        // Perform handshake
-        assert_signal(vif.ARVALID);
+        vif.ARADDR  = txn.araddr;
+        vif.ARLEN   = txn.arlen;
+        vif.ARSIZE  = txn.arsize;
+        vif.ARVALID = 1'b1;
+
+
         do begin
-          @(negedge vif.ACLK);
-        end while (!vif.ARREADY);  // Wait until ARREADY is asserted
-        deassert_signal(vif.ARVALID);
+          @(posedge vif.ACLK);
+        end while (!(vif.ARVALID && vif.ARREADY));
 
-        // Receive Data
-        assert_signal(vif.RREADY);  // Assert RREADY to start receiving data
-        do begin
-          @(negedge vif.ACLK);
-        end while (!(vif.RVALID && vif.RLAST));  // Wait until ARREADY is asserted
-        deassert_signal(vif.RREADY);
 
-        driver2gen_mbx.put(1);  // got transaction
+        @(negedge vif.ACLK);
+
+        vif.ARVALID = 1'b0;
+
+
+        // =====================================================
+        // READ DATA CHANNEL
+        // =====================================================
+
+        expected_beats = txn.expected_r_beats();
+        actual_beats = 0;
+
+
+        @(negedge vif.ACLK);
+
+        vif.RREADY = 1'b1;
+
+
+        forever begin
+
+          @(posedge vif.ACLK);
+
+
+          if (vif.RVALID && vif.RREADY) begin
+
+            actual_beats++;
+
+
+            if (vif.RLAST) break;
+
+          end
+
+        end
+
+
+        // =====================================================
+        // Validate number of received beats
+        // =====================================================
+
+        if (actual_beats != expected_beats) begin
+
+          $error("[READ_DRV] R-beat count mismatch: expected=%0d actual=%0d", expected_beats,
+                 actual_beats);
+
+        end
+
+
+        @(negedge vif.ACLK);
+
+        vif.RREADY = 1'b0;
+
+
+        // =====================================================
+        // Transaction complete
+        // =====================================================
+
+        if (driver2gen_mbx == null) begin
+
+          $fatal(1, "[READ_DRV] driver2gen_mbx is null");
+
+        end
+
+        driver2gen_mbx.put(1);
 
       end
 

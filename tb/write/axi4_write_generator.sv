@@ -2,23 +2,42 @@ package AXI_write_generator_pkg;
 
   import AXI_write_transaction_pkg::*;
 
+
   class axi4_write_generator;
 
+    // =========================================================
+    // Mailboxes
+    // =========================================================
+
     mailbox #(axi4_write_txn) gen2driver_mbx;
-    mailbox #(int) driver2gen_mbx;
+    mailbox #(int)            driver2gen_mbx;
 
     mailbox #(axi4_write_txn) gen2scb_mbx;
-    mailbox #(int) scb2gen_mbx;
+    mailbox #(int)            scb2gen_mbx;
 
-    int num_of_txns = 200;
-    int num_of_direct_txns = 30;
 
+    // =========================================================
+    // Configuration
+    // =========================================================
+
+    int unsigned              num_of_txns        = 200;
+    int unsigned              num_of_direct_txns = 30;
+
+    bit                       done               = 0;
+
+
+    // =========================================================
+    // Directed test-case generation
+    // =========================================================
 
     function bit generate_directed_test_cases(axi4_write_txn txn, int case_id);
 
       case (case_id)
 
+        // -----------------------------------------------------
         // Valid word-sized writes
+        // -----------------------------------------------------
+
         0:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
@@ -55,7 +74,10 @@ package AXI_write_generator_pkg;
         };
 
 
+        // -----------------------------------------------------
         // Near 4-KB boundary
+        // -----------------------------------------------------
+
         5:
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
@@ -78,7 +100,10 @@ package AXI_write_generator_pkg;
         };
 
 
+        // -----------------------------------------------------
         // Out-of-range addresses
+        // -----------------------------------------------------
+
         8:
         return txn.randomize() with {
           addr_mode == ADDR_OUT_OF_RANGE;
@@ -101,7 +126,10 @@ package AXI_write_generator_pkg;
         };
 
 
+        // -----------------------------------------------------
         // Invalid AWSIZE
+        // -----------------------------------------------------
+
         11:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
@@ -131,7 +159,10 @@ package AXI_write_generator_pkg;
         };
 
 
+        // -----------------------------------------------------
         // Unaligned word accesses
+        // -----------------------------------------------------
+
         15:
         return txn.randomize() with {
           addr_mode == ADDR_UNALIGNED;
@@ -154,7 +185,10 @@ package AXI_write_generator_pkg;
         };
 
 
-        // Additional valid word bursts
+        // -----------------------------------------------------
+        // Additional valid bursts
+        // -----------------------------------------------------
+
         18:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
@@ -170,7 +204,10 @@ package AXI_write_generator_pkg;
         };
 
 
-        // Additional near-boundary cases
+        // -----------------------------------------------------
+        // Additional boundary cases
+        // -----------------------------------------------------
+
         20:
         return txn.randomize() with {
           addr_mode == ADDR_NEAR_BOUNDARY;
@@ -186,7 +223,10 @@ package AXI_write_generator_pkg;
         };
 
 
+        // -----------------------------------------------------
         // Additional out-of-range case
+        // -----------------------------------------------------
+
         22:
         return txn.randomize() with {
           addr_mode == ADDR_OUT_OF_RANGE;
@@ -195,7 +235,10 @@ package AXI_write_generator_pkg;
         };
 
 
+        // -----------------------------------------------------
         // Additional invalid AWSIZE cases
+        // -----------------------------------------------------
+
         23:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
@@ -224,7 +267,11 @@ package AXI_write_generator_pkg;
           awsize == 3'b100;
         };
 
-        // More valid word burst lengths
+
+        // -----------------------------------------------------
+        // More valid burst lengths
+        // -----------------------------------------------------
+
         27:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
@@ -246,35 +293,104 @@ package AXI_write_generator_pkg;
           awsize == 3'b010;
         };
 
+
         default: return txn.randomize();
+
       endcase
+
     endfunction
 
-    task run_generator();
+
+    // =========================================================
+    // Generate one transaction
+    // =========================================================
+
+    task generate_transaction(int case_id = -1);
+
       axi4_write_txn txn;
       int token;
 
-      for (int i = 0; i < num_of_txns; i++) begin
-        txn = new();
 
-        if (i < num_of_direct_txns) begin
-          if (!generate_directed_test_cases(txn, i)) begin
-            $fatal(1, "[GENERATOR] Coverage-plan randomization failed on txn %0d", i);
-          end
-        end else begin
-          if (!txn.randomize()) begin
-            $fatal(1, "[GENERATOR] Randomization failed on txn %0d", i);
-          end
+      txn = new();
+
+
+      if (case_id >= 0) begin
+
+        if (!generate_directed_test_cases(txn, case_id)) begin
+
+          $fatal(1, "[WRITE_GEN] Directed randomization failed for case %0d", case_id);
+
         end
-        gen2driver_mbx.put(txn);
-        driver2gen_mbx.get(token);
 
-        gen2scb_mbx.put(txn);
-        scb2gen_mbx.get(token);
+      end else begin
+
+        if (!txn.randomize()) begin
+
+          $fatal(1, "[WRITE_GEN] Randomization failed.");
+
+        end
+
       end
 
-      $display("[%0t][GENERATOR] Generator Finished %0d Transactions!", $time, num_of_txns);
+
+      // Send transaction to driver.
+      gen2driver_mbx.put(txn);
+
+
+      // Wait for driver to complete the transaction.
+      $display("[WRITE_GEN] Waiting for driver completion");
+      driver2gen_mbx.get(token);
+      $display("[WRITE_GEN] Driver completed transaction");
+
+
+      // Send the completed expected transaction to the
+      // golden-model
+      gen2scb_mbx.put(txn);
+
+
+      // Wait until the scoreboard path consumes it.
+      $display("[WRITE_GEN] Waiting for scoreboard");
+      scb2gen_mbx.get(token);
+      $display("[WRITE_GEN] Scoreboard completed transaction");
 
     endtask
+
+
+    // =========================================================
+    // Generate configured transaction sequence
+    // =========================================================
+
+    task run_generator();
+
+      int unsigned directed_count;
+
+
+      directed_count = (num_of_direct_txns < num_of_txns) ? num_of_direct_txns : num_of_txns;
+
+
+      // Directed cases first.
+      for (int i = 0; i < directed_count; i++) begin
+
+        generate_transaction(i);
+
+      end
+
+
+      // Remaining transactions are constrained-random.
+      for (int i = directed_count; i < num_of_txns; i++) begin
+
+        generate_transaction();
+
+      end
+
+
+      done = 1;
+
+
+      $display("[%0t][WRITE_GEN] Generator Finished, %0d transactions sent", $time, num_of_txns);
+
+    endtask
+
   endclass
+
 endpackage

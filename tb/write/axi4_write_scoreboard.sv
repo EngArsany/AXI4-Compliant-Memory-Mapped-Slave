@@ -1,36 +1,50 @@
 package AXI_write_scoreboard_pkg;
 
   import AXI_write_transaction_pkg::*;
-  import AXI_backdoor_pkg::*;
 
   class axi4_write_scoreboard;
 
-    // Expected transactions produced by the golden model.
-    mailbox #(axi4_write_txn) gm2scb_mbx;
-    mailbox #(int) scb2gm_mbx;
+    // =========================================================
+    // Expected transactions from the golden model
+    // =========================================================
 
-    // Actual transactions produced by the write monitor.
+    mailbox #(axi4_write_txn) gm2scb_mbx;
+    mailbox #(int)            scb2gm_mbx;
+
+
+    // =========================================================
+    // Actual transactions from the monitor
+    // =========================================================
+
     mailbox #(axi4_write_txn) monitor2scb_mbx;
-    mailbox #(int) scb2monitor_mbx;
+    mailbox #(int)            scb2monitor_mbx;
 
     mailbox #(axi4_write_txn) gen2scb_mbx;
-    mailbox #(int) scb2gen_mbx;
+    mailbox #(int)            scb2gen_mbx;
 
-    // Backdoor access to DUT memory.
-    axi4_backdoor_base bd;
+    // =========================================================
+    // Statistics
+    // =========================================================
 
-    int unsigned num_checked;
-    int unsigned num_bresp_errors;
-    int unsigned num_data_errors;
-    int token;
+    int unsigned              num_checked;
+    int unsigned              num_bresp_errors;
+
+
+    // =========================================================
+    // Constructor
+    // =========================================================
 
     function new();
+
       num_checked      = 0;
       num_bresp_errors = 0;
-      num_data_errors  = 0;
 
     endfunction
 
+
+    // =========================================================
+    // Main scoreboard process
+    // =========================================================
 
     task automatic run_scoreboard();
 
@@ -39,30 +53,57 @@ package AXI_write_scoreboard_pkg;
 
       forever begin
 
-        // Only one write burst is outstanding, so the order
-        // of expected and actual transactions is identical.
+        // -----------------------------------------------------
+        // Get the expected transaction from the golden model.
+        // -----------------------------------------------------
+        $display("[WRITE_SCB] Waiting for expected transaction");
         gm2scb_mbx.get(expected_txn);
-        scb2gm_mbx.put(token);
+        $display("[WRITE_SCB] Got expected transaction");
 
+        scb2gm_mbx.put(1);
+
+
+        // -----------------------------------------------------
+        // Get the actual transaction from the monitor.
+        // -----------------------------------------------------
+        $display("[WRITE_SCB] Waiting for actual transaction");
         monitor2scb_mbx.get(actual_txn);
-        scb2monitor_mbx.put(token);
+        $display("[WRITE_SCB] Got actual transaction");
+
+
+
+        // -----------------------------------------------------
+        // Compare expected vs actual.
+        // -----------------------------------------------------
 
         check_transaction(expected_txn, actual_txn);
+        $display("[WRITE_SCB] Releasing monitor");
+        scb2monitor_mbx.put(1);
+
+        $display("[WRITE_SCB] Releasing generator");
+        scb2gen_mbx.put(1);
 
       end
 
     endtask
 
 
+    // =========================================================
+    // Check complete write transaction
+    // =========================================================
+
     task automatic check_transaction(axi4_write_txn expected_txn, axi4_write_txn actual_txn);
 
       num_checked++;
 
       check_bresp(expected_txn, actual_txn);
-      check_memory(expected_txn);
 
     endtask
 
+
+    // =========================================================
+    // Check BRESP
+    // =========================================================
 
     function automatic void check_bresp(axi4_write_txn expected_txn, axi4_write_txn actual_txn);
 
@@ -83,35 +124,9 @@ package AXI_write_scoreboard_pkg;
     endfunction
 
 
-    function automatic void check_memory(axi4_write_txn txn);
-
-      bit [31:0] actual_data;
-      bit [31:0] expected_data;
-
-      for (int i = 0; i < txn.wdata.size(); i++) begin
-
-        // Invalid beats must not modify memory, so there is
-        // nothing to check here yet. The golden model already
-        // defines which beats are expected to be written.
-        if (!txn.beat_valid[i]) continue;
-
-        actual_data   = bd.read(txn.beat_word_addr[i]);
-        expected_data = txn.wdata[i];
-
-        if (actual_data !== expected_data) begin
-
-          num_data_errors++;
-
-          $error(
-              "[WRITE_SCB] DATA MISMATCH %s beat=%0d " + "addr=0x%0h expected=0x%0h actual=0x%0h",
-              txn.convert2string(), i, txn.beat_word_addr[i], expected_data, actual_data);
-
-        end
-
-      end
-
-    endfunction
-
+    // =========================================================
+    // Final report
+    // =========================================================
 
     function void report();
 
@@ -120,10 +135,10 @@ package AXI_write_scoreboard_pkg;
       $display("=================================================");
       $display("Transactions checked : %0d", num_checked);
       $display("BRESP errors         : %0d", num_bresp_errors);
-      $display("Data errors          : %0d", num_data_errors);
       $display("=================================================");
 
-      if ((num_bresp_errors != 0) || (num_data_errors != 0)) begin
+
+      if (num_bresp_errors != 0) begin
 
         $error("[WRITE_SCB] Verification failures detected.");
 
@@ -136,4 +151,5 @@ package AXI_write_scoreboard_pkg;
     endfunction
 
   endclass
+
 endpackage

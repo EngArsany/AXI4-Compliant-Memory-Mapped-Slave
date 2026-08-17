@@ -2,43 +2,87 @@ package AXI_read_monitor_pkg;
 
   import AXI_read_transaction_pkg::*;
 
+
   class AXI_read_monitor;
 
-    virtual axi4_if.MONITOR vif;
+    virtual axi4_if.MONITOR         vif;
 
     mailbox #(AXI_read_transaction) monitor2scb_mbx;
-    mailbox #(int) scb2monitor_mbx;
+    mailbox #(int)                  scb2monitor_mbx;
 
-    task run_monitor();
+
+    task automatic run_monitor();
+
       AXI_read_transaction sampled;
       int token;
 
+
       forever begin
+
         sampled = new();
 
-        // Wait for address transfer
+
+        // =====================================================
+        // READ ADDRESS CHANNEL
+        // =====================================================
+
         do begin
-          @(negedge vif.ACLK);
+          @(posedge vif.ACLK);
         end while (!(vif.ARVALID && vif.ARREADY));
 
-        // Sample address info
+
         sampled.araddr = vif.ARADDR;
         sampled.arlen  = vif.ARLEN;
         sampled.arsize = vif.ARSIZE;
 
-        // Wait for data transfer
-        // Handle bursts
-        do begin
-          @(negedge vif.ACLK);
-          if (vif.RREADY && vif.RVALID) begin
+
+        // =====================================================
+        // READ DATA CHANNEL
+        // =====================================================
+
+        forever begin
+
+          @(posedge vif.ACLK);
+
+
+          if (vif.RVALID && vif.RREADY) begin
+
             sampled.rdata.push_back(vif.RDATA);
             sampled.rresp.push_back(vif.RRESP);
+
+            sampled.rlast = vif.RLAST;
+
+
+            if (vif.RLAST) break;
+
           end
-        end while (!(vif.RREADY && vif.RVALID && vif.RLAST));
+
+        end
+
+
+        // =====================================================
+        // Send completed transaction to scoreboard
+        // =====================================================
+
+        if (monitor2scb_mbx == null) begin
+
+          $fatal(1, "[READ_MON] monitor2scb_mbx is null");
+
+        end
 
         monitor2scb_mbx.put(sampled);
+
+
+        if (scb2monitor_mbx == null) begin
+
+          $fatal(1, "[READ_MON] scb2monitor_mbx is null");
+
+        end
+
         scb2monitor_mbx.get(token);
+
       end
+
     endtask
 
   endclass
