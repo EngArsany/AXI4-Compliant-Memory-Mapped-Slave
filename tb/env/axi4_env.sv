@@ -14,6 +14,8 @@ package AXI_env_pkg;
   import AXI_write_golden_model_pkg::*;
   import AXI_write_coverage_pkg::*;
 
+  import AXI_reference_model_pkg::*;
+
   class AXI_env;
     // Interfaces
     virtual axi4_if                 vif;
@@ -56,6 +58,9 @@ package AXI_env_pkg;
 
     mailbox #(axi4_write_txn)       gm2scb_mbx;
 
+    // Reference model
+    axi4_reference_model            ref_model;
+
     // Test Done
     bit                             test_done              = 0;
 
@@ -93,10 +98,13 @@ package AXI_env_pkg;
       read_scb.scb2gen_mbx = read_scb2gen_mbx;
       read_scb.monitor2scb_mbx = read_monitor2scb_mbx;
       read_scb.scb2monitor_mbx = read_scb2monitor_mbx;
-
       // Virtual Interface
       read_drv.vif = vif_driver;
       read_mon.vif = vif_monitor;
+
+      // Reference model
+      read_scb.ref_model = ref_model;
+
 
       // Running
       fork
