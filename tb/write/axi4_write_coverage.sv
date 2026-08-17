@@ -24,9 +24,7 @@ package AXI_write_coverage_pkg;
       }
 
       cp_awsize: coverpoint txn.awsize {
-        bins word_size = {3'b010};
-        bins sub_word_size = {3'b000, 3'b001};
-        bins oversize = {[3'b011 : 3'b111]};
+        bins word_size = {3'b010}; illegal_bins wrong_write_size = !binsof (word_size);
       }
 
       cp_addr_mode: coverpoint txn.addr_mode {
@@ -57,9 +55,7 @@ package AXI_write_coverage_pkg;
         ignore_bins out_of_range_okay =
                 binsof(cp_addr_mode.out_of_range)
                 && binsof(cp_bresp.okay);
-        ignore_bins unaligned_okay =                   
-                binsof(cp_addr_mode.unaligned)
-                && binsof(cp_bresp.okay);
+        ignore_bins unaligned_okay = binsof (cp_addr_mode.unaligned) && binsof (cp_bresp.okay);
       }
 
       cx_size_bresp: cross cp_awsize, cp_bresp{
