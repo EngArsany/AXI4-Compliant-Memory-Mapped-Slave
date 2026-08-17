@@ -18,8 +18,6 @@ package AXI_write_scoreboard_pkg;
 
     mailbox #(axi4_write_txn) monitor2scb_mbx;
     mailbox #(int)            scb2monitor_mbx;
-
-    mailbox #(axi4_write_txn) gen2scb_mbx;
     mailbox #(int)            scb2gen_mbx;
 
     // =========================================================
