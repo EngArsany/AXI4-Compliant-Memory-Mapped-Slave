@@ -1,140 +1,92 @@
-//=============================================================
-// tb_top.sv
-//=============================================================
+`timescale 1ns / 1ps
 
-`timescale 1ns/1ps
-
-import axi4_write_pkg::*;
 import AXI_env_pkg::*;
 
 module tb_top;
 
-    localparam ADDR_WIDTH   = 16;
-    localparam DATA_WIDTH   = 32;
-    localparam MEMORY_DEPTH = 1024;
+  logic ACLK;
 
-    bit ACLK;
-    bit ARESETn;
+  initial begin
+    ACLK = 1'b0;
+    forever #5 ACLK = ~ACLK;
+  end
 
-    initial ACLK = 1'b0;
-    always #5 ACLK = ~ACLK;
+  axi4_if vif (.ACLK(ACLK));
 
-    initial begin
-        ARESETn = 1'b0;
-        repeat (5) @(posedge ACLK);
-        ARESETn = 1'b1;
-    end
+  axi4_slave dut (
+      .ACLK   (vif.ACLK),
+      .ARESETn(vif.ARESETn),
 
-    axi4_if #(
-        .ADDR_WIDTH(ADDR_WIDTH),
-        .DATA_WIDTH(DATA_WIDTH)
-    ) vif (
-        .ACLK(ACLK),
-        .ARESETn(ARESETn)
-    );
+      // Write address channel
+      .AWADDR (vif.AWADDR),
+      .AWLEN  (vif.AWLEN),
+      .AWSIZE (vif.AWSIZE),
+      .AWVALID(vif.AWVALID),
+      .AWREADY(vif.AWREADY),
 
-    axi4 #(
-        .DATA_WIDTH(DATA_WIDTH),
-        .ADDR_WIDTH(ADDR_WIDTH),
-        .MEMORY_DEPTH(MEMORY_DEPTH)
-    ) dut (
-        .ACLK(ACLK),
-        .ARESETn(ARESETn),
+      // Write data channel
+      .WDATA (vif.WDATA),
+      .WLAST (vif.WLAST),
+      .WVALID(vif.WVALID),
+      .WREADY(vif.WREADY),
 
-        .AWADDR(vif.AWADDR), .AWLEN(vif.AWLEN), .AWSIZE(vif.AWSIZE),
-        .AWVALID(vif.AWVALID), .AWREADY(vif.AWREADY),
+      // Write response channel
+      .BRESP (vif.BRESP),
+      .BVALID(vif.BVALID),
+      .BREADY(vif.BREADY),
 
-        .WDATA(vif.WDATA), .WVALID(vif.WVALID), .WLAST(vif.WLAST),
-        .WREADY(vif.WREADY),
+      // Read address channel
+      .ARADDR (vif.ARADDR),
+      .ARLEN  (vif.ARLEN),
+      .ARSIZE (vif.ARSIZE),
+      .ARVALID(vif.ARVALID),
+      .ARREADY(vif.ARREADY),
 
-        .BRESP(vif.BRESP), .BVALID(vif.BVALID), .BREADY(vif.BREADY),
+      // Read data channel
+      .RDATA (vif.RDATA),
+      .RRESP (vif.RRESP),
+      .RLAST (vif.RLAST),
+      .RVALID(vif.RVALID),
+      .RREADY(vif.RREADY)
+  );
 
-        // Write-only verification scope: read channel remains idle.
-        .ARADDR({ADDR_WIDTH{1'b0}}),
-        .ARLEN(8'h00),
-        .ARSIZE(3'b010),
-        .ARVALID(1'b0),
-        .ARREADY(),
-        .RDATA(),
-        .RRESP(),
-        .RVALID(),
-        .RLAST(),
-        .RREADY(1'b0)
-    );
+  AXI_env env;
 
-    // -----------------------------------------------------------
-    // Modport handles.
-    //
-    // IMPORTANT: assign these handles first and pass the handles to
-    // the classes. Do NOT call new(vif.DRIVER)/new(vif.MONITOR)
-    // directly. Questa warns about using a modport in a hierarchical
-    // path; this handle-based form preserves the required modports
-    // without that warning.
-    // -----------------------------------------------------------
-    virtual axi4_if.DRIVER  drv_vif;
-    virtual axi4_if.MONITOR mon_vif;
-
-    // -----------------------------------------------------------
-    // Backdoor memory access.
-    // -----------------------------------------------------------
-    class axi4_backdoor_impl extends axi4_backdoor_base;
-        function bit [31:0] read(bit [9:0] word_addr);
-            return dut.mem_inst.memory[word_addr];
-        endfunction
-    endclass
-
-    AXI_env    env;
-    axi4_backdoor_impl bd;
-
-    localparam int WATCHDOG_CYCLES = 200_000;
-
-initial begin
+  initial begin
 
     env = new();
-    env.vif_driver = drv_vif;
-    env.vif_monitor = mon_vif;
 
-    bd = new();
-    env.bd = bd;
+    vif.ARESETn = 1'b0;
 
-    fork
+    // Initialize master-driven signals.
+    vif.AWADDR = '0;
+    vif.AWLEN = '0;
+    vif.AWSIZE = '0;
+    vif.AWVALID = 1'b0;
 
-        begin
-            env.run_env(200);
-            $display("[TB_TOP] Test complete.");
-        end
+    vif.WDATA = '0;
+    vif.WLAST = 1'b0;
+    vif.WVALID = 1'b0;
 
-        begin
-            repeat (WATCHDOG_CYCLES)
-                @(posedge ACLK);
+    vif.BREADY = 1'b0;
 
-            $display(
-                "[TB_TOP] WATCHDOG TIMEOUT at time %0t",
-                $time
-            );
+    vif.ARADDR = '0;
+    vif.ARLEN = '0;
+    vif.ARSIZE = '0;
+    vif.ARVALID = 1'b0;
 
-            $display(
-                "[TB_TOP] write_state=%0d AWVALID=%b AWREADY=%b WVALID=%b WREADY=%b BVALID=%b BREADY=%b",
-                dut.write_state,
-                vif.AWVALID,
-                vif.AWREADY,
-                vif.WVALID,
-                vif.WREADY,
-                vif.BVALID,
-                vif.BREADY
-            );
+    vif.RREADY = 1'b0;
 
-            $fatal(
-                1,
-                "[TB_TOP] Simulation did not complete within %0d cycles",
-                WATCHDOG_CYCLES
-            );
-        end
+    repeat (2) @(posedge ACLK);
 
-    join_any
+    vif.ARESETn = 1'b1;
 
-    disable fork;
+    env.run_env();
 
-end
+    wait (env.test_done);
+
+    $finish;
+
+  end
 
 endmodule
