@@ -1,5 +1,7 @@
 package AXI_write_monitor_pkg;
 
+  import AXI_write_transaction_pkg::*;
+
   class axi4_write_monitor;
 
     virtual axi4_if.MONITOR vif;
