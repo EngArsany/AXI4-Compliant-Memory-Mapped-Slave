@@ -7,3 +7,5 @@ AXI-Memory-Slave.mpf_new
 vsim_stacktrace.vstf
 reports/cov_report.txt
 cov.ucdb
+Questa/*
+sim_out/*
