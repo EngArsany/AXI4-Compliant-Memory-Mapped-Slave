@@ -1,5 +1,7 @@
 package AXI_write_generator_pkg;
 
+  import AXI_write_transaction_pkg::*;
+
   class axi4_write_generator;
 
     mailbox #(axi4_write_txn) gen2driver_mbx;
@@ -257,11 +259,11 @@ package AXI_write_generator_pkg;
 
         if (i < num_of_direct_txns) begin
           if (!generate_directed_test_cases(txn, i)) begin
-            $fatal(1, "[GENERATOR] Coverage-plan randomization failed on txn %0d", n);
+            $fatal(1, "[GENERATOR] Coverage-plan randomization failed on txn %0d", i);
           end
         end else begin
           if (!txn.randomize()) begin
-            $fatal(1, "[GENERATOR] Randomization failed on txn %0d", n);
+            $fatal(1, "[GENERATOR] Randomization failed on txn %0d", i);
           end
         end
         gen2driver_mbx.put(txn);
