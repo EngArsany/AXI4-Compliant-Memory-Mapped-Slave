@@ -72,13 +72,16 @@ module tb_top;
   initial begin
 
     env = new();
+    env.vif = vif;
+    env.vif_driver = vif;
+    env.vif_monitor = vif;
 
     ARESETn = 1'b0;
 
     // Initialize master-driven signals.
     vif.AWADDR = '0;
     vif.AWLEN = '0;
-    vif.AWSIZE = '0;
+    vif.AWSIZE = 'b10;
     vif.AWVALID = 1'b0;
 
     vif.WDATA = '0;
@@ -89,7 +92,7 @@ module tb_top;
 
     vif.ARADDR = '0;
     vif.ARLEN = '0;
-    vif.ARSIZE = '0;
+    vif.ARSIZE = 'b10;
     vif.ARVALID = 1'b0;
 
     vif.RREADY = 1'b0;
