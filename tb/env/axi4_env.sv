@@ -6,9 +6,17 @@ package AXI_env_pkg;
   import AXI_read_monitor_pkg::*;
   import AXI_read_scoreboard_pkg::*;
 
+  import AXI_write_transaction_pkg::*;
+  import AXI_write_generator_pkg::*;
+  import AXI_write_driver_pkg::*;
+  import AXI_write_monitor_pkg::*;
+  import AXI_write_scoreboard_pkg::*;
+  import AXI_write_golden_model_pkg::*;
+  import AXI_write_coverage_pkg::*;
 
   class AXI_env;
     // Interfaces
+    virtual axi4_if                 vif;
     virtual axi4_if.DRIVER          vif_driver;
     virtual axi4_if.MONITOR         vif_monitor;
 
@@ -16,7 +24,7 @@ package AXI_env_pkg;
     AXI_read_generator              read_gen;
     AXI_read_driver                 read_drv;
     AXI_read_monitor                read_mon;
-    AXI_read_scb                    read_scb;
+    AXI_read_scoreboard             read_scb;
 
     // Read Mailboxes
     mailbox #(AXI_read_transaction) read_gen2driver_mbx;
@@ -25,8 +33,8 @@ package AXI_env_pkg;
     mailbox #(AXI_read_transaction) read_gen2scb_mbx;
     mailbox #(int)                  read_scb2gen_mbx;
 
-    mailbox #(AXI_read_transaction) read_monitor2scb;
-    mailbox #(int)                  read_scb2monitor;
+    mailbox #(AXI_read_transaction) read_monitor2scb_mbx;
+    mailbox #(int)                  read_scb2monitor_mbx;
 
     // Write Components
     axi4_write_generator            write_gen;
@@ -44,7 +52,12 @@ package AXI_env_pkg;
     mailbox #(int)                  write_scb2gen_mbx;
 
     mailbox #(axi4_write_txn)       write_monitor2scb_mbx;
-    mailbox #(int)                  write_scb2mon_mbx;
+    mailbox #(int)                  write_scb2monitor_mbx;
+
+    mailbox #(axi4_write_txn)       gm2scb_mbx;
+
+    // Test Done
+    bit                             test_done              = 0;
 
     task run_read_env();
       // Initialize mailboxes
@@ -52,8 +65,8 @@ package AXI_env_pkg;
       read_driver2gen_mbx = new(1);
       read_gen2scb_mbx = new(1);
       read_scb2gen_mbx = new(1);
-      read_monitor2scb = new(1);
-      read_scb2monitor = new(1);
+      read_monitor2scb_mbx = new(1);
+      read_scb2monitor_mbx = new(1);
 
       // Initialize components
       read_gen = new();
@@ -72,14 +85,14 @@ package AXI_env_pkg;
       read_drv.driver2gen_mbx = read_driver2gen_mbx;
 
       // Wire Monitor mailboxes
-      read_mon.monitor2scb = read_monitor2scb;
-      read_mon.scb2monitor = read_scb2monitor;
+      read_mon.monitor2scb_mbx = read_monitor2scb_mbx;
+      read_mon.scb2monitor_mbx = read_scb2monitor_mbx;
 
       // Wire scoreboard mailboxes
       read_scb.gen2scb_mbx = read_gen2scb_mbx;
       read_scb.scb2gen_mbx = read_scb2gen_mbx;
-      read_scb.monitor2scb = read_monitor2scb;
-      read_scb.scb2monitor = read_scb2monitor;
+      read_scb.monitor2scb_mbx = read_monitor2scb_mbx;
+      read_scb.scb2monitor_mbx = read_scb2monitor_mbx;
 
       // Virtual Interface
       read_drv.vif = vif_driver;
@@ -105,8 +118,8 @@ package AXI_env_pkg;
       write_driver2gen_mbx = new(1);
       write_gen2scb_mbx = new(1);
       write_scb2gen_mbx = new(1);
-      write_monitor2scb = new(1);
-      write_scb2monitor = new(1);
+      write_monitor2scb_mbx = new(1);
+      write_scb2monitor_mbx = new(1);
 
       // Initialize components
       write_gen = new();
@@ -127,14 +140,14 @@ package AXI_env_pkg;
       write_drv.driver2gen_mbx = write_driver2gen_mbx;
 
       // Wire Monitor mailboxes
-      write_mon.monitor2scb = write_monitor2scb;
-      write_mon.scb2monitor = write_scb2monitor;
+      write_mon.monitor2scb_mbx = write_monitor2scb_mbx;
+      write_mon.scb2monitor_mbx = write_scb2monitor_mbx;
 
       // Wire scoreboard mailboxes
       write_scb.gen2scb_mbx = write_gen2scb_mbx;
       write_scb.scb2gen_mbx = write_scb2gen_mbx;
-      write_scb.monitor2scb = write_monitor2scb;
-      write_scb.scb2monitor = write_scb2monitor;
+      write_scb.monitor2scb_mbx = write_monitor2scb_mbx;
+      write_scb.scb2monitor_mbx = write_scb2monitor_mbx;
 
       // Virtual Interface
       write_drv.vif = vif_driver;
@@ -162,6 +175,7 @@ package AXI_env_pkg;
         run_write_env();
       join_any
 
+      test_done = 1;
       $stop;
 
     endtask
