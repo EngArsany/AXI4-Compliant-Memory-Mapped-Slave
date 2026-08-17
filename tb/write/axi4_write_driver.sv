@@ -1,5 +1,7 @@
 package AXI_write_driver_pkg;
 
+  import AXI_write_transaction_pkg::*;
+
   class axi4_write_driver;
 
     virtual axi4_if.DRIVER    vif;
