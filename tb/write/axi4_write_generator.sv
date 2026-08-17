@@ -5,18 +5,23 @@
 // handshake and records the DUT's BRESP into the transaction object.
 //=============================================================
 
-
-
 class axi4_write_generator;
 
-  function bit randomize_for_coverage_plan(axi4_write_txn txn, int case_id);
+  mailbox #(axi4_write_txn) gen2driver_mbx;
+  mailbox #(int) driver2gen_mbx;
+
+  mailbox #(axi4_write_txn) gen2scb_mbx;
+  mailbox #(int) scb2gen_mbx;
+
+  int num_of_txns = 200;
+  int num_of_direct_txns = 30;
+
+
+  function bit generate_directed_test_cases(axi4_write_txn txn, int case_id);
 
     case (case_id)
 
-      //=================================================
       // Valid word-sized writes
-      //=================================================
-
       0:
       return txn.randomize() with {
         addr_mode == ADDR_NORMAL;
@@ -53,10 +58,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Near 4-KB boundary
-      //=================================================
-
       5:
       return txn.randomize() with {
         addr_mode == ADDR_NEAR_BOUNDARY;
@@ -79,10 +81,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Out-of-range addresses
-      //=================================================
-
       8:
       return txn.randomize() with {
         addr_mode == ADDR_OUT_OF_RANGE;
@@ -105,10 +104,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Invalid AWSIZE
-      //=================================================
-
       11:
       return txn.randomize() with {
         addr_mode == ADDR_NORMAL;
@@ -138,10 +134,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Unaligned word accesses
-      //=================================================
-
       15:
       return txn.randomize() with {
         addr_mode == ADDR_UNALIGNED;
@@ -164,10 +157,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Additional valid word bursts
-      //=================================================
-
       18:
       return txn.randomize() with {
         addr_mode == ADDR_NORMAL;
@@ -183,10 +173,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Additional near-boundary cases
-      //=================================================
-
       20:
       return txn.randomize() with {
         addr_mode == ADDR_NEAR_BOUNDARY;
@@ -202,10 +189,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Additional out-of-range case
-      //=================================================
-
       22:
       return txn.randomize() with {
         addr_mode == ADDR_OUT_OF_RANGE;
@@ -214,10 +198,7 @@ class axi4_write_generator;
       };
 
 
-      //=================================================
       // Additional invalid AWSIZE cases
-      //=================================================
-
       23:
       return txn.randomize() with {
         addr_mode == ADDR_NORMAL;
@@ -246,11 +227,7 @@ class axi4_write_generator;
         awsize == 3'b100;
       };
 
-
-      //=================================================
       // More valid word burst lengths
-      //=================================================
-
       27:
       return txn.randomize() with {
         addr_mode == ADDR_NORMAL;
@@ -272,32 +249,31 @@ class axi4_write_generator;
         awsize == 3'b010;
       };
 
-
       default: return txn.randomize();
-
     endcase
-
   endfunction
 
   task run_generator();
-    txn = new();
+    axi4_write_txn txn;
+    int token;
 
-    if (n < COVERAGE_PLAN_COUNT) begin
+    for (int i = 0; i < num_of_txns; i++) begin
+      txn = new();
 
-      if (!randomize_for_coverage_plan(txn, n)) begin
-
-        $fatal(1, "[ENV] Coverage-plan randomization failed on txn %0d", n);
-
+      if (i < num_of_direct_txns) begin
+        if (!generate_directed_test_cases(txn, i)) begin
+          $fatal(1, "[GENERATOR] Coverage-plan randomization failed on txn %0d", n);
+        end
+      end else begin
+        if (!txn.randomize()) begin
+          $fatal(1, "[GENERATOR] Randomization failed on txn %0d", n);
+        end
       end
+      gen2driver_mbx.put(txn);
+      driver2gen_mbx.get(token);
 
-    end else begin
-
-      if (!txn.randomize()) begin
-
-        $fatal(1, "[ENV] Randomization failed on txn %0d", n);
-
-      end
-
+      gen2scb_mbx.put(txn);
+      scb2gen_mbx.get(token);
     end
 
   endtask
