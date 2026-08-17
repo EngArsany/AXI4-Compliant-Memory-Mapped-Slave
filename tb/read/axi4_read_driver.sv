@@ -9,12 +9,12 @@ package AXI_read_driver_pkg;
     mailbox #(int) driver2gen_mbx;
 
 
-    task assert_signal(ref bit signal);
+    task assert_signal(ref logic signal);
       @(negedge vif.ACLK);
       signal = 1;
     endtask
 
-    task deassert_signal(ref bit signal);
+    task deassert_signal(ref logic signal);
       @(negedge vif.ACLK);
       signal = 0;
     endtask
