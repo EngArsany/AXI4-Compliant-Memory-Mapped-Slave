@@ -2,14 +2,16 @@ package AXI_write_monitor_pkg;
 
   class axi4_write_monitor;
 
-    virtual axi4_if.MONITOR   vif;
+    virtual axi4_if.MONITOR vif;
 
     mailbox #(axi4_write_txn) monitor2scb;
+    mailbox #(int) scb2monitor;
 
 
     task automatic run_monitor();
 
       axi4_write_txn sampled;
+      int token;
 
       forever begin
 
@@ -59,6 +61,7 @@ package AXI_write_monitor_pkg;
 
         // Send the observed transaction to the scoreboard.
         if (monitor2scb != null) monitor2scb.put(sampled);
+        scb2monitor.get(token);
 
       end
 
