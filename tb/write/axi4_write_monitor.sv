@@ -2,7 +2,6 @@ package AXI_write_monitor_pkg;
 
   import AXI_write_transaction_pkg::*;
 
-
   class axi4_write_monitor;
 
     virtual axi4_if.MONITOR   vif;
@@ -15,72 +14,73 @@ package AXI_write_monitor_pkg;
 
       axi4_write_txn sampled;
       int token;
+      int wbeat_count;
 
 
       forever begin
 
         sampled = new();
+        wbeat_count = 0;
 
 
         // =====================================================
         // WRITE ADDRESS CHANNEL
         // =====================================================
 
-        // Wait for an actual AW handshake.
         do begin
-
           @(posedge vif.ACLK);
-
         end while (!(vif.AWVALID && vif.AWREADY));
 
-
-        // Sample the accepted address/control information.
         sampled.awaddr = vif.AWADDR;
         sampled.awlen  = vif.AWLEN;
         sampled.awsize = vif.AWSIZE;
-
-
-        // Allocate storage for the observed write data.
-        sampled.wdata  = new[sampled.awlen + 1];
 
 
         // =====================================================
         // WRITE DATA CHANNEL
         // =====================================================
 
-        for (int i = 0; i <= sampled.awlen; i++) begin
+        // Observe actual W handshakes.
+        // Do not assume that AWLEN + 1 transfers will occur.
+        sampled.wdata  = new[sampled.awlen + 1];
 
-          // Wait for an actual W handshake.
-          do begin
+        forever begin
 
-            @(posedge vif.ACLK);
+          @(posedge vif.ACLK);
 
-          end while (!(vif.WVALID && vif.WREADY));
+          if (vif.WVALID && vif.WREADY) begin
 
-
-          // Capture transferred data.
-          sampled.wdata[i] = vif.WDATA;
-
-
-          // WLAST must be asserted only on the final beat.
-          if (i == sampled.awlen) begin
-
-            if (!vif.WLAST) begin
-
-              $error("[WRITE_MON] WLAST missing on final write beat");
-
+            if (wbeat_count < sampled.wdata.size()) begin
+              sampled.wdata[wbeat_count] = vif.WDATA;
             end
 
-          end else begin
-
+            // WLAST must correspond to the final expected beat.
             if (vif.WLAST) begin
 
-              $error("[WRITE_MON] WLAST asserted before final write beat");
+              if (wbeat_count != sampled.awlen) begin
+                $error("[WRITE_MON] WLAST asserted early: beat=%0d expected=%0d", wbeat_count,
+                       sampled.awlen);
+              end
+
+              wbeat_count++;
+              break;
 
             end
+
+            wbeat_count++;
 
           end
 
+        end
+
+
+        // =====================================================
+        // CHECK ACTUAL NUMBER OF WRITE BEATS
+        // =====================================================
+
+        if (wbeat_count != (sampled.awlen + 1)) begin
+          $error("[WRITE_MON] Incorrect write burst length: observed=%0d expected=%0d",
+                 wbeat_count, sampled.awlen + 1);
         end
 
 
@@ -89,11 +89,8 @@ package AXI_write_monitor_pkg;
         // =====================================================
 
         do begin
-
           @(posedge vif.ACLK);
-
         end while (!(vif.BVALID && vif.BREADY));
-
 
         sampled.act_bresp = vif.BRESP;
 
@@ -103,9 +100,7 @@ package AXI_write_monitor_pkg;
         // =====================================================
 
         if (monitor2scb_mbx == null) begin
-
           $fatal(1, "[WRITE_MON] monitor2scb_mbx is null");
-
         end
 
         monitor2scb_mbx.put(sampled);
@@ -113,9 +108,7 @@ package AXI_write_monitor_pkg;
 
         // Wait until scoreboard consumes the transaction.
         if (scb2monitor_mbx == null) begin
-
           $fatal(1, "[WRITE_MON] scb2monitor_mbx is null");
-
         end
 
         scb2monitor_mbx.get(token);
