@@ -112,6 +112,20 @@ package AXI_env_pkg;
       read_scb.report();
     endtask
 
+    task run_golden_model();
+
+      axi4_write_txn txn;
+
+      forever begin
+        write_gen2scb_mbx.get(txn);
+
+        write_gm.predict(txn);
+
+        gm2scb_mbx.put(txn);
+      end
+
+    endtask
+
     task run_write_env();
       // Initialize mailboxes
       write_gen2driver_mbx = new(1);
@@ -120,6 +134,7 @@ package AXI_env_pkg;
       write_scb2gen_mbx = new(1);
       write_monitor2scb_mbx = new(1);
       write_scb2monitor_mbx = new(1);
+      gm2scb_mbx = new(1);
 
       // Initialize components
       write_gen = new();
@@ -148,6 +163,7 @@ package AXI_env_pkg;
       write_scb.scb2gen_mbx = write_scb2gen_mbx;
       write_scb.monitor2scb_mbx = write_monitor2scb_mbx;
       write_scb.scb2monitor_mbx = write_scb2monitor_mbx;
+      write_scb.gm2scb_mbx = gm2scb_mbx;
 
       // Virtual Interface
       write_drv.vif = vif_driver;
@@ -158,6 +174,7 @@ package AXI_env_pkg;
         write_gen.run_generator();
         write_drv.run_driver();
         write_mon.run_monitor();
+        run_golden_model();
         write_scb.run_scoreboard();
       join_any
 
