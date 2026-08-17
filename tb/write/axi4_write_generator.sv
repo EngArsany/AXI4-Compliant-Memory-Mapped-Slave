@@ -21,7 +21,7 @@ package AXI_write_generator_pkg;
     // =========================================================
 
     int unsigned              num_of_txns        = 200;
-    int unsigned              num_of_direct_txns = 30;
+    int unsigned              num_of_direct_txns = 34;
 
     bit                       done               = 0;
 
@@ -272,6 +272,36 @@ package AXI_write_generator_pkg;
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
           awlen == 8'd127;
+
+        };
+                30:
+        return txn.randomize() with {
+          addr_mode == ADDR_NORMAL;
+          awlen     == 8'd0;
+          awsize    == 3'b000;   
+
+        };
+
+        31:
+        return txn.randomize() with {
+          addr_mode == ADDR_NORMAL;
+          awlen     == 8'd0;
+          awsize    == 3'b001;   
+
+        };
+
+        32:
+        return txn.randomize() with {
+          addr_mode == ADDR_NORMAL;
+          awlen     == 8'd0;
+          awsize    == 3'b011;  
+        };
+
+        33:
+        return txn.randomize() with {
+          addr_mode == ADDR_NORMAL;
+          awlen     == 8'd0;
+          awsize    == 3'b111;  
 
         };
 

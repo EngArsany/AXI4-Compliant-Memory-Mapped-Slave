@@ -70,7 +70,13 @@ package AXI_write_transaction_pkg;
     // illegal-transfer handling.
     // =========================================================
 
-    constraint c_awsize {awsize == 3'b010;}
+    constraint c_awsize {
+  awsize dist {
+    3'b010             := 90,
+    [3'b000 : 3'b001]  := 5,
+    [3'b011 : 3'b111]  := 5
+  };
+}
 
 
     // =========================================================

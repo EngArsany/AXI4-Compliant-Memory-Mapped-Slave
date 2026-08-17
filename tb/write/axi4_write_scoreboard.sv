@@ -1,6 +1,7 @@
 package AXI_write_scoreboard_pkg;
 
   import AXI_write_transaction_pkg::*;
+   import AXI_write_coverage_pkg::*; 
 
   class axi4_write_scoreboard;
 
@@ -20,6 +21,7 @@ package AXI_write_scoreboard_pkg;
     mailbox #(int)            scb2monitor_mbx;
     mailbox #(int)            scb2gen_mbx;
 
+    axi4_write_coverage        write_cov;      
     // =========================================================
     // Statistics
     // =========================================================
@@ -89,6 +91,7 @@ package AXI_write_scoreboard_pkg;
       num_checked++;
 
       check_bresp(expected_txn, actual_txn);
+      write_cov.sample(expected_txn);          
 
     endtask
 

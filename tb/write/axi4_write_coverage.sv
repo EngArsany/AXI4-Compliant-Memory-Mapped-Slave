@@ -57,6 +57,9 @@ package AXI_write_coverage_pkg;
         ignore_bins out_of_range_okay =
                 binsof(cp_addr_mode.out_of_range)
                 && binsof(cp_bresp.okay);
+        ignore_bins unaligned_okay =                   
+                binsof(cp_addr_mode.unaligned)
+                && binsof(cp_bresp.okay);
       }
 
       cx_size_bresp: cross cp_awsize, cp_bresp{
