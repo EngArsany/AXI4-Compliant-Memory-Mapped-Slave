@@ -1,89 +1,99 @@
-//=============================================================
-// axi4_write_driver.sv
-//
-// AXI4 write master driver for one outstanding burst at a time.
-//
-// Timing rule used here:
-//   - Drive payload/VALID on the falling edge.
-//   - Observe READY/VALID handshakes on the following rising edge.
-//
-// This avoids the #1step clocking-block race that caused the original
-// environment to leave WVALID asserted after the DUT had already
-// entered W_RESP.
-//=============================================================
-
 class axi4_write_driver;
 
-    virtual axi4_if.DRIVER vif;
+  virtual axi4_if.DRIVER    vif;
 
-    function new(virtual axi4_if.DRIVER vif);
-        this.vif = vif;
-    endfunction
+  mailbox #(axi4_write_txn) gen2driver_mbx;
+  mailbox #(int)            driver2gen_mbx;
 
-    task automatic reset_signals();
-        vif.AWADDR  = '0;
-        vif.AWLEN   = '0;
-        vif.AWSIZE  = '0;
-        vif.AWVALID = 1'b0;
+  task automatic reset_signals();
+    vif.AWADDR  = '0;
+    vif.AWLEN   = '0;
+    vif.AWSIZE  = '0;
+    vif.AWVALID = 1'b0;
 
-        vif.WDATA   = '0;
-        vif.WLAST   = 1'b0;
-        vif.WVALID  = 1'b0;
+    vif.WDATA   = '0;
+    vif.WLAST   = 1'b0;
+    vif.WVALID  = 1'b0;
 
-        vif.BREADY  = 1'b0;
-    endtask
+    vif.BREADY  = 1'b0;
+  endtask
 
-    task automatic drive_one(axi4_write_txn txn);
+  task automatic run_driver();
 
-        // =====================================================
-        // AW CHANNEL
-        // =====================================================
-        @(negedge vif.ACLK);
+    axi4_write_txn txn;
 
-        vif.AWADDR  = txn.awaddr;
-        vif.AWLEN   = txn.awlen;
-        vif.AWSIZE  = txn.awsize;
-        vif.AWVALID = 1'b1;
+    reset_signals();
 
-        // Transfer occurs only when AWVALID && AWREADY are both high.
-        do @(posedge vif.ACLK);
-        while (!(vif.AWVALID && vif.AWREADY));
+    forever begin
 
-        @(negedge vif.ACLK);
-        vif.AWVALID = 1'b0;
+      // Wait for the next transaction from the generator.
+      gen2driver_mbx.get(txn);
 
-        // =====================================================
-        // W CHANNEL
-        // =====================================================
-        // AXI burst has AWLEN+1 transfers, exactly as stated by the
-        // project specification.
-        for (int i = 0; i <= txn.awlen; i++) begin
-            @(negedge vif.ACLK);
+      // =================================================
+      // WRITE ADDRESS CHANNEL
+      // =================================================
 
-            vif.WDATA  = txn.wdata[i];
-            vif.WLAST  = (i == txn.awlen);
-            vif.WVALID = 1'b1;
+      @(negedge vif.ACLK);
 
-            do @(posedge vif.ACLK);
-            while (!(vif.WVALID && vif.WREADY));
-        end
+      vif.AWADDR  = txn.awaddr;
+      vif.AWLEN   = txn.awlen;
+      vif.AWSIZE  = txn.awsize;
+      vif.AWVALID = 1'b1;
 
-        @(negedge vif.ACLK);
-        vif.WVALID = 1'b0;
-        vif.WLAST  = 1'b0;
+      // Hold AWVALID and payload until handshake.
+      do begin
+        @(posedge vif.ACLK);
+      end while (!vif.AWREADY);
 
-        // =====================================================
-        // B CHANNEL
-        // =====================================================
-        @(negedge vif.ACLK);
-        vif.BREADY = 1'b1;
+      @(negedge vif.ACLK);
+      vif.AWVALID = 1'b0;
 
-        do @(posedge vif.ACLK);
-        while (!(vif.BVALID && vif.BREADY));
+      // =================================================
+      // WRITE DATA CHANNEL
+      // =================================================
+
+      for (int i = 0; i <= txn.awlen; i++) begin
 
         @(negedge vif.ACLK);
-        vif.BREADY = 1'b0;
 
-    endtask
+        vif.WDATA  = txn.wdata[i];
+        vif.WLAST  = (i == txn.awlen);
+        vif.WVALID = 1'b1;
+
+        // Hold WVALID, WDATA and WLAST until handshake.
+        do begin
+          @(posedge vif.ACLK);
+        end while (!vif.WREADY);
+      end
+
+      @(negedge vif.ACLK);
+
+      vif.WVALID = 1'b0;
+      vif.WLAST  = 1'b0;
+      vif.WDATA  = '0;
+
+      // =================================================
+      // WRITE RESPONSE CHANNEL
+      // =================================================
+
+      @(negedge vif.ACLK);
+
+      vif.BREADY = 1'b1;
+
+      // Wait for BVALID/BREADY handshake.
+      do begin
+        @(posedge vif.ACLK);
+      end while (!vif.BVALID);
+
+      @(negedge vif.ACLK);
+
+      vif.BREADY = 1'b0;
+
+      // Tell generator that this transaction completed.
+      if (driver2gen_mbx != null) driver2gen_mbx.put(1);
+
+    end
+
+  endtask
 
 endclass
