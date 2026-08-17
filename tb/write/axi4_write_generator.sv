@@ -320,9 +320,7 @@ package AXI_write_generator_pkg;
 
 
       // Wait for driver to complete the transaction.
-      $display("[WRITE_GEN] Waiting for driver completion");
       driver2gen_mbx.get(token);
-      $display("[WRITE_GEN] Driver completed transaction");
 
 
       // Send the completed expected transaction to the
@@ -331,9 +329,7 @@ package AXI_write_generator_pkg;
 
 
       // Wait until the scoreboard path consumes it.
-      $display("[WRITE_GEN] Waiting for scoreboard");
       scb2gen_mbx.get(token);
-      $display("[WRITE_GEN] Scoreboard completed transaction");
 
     endtask
 
