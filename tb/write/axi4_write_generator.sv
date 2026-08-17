@@ -276,5 +276,7 @@ class axi4_write_generator;
       scb2gen_mbx.get(token);
     end
 
+    $display("[%0t][GENERATOR] Generator Finished %0d Transactions!", $time, num_of_txns);
+
   endtask
 endclass
