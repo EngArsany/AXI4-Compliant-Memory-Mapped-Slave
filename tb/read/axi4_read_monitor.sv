@@ -6,8 +6,8 @@ package AXI_read_monitor_pkg;
 
     virtual axi4_if.MONITOR vif;
 
-    mailbox #(AXI_read_transaction) monitor2scb;
-    mailbox #(int) scb2monitor;
+    mailbox #(AXI_read_transaction) monitor2scb_mbx;
+    mailbox #(int) scb2monitor_mbx;
 
     task run_monitor();
       AXI_read_transaction sampled;
@@ -36,8 +36,8 @@ package AXI_read_monitor_pkg;
           end
         end while (!(vif.RREADY && vif.RVALID && vif.RLAST));
 
-        monitor2scb.put(sampled);
-        scb2monitor.get(token);
+        monitor2scb_mbx.put(sampled);
+        scb2monitor_mbx.get(token);
       end
     endtask
 
