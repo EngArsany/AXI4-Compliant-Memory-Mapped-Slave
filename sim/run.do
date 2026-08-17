@@ -18,11 +18,12 @@ vlog tb/write/axi4_write_transaction.sv
 vlog tb/write/axi4_write_generator.sv
 vlog tb/write/axi4_write_driver.sv
 vlog tb/write/axi4_write_monitor.sv
-vlog tb/write/axi4_write_scoreboard.sv
 vlog tb/write/axi4_write_golden_model.sv
+vlog tb/write/axi4_write_scoreboard.sv
 vlog tb/write/axi4_write_coverage.sv
 
 vlog tb/env/axi4_env.sv
 vlog tb/top/axi4_tb_top.sv
 
+vsim -voptargs=+acc work.tb_top -l Main.log
 run -all
