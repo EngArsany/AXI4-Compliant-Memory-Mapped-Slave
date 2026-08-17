@@ -70,16 +70,7 @@ package AXI_write_transaction_pkg;
     // illegal-transfer handling.
     // =========================================================
 
-    constraint c_awsize {
-
-      awsize dist {
-        3'b010            := 70,
-        3'b000            := 10,
-        3'b001            := 10,
-        [3'b011 : 3'b111] := 10
-      };
-
-    }
+    constraint c_awsize {awsize == WORD_SIZE;}
 
 
     // =========================================================
