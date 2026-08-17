@@ -13,6 +13,9 @@ package AXI_write_scoreboard_pkg;
     mailbox #(axi4_write_txn) monitor2scb_mbx;
     mailbox #(int) scb2monitor_mbx;
 
+    mailbox #(axi4_write_txn) gen2scb_mbx;
+    mailbox #(int) scb2gen_mbx;
+
     // Backdoor access to DUT memory.
     axi4_backdoor_base bd;
 
@@ -21,16 +24,10 @@ package AXI_write_scoreboard_pkg;
     int unsigned num_data_errors;
     int token;
 
-    function new(mailbox#(axi4_write_txn) gm2scb_mbx, mailbox#(axi4_write_txn) monitor2scb_mbx,
-                 axi4_backdoor_base bd);
-
-      this.gm2scb_mbx      = gm2scb_mbx;
-      this.monitor2scb_mbx = monitor2scb_mbx;
-      this.bd              = bd;
-
-      num_checked          = 0;
-      num_bresp_errors     = 0;
-      num_data_errors      = 0;
+    function new();
+      num_checked      = 0;
+      num_bresp_errors = 0;
+      num_data_errors  = 0;
 
     endfunction
 
