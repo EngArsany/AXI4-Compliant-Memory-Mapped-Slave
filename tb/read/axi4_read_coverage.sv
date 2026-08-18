@@ -43,7 +43,7 @@ package AXI_read_coverage_pkg;
 
     // TRANSFER SIZE
     cp_size: coverpoint arsize {
-      bins legal_size = {3'd2}; illegal_bins wrong_read_size = !binsof (legal_size);
+      bins word_size = {3'd2}; illegal_bins wrong_read_size = default;
     }
 
     // BURST VALIDITY
