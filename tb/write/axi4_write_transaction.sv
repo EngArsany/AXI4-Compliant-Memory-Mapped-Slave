@@ -171,6 +171,26 @@ package AXI_write_transaction_pkg;
 
     endfunction
 
+    function void compute_beat_info();
+      bit valid;
+      int unsigned num_beats, bytes_per_beat;
+      longint unsigned beat_addr;
+
+      valid          = is_valid_burst();
+      num_beats      = int'(awlen) + 1;
+      bytes_per_beat = 1 << awsize;
+      beat_addr      = awaddr;
+
+      beat_word_addr = new[num_beats];
+      beat_valid     = new[num_beats];
+
+      for (int i = 0; i < num_beats; i++) begin
+        beat_word_addr[i] = beat_addr >> 2;
+        beat_valid[i]     = valid;
+        beat_addr += bytes_per_beat;
+      end
+    endfunction
+
   endclass
 
 endpackage

@@ -7,7 +7,7 @@ package AXI_reference_model_pkg;
 
     localparam int MEMORY_DEPTH = 1024;
     localparam bit [2:0] WORD_SIZE = 3'b010;
-    localparam bit [1:0] OKAY   = 2'b00;
+    localparam bit [1:0] OKAY = 2'b00;
     localparam bit [1:0] SLVERR = 2'b10;
 
     bit [31:0] expected_mem[MEMORY_DEPTH];
@@ -61,25 +61,16 @@ package AXI_reference_model_pkg;
     // Apply a write transaction to the expected memory
     // ========================================================
     function void apply_write(axi4_write_txn txn);
-      int unsigned     num_beats;
-      int unsigned     bytes_per_beat;
-      bit              burst_valid;
-      longint unsigned beat_addr;
+      bit burst_valid;
+      int unsigned num_beats;
 
-      num_beats          = int'(txn.awlen) + 1;
-      bytes_per_beat     = 1 << txn.awsize;
-      burst_valid        = is_valid_burst(txn.awaddr, txn.awlen, txn.awsize);
+      txn.compute_beat_info();
 
-      txn.beat_word_addr = new[num_beats];
-      txn.beat_valid     = new[num_beats];
-
-      beat_addr          = txn.awaddr;
+      burst_valid = is_valid_burst(txn.awaddr, txn.awlen, txn.awsize);
+      num_beats   = int'(txn.awlen) + 1;
 
       for (int i = 0; i < num_beats; i++) begin
-        txn.beat_word_addr[i] = beat_addr >> 2;
-        txn.beat_valid[i]     = burst_valid;
-        if (burst_valid) expected_mem[beat_addr>>2] = txn.wdata[i];
-        beat_addr += bytes_per_beat;
+        if (txn.beat_valid[i]) expected_mem[txn.beat_word_addr[i]] = txn.wdata[i];
       end
 
       txn.exp_bresp = burst_valid ? OKAY : SLVERR;
@@ -97,7 +88,7 @@ package AXI_reference_model_pkg;
       // Clear output queues
       txn.rdata.delete();
       txn.rresp.delete();
-      txn.rlast.delete();   
+      txn.rlast.delete();
 
       num_beats      = int'(txn.arlen) + 1;
       bytes_per_beat = 1 << txn.arsize;
@@ -108,7 +99,7 @@ package AXI_reference_model_pkg;
       if (!burst_valid) begin
         txn.rdata.push_back(32'h0000_0000);
         txn.rresp.push_back(SLVERR);
-        txn.rlast.push_back(1'b1);   
+        txn.rlast.push_back(1'b1);
         return;
       end
 
@@ -118,7 +109,7 @@ package AXI_reference_model_pkg;
         txn.rdata.push_back(expected_mem[beat_addr>>2]);
         txn.rresp.push_back(OKAY);
         // RLAST is 1 on the last beat, 0 otherwise
-        txn.rlast.push_back((i == num_beats-1) ? 1'b1 : 1'b0);
+        txn.rlast.push_back((i == num_beats - 1) ? 1'b1 : 1'b0);
         beat_addr += bytes_per_beat;
       end
     endfunction

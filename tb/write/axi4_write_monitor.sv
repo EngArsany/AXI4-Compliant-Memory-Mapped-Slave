@@ -34,6 +34,7 @@ package AXI_write_monitor_pkg;
         sampled.awaddr = vif.AWADDR;
         sampled.awlen  = vif.AWLEN;
         sampled.awsize = vif.AWSIZE;
+        sampled.compute_beat_info();
 
 
         // =====================================================
@@ -42,7 +43,7 @@ package AXI_write_monitor_pkg;
 
         // Observe actual W handshakes.
         // Do not assume that AWLEN + 1 transfers will occur.
-        sampled.wdata  = new[sampled.awlen + 1];
+        sampled.wdata = new[sampled.awlen + 1];
 
         forever begin
 
