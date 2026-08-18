@@ -161,7 +161,7 @@ package AXI_env_pkg;
       read_mon                 = new();
       read_scb                 = new();
 
-     
+
       // -------------------------------------------------------
       // Generator connections
       // -------------------------------------------------------
@@ -239,7 +239,7 @@ package AXI_env_pkg;
 
       write_gen.gen2scb_mbx     = write_gen2scb_mbx;
       write_gen.scb2gen_mbx     = write_scb2gen_mbx;
-     
+
 
       // -------------------------------------------------------
       // Driver connections
@@ -267,7 +267,7 @@ package AXI_env_pkg;
       write_scb.scb2gen_mbx     = write_scb2gen_mbx;
 
       write_scb.gm2scb_mbx      = gm2scb_mbx;
-       write_scb.write_cov = write_cov;
+      write_scb.write_cov       = write_cov;
 
 
       // -------------------------------------------------------
@@ -408,7 +408,6 @@ package AXI_env_pkg;
 
     task automatic run_env();
 
-
       run_write_env();
 
 
@@ -417,7 +416,6 @@ package AXI_env_pkg;
       // -------------------------------------------------------
 
       run_read_env();
-
 
       // -------------------------------------------------------
       // All verification activity is complete.
