@@ -7,7 +7,7 @@
 # PROJECT PATH
 #===========================================================
 
-quietly set PROJ_DIR "C:/Users/zyado/OneDrive/Desktop/Summer 2026/Hassan Khaled/AXI4_Project"
+quietly set PROJ_DIR "D:/Projects/Career/Learning/Verification - Hassan Khaled/Projects/AXI4-Compliant-Memory-Mapped-Slave"
 quietly set OUT_DIR  "${PROJ_DIR}/sim_out"
 
 file mkdir "${OUT_DIR}"
@@ -171,18 +171,6 @@ puts "==========================================================="
 
 vlog -sv \
     "${PROJ_DIR}/tb/read/axi4_read_scoreboard.sv"
-
-
-#===========================================================
-# WRITE BACKDOOR
-#===========================================================
-
-puts "==========================================================="
-puts " Compiling WRITE backdoor"
-puts "==========================================================="
-
-vlog -sv \
-    "${PROJ_DIR}/tb/write/axi4_backdoor_base.sv"
 
 
 #===========================================================
