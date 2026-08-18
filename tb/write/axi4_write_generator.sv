@@ -21,7 +21,7 @@ package AXI_write_generator_pkg;
     // =========================================================
 
     int unsigned              num_of_txns        = 200;
-    int unsigned              num_of_direct_txns = 34;
+    int unsigned              num_of_direct_txns = 35;
 
     bit                       done               = 0;
 
@@ -268,43 +268,35 @@ package AXI_write_generator_pkg;
 
         };
 
-        29:
-        return txn.randomize() with {
-          addr_mode == ADDR_NORMAL;
-          awlen == 8'd127;
-
-        };
-                30:
-        return txn.randomize() with {
-          addr_mode == ADDR_NORMAL;
-          awlen     == 8'd0;
-          awsize    == 3'b000;   
-
-        };
+        29: return txn.randomize() with {addr_mode == ADDR_NORMAL; awlen == 8'd127;};
+        30: return txn.randomize() with {addr_mode == ADDR_NORMAL; awlen == 8'd0;};
 
         31:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
-          awlen     == 8'd0;
-          awsize    == 3'b001;   
+          awlen == 8'd0;
 
         };
 
         32:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
-          awlen     == 8'd0;
-          awsize    == 3'b011;  
+          awlen == 8'd0;
         };
 
         33:
         return txn.randomize() with {
           addr_mode == ADDR_NORMAL;
-          awlen     == 8'd0;
-          awsize    == 3'b111;  
+          awlen == 8'd0;
 
         };
 
+        34:
+        return txn.randomize() with {
+          addr_mode == ADDR_NORMAL;
+          awlen == 8'd255;
+          awaddr == 16'h0000;
+        };
 
         default: return txn.randomize();
 
