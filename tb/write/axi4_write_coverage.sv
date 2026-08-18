@@ -13,6 +13,13 @@ package AXI_write_coverage_pkg;
     bit beat_valid_bit;
     bit [15:0] beat_addr;
 
+    function automatic addr_mode_e classify_addr(bit [15:0] addr);
+      if (addr inside {[16'h1000 : 16'hFFFF]}) return ADDR_OUT_OF_RANGE;
+      if (addr[1:0] != 2'b00) return ADDR_UNALIGNED;
+      if (addr inside {[16'h0FA0 : 16'h0FFC]}) return ADDR_NEAR_BOUNDARY;
+      return ADDR_NORMAL;
+    endfunction
+
     covergroup cg_write;
       option.per_instance = 1;
 
@@ -27,11 +34,13 @@ package AXI_write_coverage_pkg;
         bins word_size = {3'b010}; illegal_bins wrong_write_size = default;
       }
 
-      cp_addr_mode: coverpoint txn.addr_mode {
+      cp_addr_mode: coverpoint classify_addr(
+          txn.awaddr
+      ) {
         bins normal = {ADDR_NORMAL};
         bins near_boundary = {ADDR_NEAR_BOUNDARY};
         bins out_of_range = {ADDR_OUT_OF_RANGE};
-        bins unaligned = {ADDR_UNALIGNED};
+        illegal_bins unaligned = {ADDR_UNALIGNED};
       }
 
       cp_aligned: coverpoint txn.awaddr[1:0] {
@@ -42,7 +51,7 @@ package AXI_write_coverage_pkg;
         bins low = {[0 : 7]}; bins mid = {[8 : 14]}; bins near_edge = {15}; bins beyond = default;
       }
 
-      cp_bresp: coverpoint txn.exp_bresp {
+      cp_bresp: coverpoint txn.act_bresp {
         bins okay = {2'b00}; bins slverr = {2'b10}; illegal_bins unreachable = {2'b01, 2'b11};
       }
 
@@ -55,7 +64,6 @@ package AXI_write_coverage_pkg;
         ignore_bins out_of_range_okay =
                 binsof(cp_addr_mode.out_of_range)
                 && binsof(cp_bresp.okay);
-        ignore_bins unaligned_okay = binsof (cp_addr_mode.unaligned) && binsof (cp_bresp.okay);
       }
 
       cx_size_bresp: cross cp_awsize, cp_bresp{
